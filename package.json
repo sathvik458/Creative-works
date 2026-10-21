@@ -1,0 +1,39 @@
+{
+  "name": "language-stories",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Language Stories \u2014 interactive branching stories where your language choices change what happens next.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run validate && next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "validate": "node --import tsx scripts/validate-content.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "ui:dev": "next dev --hostname localhost --port 3000",
+    "ui:verify": "node scripts/verify-ui.cjs"
+  },
+  "dependencies": {
+    "@fontsource/m-plus-rounded-1c": "^5.3.0",
+    "@fontsource/noto-sans-jp": "^5.3.0",
+    "next": "^16.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "playwright": "1.64.1",
+    "prettier": "3.9.10",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3"
+  }
+}

@@ -1,0 +1,675 @@
+{
+  "language": "ja",
+  "characters": [
+    {
+      "id": "mika",
+      "name": "Mika",
+      "nameNative": "みか",
+      "role": "Classmate",
+      "color": "#e76f51",
+      "look": {
+        "hair": "#8a4b2f",
+        "hairStyle": "bob",
+        "skin": "#f7d6bd",
+        "outfit": "#f4a261",
+        "accent": "#fff3c4"
+      }
+    },
+    {
+      "id": "hiro",
+      "name": "Hiro",
+      "nameNative": "ひろ",
+      "role": "Shop staff",
+      "color": "#3a86ff",
+      "look": {
+        "hair": "#22223b",
+        "hairStyle": "short",
+        "skin": "#f2c9a8",
+        "outfit": "#3a86ff",
+        "accent": "#ffffff"
+      }
+    },
+    {
+      "id": "ojisan",
+      "name": "Mr. Mori",
+      "nameNative": "森さん",
+      "role": "Neighbour",
+      "color": "#6a994e",
+      "look": {
+        "hair": "#9a9a9a",
+        "hairStyle": "short",
+        "skin": "#eec4a2",
+        "outfit": "#6a994e",
+        "accent": "#f2e8cf"
+      }
+    },
+    {
+      "id": "sensei",
+      "name": "Ms. Ito",
+      "nameNative": "伊藤先生",
+      "role": "Japanese teacher",
+      "color": "#9d4edd",
+      "look": {
+        "hair": "#2b2340",
+        "hairStyle": "long",
+        "skin": "#f6d3b8",
+        "outfit": "#9d4edd",
+        "accent": "#ffffff"
+      }
+    }
+  ],
+  "challenges": [
+    {
+      "id": "d01_ramen",
+      "title": "Ordering ramen",
+      "context": "You sit down at a small ramen shop. The staff member comes over.",
+      "background": "/images/bg/cafe.svg",
+      "skill": "politeness",
+      "steps": [
+        {
+          "speaker": "hiro",
+          "expression": "happy",
+          "text": "いらっしゃいませ！ご{注文|ちゅうもん}は？",
+          "reading": "Irasshaimase! Gochuumon wa?",
+          "translation": "Welcome! What would you like?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "しょうゆラーメンをひとつお{願|ねが}いします。",
+              "reading": "Shouyu raamen o hitotsu onegaishimasu.",
+              "translation": "One shoyu ramen, please.",
+              "quality": "natural",
+              "feedback": "Item + number + お願いします. That's how orders are made.",
+              "why": "〜をひとつお願いします is the standard polite order. ひとつ, ふたつ… count most things."
+            },
+            {
+              "id": "b",
+              "text": "しょうゆラーメンをひとつ{食|た}べます。",
+              "reading": "Shouyu raamen o hitotsu tabemasu.",
+              "translation": "I will eat one shoyu ramen.",
+              "quality": "awkward",
+              "feedback": "食べます = 'I'll eat'. To order, use 〜をお願いします or 〜をください.",
+              "why": "Ordering is a request, so use お願いします／ください rather than a statement about yourself."
+            },
+            {
+              "id": "c",
+              "text": "ラーメンはどこですか？",
+              "reading": "Raamen wa doko desu ka?",
+              "translation": "Where is the ramen?",
+              "quality": "wrong",
+              "feedback": "You're IN the ramen shop! Just order: 〜をお願いします.",
+              "why": "どこですか asks for a location. For orders, name the dish + お願いします."
+            }
+          ]
+        },
+        {
+          "speaker": "hiro",
+          "expression": "smile",
+          "text": "お{飲|の}み{物|もの}はいかがですか？",
+          "reading": "Onomimono wa ikaga desu ka?",
+          "translation": "Would you like something to drink?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "いえ、{大丈夫|だいじょうぶ}です。",
+              "reading": "Ie, daijoubu desu.",
+              "translation": "No, I'm fine.",
+              "quality": "natural",
+              "feedback": "A soft, polite 'no thanks'.",
+              "why": "いかがですか offers something. 大丈夫です declines gently, or accept with はい、〜をお願いします."
+            },
+            {
+              "id": "b",
+              "text": "はい、いかがです。",
+              "reading": "Hai, ikaga desu.",
+              "translation": "Yes, how about.",
+              "quality": "wrong",
+              "feedback": "いかが means 'how about…?'. You can't answer with it.",
+              "why": "Answer offers with お願いします (yes) or 大丈夫です (no thanks)."
+            },
+            {
+              "id": "c",
+              "text": "{飲|の}み{物|もの}、いらない。",
+              "reading": "Nomimono, iranai.",
+              "translation": "Don't need a drink.",
+              "quality": "awkward",
+              "feedback": "Understandable, but blunt and casual for a restaurant.",
+              "why": "いらない is plain-form 'don't need'. With staff, 大丈夫です sounds much softer."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d02_lost",
+      "title": "Lost in the neighbourhood",
+      "context": "You're looking at a map on your phone. An older man stops beside you.",
+      "background": "/images/bg/street.svg",
+      "skill": "politeness",
+      "steps": [
+        {
+          "speaker": "ojisan",
+          "expression": "smile",
+          "text": "どうしましたか？{道|みち}に{迷|まよ}いましたか？",
+          "reading": "Dou shimashita ka? Michi ni mayoimashita ka?",
+          "translation": "What's wrong? Are you lost?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "はい。すみません、{駅|えき}はどちらですか？",
+              "reading": "Hai. Sumimasen, eki wa dochira desu ka?",
+              "translation": "Yes. Excuse me, which way is the station?",
+              "quality": "natural",
+              "feedback": "どちら is the polite version of どこ. Perfect with an older stranger.",
+              "why": "どちら (which way / where) is softer and more polite than どこ, so it's great with elders and strangers."
+            },
+            {
+              "id": "b",
+              "text": "はい、{迷|まよ}いました。さようなら。",
+              "reading": "Hai, mayoimashita. Sayounara.",
+              "translation": "Yes, I'm lost. Goodbye.",
+              "quality": "awkward",
+              "feedback": "You admitted you're lost, then left before he could help!",
+              "why": "After accepting help, ask your actual question. さようなら ends the conversation."
+            },
+            {
+              "id": "c",
+              "text": "いいえ、{駅|えき}です。",
+              "reading": "Iie, eki desu.",
+              "translation": "No, it's a station.",
+              "quality": "wrong",
+              "feedback": "That doesn't answer his question or ask for directions.",
+              "why": "迷いましたか？ is a yes/no question. Answer はい, then ask 〜はどちらですか？"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d03_late",
+      "title": "Late for class",
+      "context": "You rush into Japanese class five minutes late.",
+      "background": "/images/bg/room.svg",
+      "skill": "politeness",
+      "steps": [
+        {
+          "speaker": "sensei",
+          "expression": "neutral",
+          "text": "{遅|おそ}かったですね。どうしましたか？",
+          "reading": "Osokatta desu ne. Dou shimashita ka?",
+          "translation": "You're late. What happened?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "{遅|おく}れてすみません。{電車|でんしゃ}が{遅|おく}れました。",
+              "reading": "Okurete sumimasen. Densha ga okuremashita.",
+              "translation": "Sorry I'm late. The train was delayed.",
+              "quality": "natural",
+              "feedback": "Apology first, then the reason. Very natural.",
+              "why": "〜てすみません = 'sorry for ~ing'. 遅れる (to be late) is the verb, 遅い (late, slow) is the adjective."
+            },
+            {
+              "id": "b",
+              "text": "{遅|おそ}いです。",
+              "reading": "Osoi desu.",
+              "translation": "It's slow.",
+              "quality": "wrong",
+              "feedback": "遅い is an adjective ('slow / late'). Apologize: 遅れてすみません.",
+              "why": "Use the verb 遅れる for 'to be late': 遅れてすみません."
+            },
+            {
+              "id": "c",
+              "text": "ごめんね！",
+              "reading": "Gomen ne!",
+              "translation": "Sorry!",
+              "quality": "awkward",
+              "feedback": "ごめんね is for friends. With a teacher, use すみません.",
+              "why": "Match apologies to the relationship: ごめん (friends), すみません (polite), 申し訳ありません (formal)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d04_compliment",
+      "title": "A compliment",
+      "context": "Your classmate Mika notices your new jacket.",
+      "background": "/images/bg/street.svg",
+      "skill": "culture",
+      "steps": [
+        {
+          "speaker": "mika",
+          "expression": "happy",
+          "text": "その{服|ふく}、かわいいね！",
+          "reading": "Sono fuku, kawaii ne!",
+          "translation": "That outfit is cute!",
+          "choices": [
+            {
+              "id": "a",
+              "text": "ほんと？ありがとう！",
+              "reading": "Honto? Arigatou!",
+              "translation": "Really? Thanks!",
+              "quality": "natural",
+              "feedback": "A light, happy thank-you, in casual style to match hers.",
+              "why": "Casual compliments get casual thanks. ほんと？ adds a natural, modest touch."
+            },
+            {
+              "id": "b",
+              "text": "はい、かわいいです。",
+              "reading": "Hai, kawaii desu.",
+              "translation": "Yes, it is cute.",
+              "quality": "awkward",
+              "feedback": "Fully agreeing sounds a little boastful. A modest thank-you feels more natural.",
+              "why": "In Japanese it's common to receive compliments modestly (ほんと？／ありがとう) rather than agreeing outright."
+            },
+            {
+              "id": "c",
+              "text": "いいえ、{服|ふく}です。",
+              "reading": "Iie, fuku desu.",
+              "translation": "No, it's clothes.",
+              "quality": "wrong",
+              "feedback": "That doesn't respond to the compliment.",
+              "why": "React to compliments with ありがとう or a modest ほんと？／そうかな."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d05_photo",
+      "title": "Take a photo?",
+      "context": "You're at a temple and want someone to take your picture.",
+      "background": "/images/bg/street.svg",
+      "skill": "politeness",
+      "steps": [
+        {
+          "speaker": "ojisan",
+          "expression": "neutral",
+          "text": "はい、なんでしょう？",
+          "reading": "Hai, nan deshou?",
+          "translation": "Yes, can I help you?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "すみません、{写真|しゃしん}を{撮|と}っていただけませんか？",
+              "reading": "Sumimasen, shashin o totte itadakemasen ka?",
+              "translation": "Excuse me, could you take a photo for me?",
+              "quality": "natural",
+              "feedback": "〜ていただけませんか is a very polite request. Perfect for a stranger.",
+              "why": "〜ていただけませんか ('could I humbly receive you doing ~?') is one of the politest ways to ask a favour."
+            },
+            {
+              "id": "b",
+              "text": "{写真|しゃしん}を{撮|と}りますか？",
+              "reading": "Shashin o torimasu ka?",
+              "translation": "Will you take a photo?",
+              "quality": "awkward",
+              "feedback": "That sounds like you're offering, or just asking about his plans.",
+              "why": "To ask a favour, use the te-form + ください／いただけませんか, not a plain question."
+            },
+            {
+              "id": "c",
+              "text": "{写真|しゃしん}をなくしました。",
+              "reading": "Shashin o nakushimashita.",
+              "translation": "I lost a photo.",
+              "quality": "wrong",
+              "feedback": "That reports a lost photo!",
+              "why": "Choose the verb for what you want: 撮る (take a photo), なくす (lose)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d06_weather",
+      "title": "Small talk",
+      "context": "Your neighbour Mr. Mori greets you on a sweltering morning.",
+      "background": "/images/bg/street.svg",
+      "skill": "culture",
+      "steps": [
+        {
+          "speaker": "ojisan",
+          "expression": "smile",
+          "text": "{今日|きょう}は{暑|あつ}いですね。",
+          "reading": "Kyou wa atsui desu ne.",
+          "translation": "It's hot today, isn't it?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "そうですね。{本当|ほんとう}に{暑|あつ}いですね。",
+              "reading": "Sou desu ne. Hontou ni atsui desu ne.",
+              "translation": "It sure is. Really hot.",
+              "quality": "natural",
+              "feedback": "そうですね agrees, and echoing the topic keeps the chat going.",
+              "why": "〜ですね invites agreement. Respond with そうですね and add a little of your own."
+            },
+            {
+              "id": "b",
+              "text": "はい。",
+              "reading": "Hai.",
+              "translation": "Yes.",
+              "quality": "understandable",
+              "feedback": "Fine, but そうですね is the natural way to agree with 〜ですね.",
+              "why": "はい sounds like answering a factual question. そうですね shares the feeling."
+            },
+            {
+              "id": "c",
+              "text": "いいえ、{暑|あつ}いです。",
+              "reading": "Iie, atsui desu.",
+              "translation": "No, it's hot.",
+              "quality": "wrong",
+              "feedback": "いいえ disagrees, then you agreed. That's confusing!",
+              "why": "If you agree, start with そうですね. If you don't, say そうですか？ softly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d07_size",
+      "title": "Trying clothes",
+      "context": "You're in a clothing shop. The jacket you tried on is too big.",
+      "background": "/images/bg/konbini.svg",
+      "skill": "grammar",
+      "steps": [
+        {
+          "speaker": "hiro",
+          "expression": "smile",
+          "text": "サイズはいかがですか？",
+          "reading": "Saizu wa ikaga desu ka?",
+          "translation": "How's the size?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "ちょっと{大|おお}きいです。{小|ちい}さいのはありますか？",
+              "reading": "Chotto ookii desu. Chiisai no wa arimasu ka?",
+              "translation": "It's a bit big. Do you have a smaller one?",
+              "quality": "natural",
+              "feedback": "Clear problem + polite question. Adjective + の = 'a ~ one'.",
+              "why": "Adjective + の makes 'the ~ one' (小さいの = a small one). ちょっと softens the complaint."
+            },
+            {
+              "id": "b",
+              "text": "{小|ちい}さいをください。",
+              "reading": "Chiisai o kudasai.",
+              "translation": "Small, please.",
+              "quality": "awkward",
+              "feedback": "Close! Add の to make 'a small one': 小さいのをください.",
+              "why": "An adjective can't take を directly. Turn it into a noun with の: 小さいのをください."
+            },
+            {
+              "id": "c",
+              "text": "サイズです。",
+              "reading": "Saizu desu.",
+              "translation": "It's a size.",
+              "quality": "wrong",
+              "feedback": "That doesn't say how it fits.",
+              "why": "Describe the fit with an adjective: 大きい (big), 小さい (small), ちょうどいい (just right)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d08_reservation",
+      "title": "Booking by phone",
+      "context": "You call a restaurant to book a table for Friday.",
+      "background": "/images/bg/room.svg",
+      "skill": "politeness",
+      "steps": [
+        {
+          "speaker": "hiro",
+          "expression": "neutral",
+          "text": "はい、さくら{食堂|しょくどう}でございます。",
+          "reading": "Hai, Sakura Shokudou de gozaimasu.",
+          "translation": "Hello, this is Sakura Diner.",
+          "choices": [
+            {
+              "id": "a",
+              "text": "もしもし、{予約|よやく}をお{願|ねが}いしたいんですが…",
+              "reading": "Moshimoshi, yoyaku o onegai shitai n desu ga…",
+              "translation": "Hello, I'd like to make a reservation…",
+              "quality": "natural",
+              "feedback": "〜たいんですが… politely opens a request and lets them take over.",
+              "why": "Ending with んですが… (trailing off) is a soft, very natural way to start a request."
+            },
+            {
+              "id": "b",
+              "text": "{予約|よやく}！",
+              "reading": "Yoyaku!",
+              "translation": "Reservation!",
+              "quality": "awkward",
+              "feedback": "They'll understand, but one word sounds abrupt on the phone.",
+              "why": "Phone Japanese is extra polite. Use full sentences with お願いします."
+            },
+            {
+              "id": "c",
+              "text": "さくら{食堂|しょくどう}ですか？さようなら。",
+              "reading": "Sakura Shokudou desu ka? Sayounara.",
+              "translation": "Sakura Diner? Goodbye.",
+              "quality": "wrong",
+              "feedback": "You hung up before booking!",
+              "why": "Confirming you've reached the right place is fine, but then say what you want: 予約をお願いします."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d09_bump",
+      "title": "Oops!",
+      "context": "You accidentally bump into Mr. Mori on a crowded street.",
+      "background": "/images/bg/street.svg",
+      "skill": "politeness",
+      "steps": [
+        {
+          "speaker": "ojisan",
+          "expression": "surprised",
+          "text": "あっ…",
+          "reading": "A…",
+          "translation": "Oh…",
+          "choices": [
+            {
+              "id": "a",
+              "text": "あ、すみません！{大丈夫|だいじょうぶ}ですか？",
+              "reading": "A, sumimasen! Daijoubu desu ka?",
+              "translation": "Oh, I'm sorry! Are you okay?",
+              "quality": "natural",
+              "feedback": "Apologize, then check on him. Kind and natural.",
+              "why": "すみません is the all-purpose apology with strangers. 大丈夫ですか？ shows care."
+            },
+            {
+              "id": "b",
+              "text": "ありがとうございます！",
+              "reading": "Arigatou gozaimasu!",
+              "translation": "Thank you very much!",
+              "quality": "wrong",
+              "feedback": "That's 'thank you'. After bumping into someone, apologize.",
+              "why": "すみません covers both 'excuse me' and 'sorry'. ありがとう is only for thanks."
+            },
+            {
+              "id": "c",
+              "text": "ごめん。",
+              "reading": "Gomen.",
+              "translation": "Sorry.",
+              "quality": "awkward",
+              "feedback": "ごめん is casual. With an older stranger, すみません is better.",
+              "why": "Use polite apologies with people you don't know, especially older people."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d10_decline",
+      "title": "Saying no nicely",
+      "context": "Mika invites you out, but you have an exam tomorrow.",
+      "background": "/images/bg/street.svg",
+      "skill": "culture",
+      "steps": [
+        {
+          "speaker": "mika",
+          "expression": "happy",
+          "text": "{今夜|こんや}、ごはん{行|い}かない？",
+          "reading": "Kon'ya, gohan ikanai?",
+          "translation": "Want to grab dinner tonight?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "ごめん、{今夜|こんや}はちょっと…また{今度|こんど}ね！",
+              "reading": "Gomen, kon'ya wa chotto… mata kondo ne!",
+              "translation": "Sorry, tonight's a bit… Next time!",
+              "quality": "natural",
+              "feedback": "ちょっと… softly says no, and また今度 keeps the friendship warm.",
+              "why": "Japanese refusals are often indirect: 〜はちょっと… Adding また今度 suggests another time."
+            },
+            {
+              "id": "b",
+              "text": "いいえ、{行|い}きません。",
+              "reading": "Iie, ikimasen.",
+              "translation": "No, I won't go.",
+              "quality": "understandable",
+              "feedback": "Clear, but it sounds cold. Soften it with ごめん and ちょっと….",
+              "why": "A flat いいえ + negative can feel harsh. Indirect refusals are kinder."
+            },
+            {
+              "id": "c",
+              "text": "はい、{行|い}きません。",
+              "reading": "Hai, ikimasen.",
+              "translation": "Yes, I won't go.",
+              "quality": "wrong",
+              "feedback": "はい + 行きません mixes yes and no.",
+              "why": "Answering 〜ない？ invitations: うん／いいね (yes) or ごめん、ちょっと… (no)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d11_hotel",
+      "title": "Hotel check-in",
+      "context": "You arrive at a hotel front desk.",
+      "background": "/images/bg/room.svg",
+      "skill": "politeness",
+      "steps": [
+        {
+          "speaker": "hiro",
+          "expression": "smile",
+          "text": "いらっしゃいませ。お{名前|なまえ}をお{願|ねが}いします。",
+          "reading": "Irasshaimase. Onamae o onegaishimasu.",
+          "translation": "Welcome. Your name, please.",
+          "choices": [
+            {
+              "id": "a",
+              "text": "スミスです。{予約|よやく}しています。",
+              "reading": "Sumisu desu. Yoyaku shite imasu.",
+              "translation": "I'm Smith. I have a reservation.",
+              "quality": "natural",
+              "feedback": "Name + です and your booking status. Clear and polite.",
+              "why": "〜しています describes a current state: 予約しています = 'I have (made) a booking'."
+            },
+            {
+              "id": "b",
+              "text": "お{名前|なまえ}はスミスです。",
+              "reading": "Onamae wa Sumisu desu.",
+              "translation": "My honourable name is Smith.",
+              "quality": "awkward",
+              "feedback": "お名前 is honorific. Never add お to your own name.",
+              "why": "Honorific お／ご are for other people's things. For yourself: 名前はスミスです, or just スミスです."
+            },
+            {
+              "id": "c",
+              "text": "{名前|なまえ}をください。",
+              "reading": "Namae o kudasai.",
+              "translation": "Give me a name, please.",
+              "quality": "wrong",
+              "feedback": "You asked HIM for a name!",
+              "why": "When asked for information, give it: [name] です."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d12_dinner",
+      "title": "Dinner with a host family",
+      "context": "Your host father, Mr. Mori, serves dinner.",
+      "background": "/images/bg/room.svg",
+      "skill": "culture",
+      "steps": [
+        {
+          "speaker": "ojisan",
+          "expression": "smile",
+          "text": "さあ、どうぞ{食|た}べてください。",
+          "reading": "Saa, douzo tabete kudasai.",
+          "translation": "Here you go, please eat.",
+          "choices": [
+            {
+              "id": "a",
+              "text": "いただきます！",
+              "reading": "Itadakimasu!",
+              "translation": "Let's eat! (Thank you for the food.)",
+              "quality": "natural",
+              "feedback": "The set phrase before eating.",
+              "why": "いただきます is said before eating to thank everyone involved in the meal."
+            },
+            {
+              "id": "b",
+              "text": "ごちそうさまでした！",
+              "reading": "Gochisousama deshita!",
+              "translation": "Thank you for the meal! (after eating)",
+              "quality": "wrong",
+              "feedback": "That's said AFTER eating. You haven't started yet!",
+              "why": "Before eating: いただきます. After eating: ごちそうさまでした."
+            },
+            {
+              "id": "c",
+              "text": "{食|た}べてください。",
+              "reading": "Tabete kudasai.",
+              "translation": "Please eat.",
+              "quality": "awkward",
+              "feedback": "You repeated his invitation back to him.",
+              "why": "Respond to an invitation to eat with いただきます."
+            }
+          ]
+        },
+        {
+          "speaker": "ojisan",
+          "expression": "happy",
+          "text": "おいしかったですか？",
+          "reading": "Oishikatta desu ka?",
+          "translation": "Was it good?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "はい、とてもおいしかったです。ごちそうさまでした！",
+              "reading": "Hai, totemo oishikatta desu. Gochisousama deshita!",
+              "translation": "Yes, it was delicious. Thank you for the meal!",
+              "quality": "natural",
+              "feedback": "Past tense for a finished meal, plus the closing phrase.",
+              "why": "おいしい → おいしかった (past tense of い-adjectives: drop い, add かった)."
+            },
+            {
+              "id": "b",
+              "text": "はい、おいしいです。",
+              "reading": "Hai, oishii desu.",
+              "translation": "Yes, it's delicious.",
+              "quality": "understandable",
+              "feedback": "Kind! But the meal's finished, so the past tense おいしかった fits better.",
+              "why": "い-adjectives take a past tense: おいしい → おいしかった."
+            },
+            {
+              "id": "c",
+              "text": "いいえ、おいしかったです。",
+              "reading": "Iie, oishikatta desu.",
+              "translation": "No, it was delicious.",
+              "quality": "wrong",
+              "feedback": "いいえ (no) followed by praise is confusing!",
+              "why": "Start with はい when you agree."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
