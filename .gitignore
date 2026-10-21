@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.vercel
+.env.local
+.retired-local-data/
+docs/cleanup/
+**/.qa/
+*.zip

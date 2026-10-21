@@ -1,0 +1,3848 @@
+{
+  "id": "first-week-in-tokyo",
+  "title": "First Week in Tokyo",
+  "titleNative": "東京の最初の一週間",
+  "level": 1,
+  "targetLanguage": "ja",
+  "nativeLanguage": "en",
+  "synopsis": "You've just moved to Tokyo as an international student. Survive a lost ticket, a late-night konbini run and your first job interview — armed with nothing but your Japanese.",
+  "coverImage": "/images/covers/first-week.svg",
+  "accent": "#ff6f91",
+  "characters": [
+    {
+      "id": "tanaka",
+      "name": "Mr. Tanaka",
+      "nameNative": "田中さん",
+      "role": "Station attendant",
+      "color": "#3f6fb5",
+      "look": {
+        "hair": "#7d838c",
+        "hairStyle": "cap",
+        "skin": "#f0c6a4",
+        "outfit": "#2c4a7c",
+        "accent": "#e9c46a"
+      }
+    },
+    {
+      "id": "kenta",
+      "name": "Kenta",
+      "nameNative": "ケンタ",
+      "role": "Konbini clerk",
+      "color": "#2f9e6e",
+      "look": {
+        "hair": "#8a5530",
+        "hairStyle": "spiky",
+        "skin": "#f6d3b8",
+        "outfit": "#2f9e6e",
+        "accent": "#ffffff"
+      }
+    },
+    {
+      "id": "yuki",
+      "name": "Yuki",
+      "nameNative": "ゆき",
+      "role": "University student",
+      "color": "#ff6f91",
+      "look": {
+        "hair": "#2b2340",
+        "hairStyle": "long",
+        "skin": "#f9dcc4",
+        "outfit": "#ff9eb5",
+        "accent": "#fff3c4"
+      }
+    },
+    {
+      "id": "sato",
+      "name": "Manager Sato",
+      "nameNative": "佐藤店長",
+      "role": "Café manager",
+      "color": "#b8692e",
+      "look": {
+        "hair": "#1f1a1c",
+        "hairStyle": "bob",
+        "skin": "#f3cfb3",
+        "outfit": "#6b4f3a",
+        "accent": "#f4e1c1"
+      }
+    }
+  ],
+  "vocab": [
+    {
+      "id": "v_sumimasen",
+      "episode": "ep1",
+      "term": "すみません",
+      "reading": "すみません",
+      "romaji": "sumimasen",
+      "meaning": "excuse me / sorry",
+      "pos": "expression",
+      "example": "すみません、駅はどこですか？",
+      "exampleTranslation": "Excuse me, where is the station?"
+    },
+    {
+      "id": "v_kippu",
+      "episode": "ep1",
+      "term": "きっぷ",
+      "forms": [
+        "切符"
+      ],
+      "reading": "きっぷ",
+      "romaji": "kippu",
+      "meaning": "ticket",
+      "pos": "noun",
+      "example": "きっぷを二枚ください。",
+      "exampleTranslation": "Two tickets, please."
+    },
+    {
+      "id": "v_nakushimashita",
+      "episode": "ep1",
+      "term": "なくしました",
+      "forms": [
+        "なくした"
+      ],
+      "reading": "なくしました",
+      "romaji": "nakushimashita",
+      "meaning": "lost (polite past of なくす, to lose)",
+      "pos": "verb",
+      "example": "かぎをなくしました。",
+      "exampleTranslation": "I lost my key."
+    },
+    {
+      "id": "v_doko",
+      "episode": "ep1",
+      "term": "どこ",
+      "reading": "どこ",
+      "romaji": "doko",
+      "meaning": "where",
+      "pos": "question word",
+      "example": "トイレはどこですか？",
+      "exampleTranslation": "Where is the toilet?"
+    },
+    {
+      "id": "v_eki",
+      "episode": "ep1",
+      "term": "駅",
+      "reading": "えき",
+      "romaji": "eki",
+      "meaning": "station",
+      "pos": "noun",
+      "example": "駅は近いです。",
+      "exampleTranslation": "The station is close."
+    },
+    {
+      "id": "v_kimashita",
+      "episode": "ep1",
+      "term": "来ました",
+      "reading": "きました",
+      "romaji": "kimashita",
+      "meaning": "came (polite past of 来る, to come)",
+      "pos": "verb",
+      "example": "インドから来ました。",
+      "exampleTranslation": "I came from India."
+    },
+    {
+      "id": "v_daijoubu",
+      "episode": "ep1",
+      "term": "大丈夫",
+      "reading": "だいじょうぶ",
+      "romaji": "daijoubu",
+      "meaning": "okay, all right; (in shops) no thanks",
+      "pos": "na-adjective",
+      "example": "大丈夫ですか？",
+      "exampleTranslation": "Are you okay?"
+    },
+    {
+      "id": "v_kudasai",
+      "episode": "ep1",
+      "term": "ください",
+      "reading": "ください",
+      "romaji": "kudasai",
+      "meaning": "please (give me / do …)",
+      "pos": "expression",
+      "example": "水をください。",
+      "exampleTranslation": "Water, please."
+    },
+    {
+      "id": "v_wakarimashita",
+      "episode": "ep1",
+      "term": "わかりました",
+      "reading": "わかりました",
+      "romaji": "wakarimashita",
+      "meaning": "understood / got it",
+      "pos": "verb",
+      "example": "はい、わかりました。",
+      "exampleTranslation": "Yes, understood."
+    },
+    {
+      "id": "v_wakarimasen",
+      "episode": "ep1",
+      "term": "わかりません",
+      "reading": "わかりません",
+      "romaji": "wakarimasen",
+      "meaning": "I don't understand / I don't know",
+      "pos": "verb",
+      "example": "すみません、わかりません。",
+      "exampleTranslation": "Sorry, I don't understand."
+    },
+    {
+      "id": "v_ikura",
+      "episode": "ep1",
+      "term": "いくら",
+      "reading": "いくら",
+      "romaji": "ikura",
+      "meaning": "how much (price)",
+      "pos": "question word",
+      "example": "これはいくらですか？",
+      "exampleTranslation": "How much is this?"
+    },
+    {
+      "id": "v_densha",
+      "episode": "ep1",
+      "term": "電車",
+      "reading": "でんしゃ",
+      "romaji": "densha",
+      "meaning": "train",
+      "pos": "noun",
+      "example": "電車で行きます。",
+      "exampleTranslation": "I'll go by train."
+    },
+    {
+      "id": "v_bansen",
+      "episode": "ep1",
+      "term": "番線",
+      "reading": "ばんせん",
+      "romaji": "bansen",
+      "meaning": "platform (number) — 五番線 = platform 5",
+      "pos": "noun / counter",
+      "example": "三番線の電車に乗ってください。",
+      "exampleTranslation": "Please take the train on platform 3."
+    },
+    {
+      "id": "v_kaisatsu",
+      "episode": "ep1",
+      "term": "改札",
+      "reading": "かいさつ",
+      "romaji": "kaisatsu",
+      "meaning": "ticket gate",
+      "pos": "noun",
+      "example": "改札で待っています。",
+      "exampleTranslation": "I'll wait at the ticket gate."
+    },
+    {
+      "id": "v_arigatou",
+      "episode": "ep1",
+      "term": "ありがとうございます",
+      "forms": [
+        "ありがとう"
+      ],
+      "reading": "ありがとうございます",
+      "romaji": "arigatou gozaimasu",
+      "meaning": "thank you (polite) — ありがとう is casual",
+      "pos": "expression",
+      "example": "手伝ってくれて、ありがとうございます。",
+      "exampleTranslation": "Thank you for helping me."
+    },
+    {
+      "id": "v_irasshaimase",
+      "episode": "ep2",
+      "term": "いらっしゃいませ",
+      "reading": "いらっしゃいませ",
+      "romaji": "irasshaimase",
+      "meaning": "welcome (said by staff to customers)",
+      "pos": "expression",
+      "example": "いらっしゃいませ、こんにちは！",
+      "exampleTranslation": "Welcome, hello!"
+    },
+    {
+      "id": "v_onigiri",
+      "episode": "ep2",
+      "term": "おにぎり",
+      "reading": "おにぎり",
+      "romaji": "onigiri",
+      "meaning": "rice ball",
+      "pos": "noun",
+      "example": "ツナマヨのおにぎりが好きです。",
+      "exampleTranslation": "I like tuna-mayo rice balls."
+    },
+    {
+      "id": "v_arimasu",
+      "episode": "ep2",
+      "term": "あります",
+      "forms": [
+        "ありません"
+      ],
+      "reading": "あります",
+      "romaji": "arimasu",
+      "meaning": "there is / to have (for objects)",
+      "pos": "verb",
+      "example": "コンビニに傘があります。",
+      "exampleTranslation": "There are umbrellas at the konbini."
+    },
+    {
+      "id": "v_imasu",
+      "episode": "ep2",
+      "term": "います",
+      "reading": "います",
+      "romaji": "imasu",
+      "meaning": "there is / to be (for people & animals)",
+      "pos": "verb",
+      "example": "公園に猫がいます。",
+      "exampleTranslation": "There's a cat in the park."
+    },
+    {
+      "id": "v_onegaishimasu",
+      "episode": "ep2",
+      "term": "お願いします",
+      "forms": [
+        "お願い"
+      ],
+      "reading": "おねがいします",
+      "romaji": "onegaishimasu",
+      "meaning": "please (polite request)",
+      "pos": "expression",
+      "example": "コーヒーをお願いします。",
+      "exampleTranslation": "A coffee, please."
+    },
+    {
+      "id": "v_bentou",
+      "episode": "ep2",
+      "term": "お弁当",
+      "forms": [
+        "弁当"
+      ],
+      "reading": "おべんとう",
+      "romaji": "obentou",
+      "meaning": "boxed meal, bento",
+      "pos": "noun",
+      "example": "毎日お弁当を作ります。",
+      "exampleTranslation": "I make a bento every day."
+    },
+    {
+      "id": "v_atatamemasu",
+      "episode": "ep2",
+      "term": "温めます",
+      "forms": [
+        "温め"
+      ],
+      "reading": "あたためます",
+      "romaji": "atatamemasu",
+      "meaning": "to heat up (polite) — 温めますか？ = shall I heat it?",
+      "pos": "verb",
+      "example": "スープを温めます。",
+      "exampleTranslation": "I'll heat up the soup."
+    },
+    {
+      "id": "v_fukuro",
+      "episode": "ep2",
+      "term": "袋",
+      "reading": "ふくろ",
+      "romaji": "fukuro",
+      "meaning": "bag",
+      "pos": "noun",
+      "example": "袋はいりません。",
+      "exampleTranslation": "I don't need a bag."
+    },
+    {
+      "id": "v_fukurou",
+      "episode": "ep2",
+      "term": "ふくろう",
+      "reading": "ふくろう",
+      "romaji": "fukurou",
+      "meaning": "owl (careful: not 袋 fukuro, bag!)",
+      "pos": "noun",
+      "example": "森にふくろうがいます。",
+      "exampleTranslation": "There's an owl in the forest."
+    },
+    {
+      "id": "v_genki",
+      "episode": "ep2",
+      "term": "元気",
+      "reading": "げんき",
+      "romaji": "genki",
+      "meaning": "well, energetic — 元気？ = how are you?",
+      "pos": "na-adjective",
+      "example": "おばあちゃんは元気です。",
+      "exampleTranslation": "Grandma is doing well."
+    },
+    {
+      "id": "v_issho",
+      "episode": "ep2",
+      "term": "一緒",
+      "reading": "いっしょ",
+      "romaji": "issho",
+      "meaning": "together (一緒に = together with)",
+      "pos": "noun / adverb",
+      "example": "一緒に帰りましょう。",
+      "exampleTranslation": "Let's go home together."
+    },
+    {
+      "id": "v_tenchou",
+      "episode": "ep3",
+      "term": "店長",
+      "reading": "てんちょう",
+      "romaji": "tenchou",
+      "meaning": "store manager (also used as a title)",
+      "pos": "noun",
+      "example": "店長は今いません。",
+      "exampleTranslation": "The manager isn't here right now."
+    },
+    {
+      "id": "v_kinchou",
+      "episode": "ep3",
+      "term": "緊張",
+      "reading": "きんちょう",
+      "romaji": "kinchou",
+      "meaning": "nervousness — 緊張する = to be nervous",
+      "pos": "noun / suru-verb",
+      "example": "面接で緊張しました。",
+      "exampleTranslation": "I was nervous at the interview."
+    },
+    {
+      "id": "v_ganbaru",
+      "episode": "ep3",
+      "term": "頑張る",
+      "forms": [
+        "頑張"
+      ],
+      "reading": "がんばる",
+      "romaji": "ganbaru",
+      "meaning": "to do one's best, hang in there",
+      "pos": "verb",
+      "example": "テスト、頑張ってね！",
+      "exampleTranslation": "Good luck on the test!"
+    },
+    {
+      "id": "v_hataraku",
+      "episode": "ep3",
+      "term": "働く",
+      "forms": [
+        "働"
+      ],
+      "reading": "はたらく",
+      "romaji": "hataraku",
+      "meaning": "to work",
+      "pos": "verb",
+      "example": "カフェで働いています。",
+      "exampleTranslation": "I work at a café."
+    },
+    {
+      "id": "v_yoroshiku",
+      "episode": "ep3",
+      "term": "よろしくお願いします",
+      "forms": [
+        "よろしくお願いいたします",
+        "よろしく"
+      ],
+      "reading": "よろしくおねがいします",
+      "romaji": "yoroshiku onegaishimasu",
+      "meaning": "pleased to meet you / I look forward to working with you",
+      "pos": "expression",
+      "example": "これからよろしくお願いします。",
+      "exampleTranslation": "I look forward to working with you from now on."
+    },
+    {
+      "id": "v_honjitsu",
+      "episode": "ep3",
+      "term": "本日",
+      "reading": "ほんじつ",
+      "romaji": "honjitsu",
+      "meaning": "today (formal version of 今日)",
+      "pos": "noun",
+      "example": "本日は休みです。",
+      "exampleTranslation": "We are closed today."
+    },
+    {
+      "id": "v_okyakusan",
+      "episode": "ep3",
+      "term": "お客さん",
+      "forms": [
+        "お客様"
+      ],
+      "reading": "おきゃくさん",
+      "romaji": "okyakusan",
+      "meaning": "customer, guest",
+      "pos": "noun",
+      "example": "お客さんが来ました。",
+      "exampleTranslation": "A customer has arrived."
+    },
+    {
+      "id": "v_jikyuu",
+      "episode": "ep3",
+      "term": "時給",
+      "reading": "じきゅう",
+      "romaji": "jikyuu",
+      "meaning": "hourly wage",
+      "pos": "noun",
+      "example": "時給は千二百円です。",
+      "exampleTranslation": "The hourly wage is 1,200 yen."
+    },
+    {
+      "id": "v_raishuu",
+      "episode": "ep3",
+      "term": "来週",
+      "reading": "らいしゅう",
+      "romaji": "raishuu",
+      "meaning": "next week",
+      "pos": "noun",
+      "example": "来週、京都に行きます。",
+      "exampleTranslation": "I'm going to Kyoto next week."
+    },
+    {
+      "id": "v_shitsumon",
+      "episode": "ep3",
+      "term": "質問",
+      "reading": "しつもん",
+      "romaji": "shitsumon",
+      "meaning": "question",
+      "pos": "noun",
+      "example": "質問してもいいですか？",
+      "exampleTranslation": "May I ask a question?"
+    },
+    {
+      "id": "v_kenshuu",
+      "episode": "ep3",
+      "term": "研修",
+      "reading": "けんしゅう",
+      "romaji": "kenshuu",
+      "meaning": "training (for new staff)",
+      "pos": "noun",
+      "example": "研修は三日間です。",
+      "exampleTranslation": "The training lasts three days."
+    },
+    {
+      "id": "v_makanai",
+      "episode": "ep3",
+      "term": "まかない",
+      "reading": "まかない",
+      "romaji": "makanai",
+      "meaning": "staff meal (free/cheap food for employees)",
+      "pos": "noun",
+      "example": "このお店のまかないはおいしいです。",
+      "exampleTranslation": "This shop's staff meals are delicious."
+    }
+  ],
+  "episodes": [
+    {
+      "id": "ep1",
+      "title": "The Lost Ticket",
+      "titleNative": "なくしたきっぷ",
+      "level": 1,
+      "goal": "Get from Shinjuku Station to your new dorm in Kichijoji.",
+      "synopsis": "Day 1. Your ticket has vanished somewhere between the airport and the ticket gates. A station attendant is your only hope.",
+      "startScene": "s1",
+      "scenes": {
+        "s1": {
+          "background": "/images/bg/station.svg",
+          "cast": [
+            "tanaka"
+          ],
+          "skill": "politeness",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Day 1. You've just arrived in Tokyo. Your new dorm is in Kichijoji — a short train ride away."
+            },
+            {
+              "speaker": "narrator",
+              "text": "At the crowded ticket gates of Shinjuku Station, you reach into your pocket… Your ticket is gone!"
+            },
+            {
+              "speaker": "you",
+              "text": "あれ？きっぷがない…！",
+              "reading": "Are? Kippu ga nai…!",
+              "translation": "Huh? My ticket's gone…!",
+              "vocabRefs": [
+                "v_kippu"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "A station attendant is standing by the gates. Time to get his attention."
+            }
+          ],
+          "choices": [
+            {
+              "id": "e1_c1a",
+              "text": "すみません！",
+              "reading": "Sumimasen!",
+              "translation": "Excuse me!",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_sumimasen"
+              ],
+              "feedback": "すみません is the go-to 'excuse me' for getting a stranger's attention — polite and natural.",
+              "why": "すみません works as 'excuse me', 'sorry' and even 'thanks for the trouble'. Opening with it is the standard, polite way to start any request to a stranger or a member of staff.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "はい！どうしましたか？",
+                  "reading": "Hai! Dou shimashita ka?",
+                  "translation": "Yes! What's the matter?"
+                }
+              ],
+              "next": "s2"
+            },
+            {
+              "id": "e1_c1b",
+              "text": "おい！",
+              "reading": "Oi!",
+              "translation": "Hey, you!",
+              "quality": "wrong",
+              "effects": {
+                "trust": -2,
+                "fluency": 0
+              },
+              "reactionExpression": "surprised",
+              "feedback": "おい is a rough 'hey!' used between close friends — shouting it at staff sounds rude.",
+              "why": "おい is a blunt 'hey!' used mostly between close friends, or by someone talking down to another person. Toward staff or strangers it sounds rude or angry. Safe alternatives: すみません or あのう….",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "surprised",
+                  "text": "わっ！…は、はい？",
+                  "reading": "Wa! …Ha, hai?",
+                  "translation": "Whoa! …Y-yes?"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "He jumps. A few commuters turn around to stare."
+                }
+              ],
+              "next": "s2"
+            },
+            {
+              "id": "e1_c1c",
+              "text": "ありがとうございます！",
+              "reading": "Arigatou gozaimasu!",
+              "translation": "Thank you very much!",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_arigatou"
+              ],
+              "feedback": "That's 'thank you' — but he hasn't helped yet! Use すみません to get someone's attention.",
+              "why": "ありがとうございます thanks someone for help they've given. To open a conversation before any help has happened, Japanese uses すみません. Save ありがとうございます for afterwards (ありがとうございました once the help is finished).",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "confused",
+                  "text": "え？まだ{何|なに}もしていませんよ。",
+                  "reading": "E? Mada nani mo shite imasen yo.",
+                  "translation": "Huh? I haven't done anything yet."
+                }
+              ],
+              "next": "s2"
+            }
+          ]
+        },
+        "s2": {
+          "skill": "vocabulary",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "He waits for you to explain what happened."
+            }
+          ],
+          "choices": [
+            {
+              "id": "e1_c2a",
+              "text": "きっぷをなくしました。",
+              "reading": "Kippu o nakushimashita.",
+              "translation": "I lost my ticket.",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_kippu",
+                "v_nakushimashita"
+              ],
+              "feedback": "なくしました is the polite past of なくす (to lose) — clear, and exactly what happened.",
+              "why": "なくす = to lose (an object). ～ました is the polite past, and を marks the thing you lost: きっぷをなくしました. Japanese usually drops 'I' and 'my' because the context makes it clear.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "neutral",
+                  "text": "そうですか。{大丈夫|だいじょうぶ}ですよ。",
+                  "reading": "Sou desu ka. Daijoubu desu yo.",
+                  "translation": "I see. Don't worry, it's okay.",
+                  "vocabRefs": [
+                    "v_daijoubu"
+                  ]
+                }
+              ],
+              "next": "s3"
+            },
+            {
+              "id": "e1_c2b",
+              "text": "きっぷをください。",
+              "reading": "Kippu o kudasai.",
+              "translation": "A ticket, please.",
+              "quality": "understandable",
+              "effects": {
+                "trust": 0,
+                "fluency": 1
+              },
+              "vocabRefs": [
+                "v_kippu",
+                "v_kudasai"
+              ],
+              "feedback": "He'll get that you want a ticket, but not that you LOST one — なくしました means 'I lost it'.",
+              "why": "〜をください = 'please give me ~'. That's a request, not an explanation. Staff need to know what happened first, so report it in the past tense (なくしました) and then ask.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "neutral",
+                  "text": "きっぷは、あちらで{買|か}えますよ。",
+                  "reading": "Kippu wa, achira de kaemasu yo.",
+                  "translation": "You can buy tickets over there.",
+                  "vocabRefs": [
+                    "v_kippu"
+                  ]
+                },
+                {
+                  "speaker": "tanaka",
+                  "expression": "confused",
+                  "text": "…あれ？きっぷをなくしましたか？",
+                  "reading": "…Are? Kippu o nakushimashita ka?",
+                  "translation": "…Wait, did you lose your ticket?",
+                  "vocabRefs": [
+                    "v_nakushimashita"
+                  ]
+                },
+                {
+                  "speaker": "you",
+                  "text": "は、はい…！",
+                  "reading": "Ha, hai…!",
+                  "translation": "Y-yes…!"
+                }
+              ],
+              "next": "s3"
+            },
+            {
+              "id": "e1_c2c",
+              "text": "きっぷはおいしいです。",
+              "reading": "Kippu wa oishii desu.",
+              "translation": "The ticket is delicious.",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_kippu"
+              ],
+              "feedback": "おいしい means 'delicious'! To say you lost something, use なくしました.",
+              "why": "[thing] は [adjective] です describes something, and おいしい means 'delicious'. To report a problem you need a verb: なくしました (lost), わすれました (forgot), こわれました (broke).",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "はは！きっぷは{食|た}べませんよ！",
+                  "reading": "Haha! Kippu wa tabemasen yo!",
+                  "translation": "Haha! We don't eat tickets!",
+                  "vocabRefs": [
+                    "v_kippu"
+                  ]
+                },
+                {
+                  "speaker": "tanaka",
+                  "expression": "neutral",
+                  "text": "…もしかして、なくしましたか？",
+                  "reading": "…Moshikashite, nakushimashita ka?",
+                  "translation": "…Did you, by any chance, lose it?",
+                  "vocabRefs": [
+                    "v_nakushimashita"
+                  ]
+                },
+                {
+                  "speaker": "you",
+                  "text": "はい…",
+                  "reading": "Hai…",
+                  "translation": "Yes…"
+                }
+              ],
+              "next": "s3"
+            }
+          ]
+        },
+        "s3": {
+          "skill": "comprehension",
+          "lines": [
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "どこから{来|き}ましたか？",
+              "reading": "Doko kara kimashita ka?",
+              "translation": "Where did you come from?",
+              "vocabRefs": [
+                "v_doko",
+                "v_kimashita"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e1_c3a",
+              "text": "{成田|なりた}{空港|くうこう}の{駅|えき}から{来|き}ました。",
+              "reading": "Narita kuukou no eki kara kimashita.",
+              "translation": "I came from Narita Airport station.",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_eki",
+                "v_kimashita"
+              ],
+              "feedback": "He meant which station your trip started from — place + から + 来ました answers it perfectly.",
+              "why": "どこから来ましたか？ = 'Where did you come from?'. At a station that means your departure station. Answer with place + から + 来ました, or more simply: 成田空港駅からです.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "{成田|なりた}からですね。わかりました。",
+                  "reading": "Narita kara desu ne. Wakarimashita.",
+                  "translation": "From Narita, I see. Got it.",
+                  "vocabRefs": [
+                    "v_wakarimashita"
+                  ]
+                }
+              ],
+              "next": "s4"
+            },
+            {
+              "id": "e1_c3b",
+              "text": "{私|わたし}の{国|くに}から{来|き}ました！",
+              "reading": "Watashi no kuni kara kimashita!",
+              "translation": "I came from my country!",
+              "quality": "awkward",
+              "effects": {
+                "trust": 1,
+                "fluency": 0
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_kimashita"
+              ],
+              "feedback": "Perfect grammar — but he meant which STATION, not which country. Context matters!",
+              "why": "どこから来ましたか？ is also how people ask a foreigner where they're from, so this mix-up is really common! The situation (a ticket problem at a station) shows he means the station. A clearer way to ask about nationality is お国はどちらですか？",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "はは、{遠|とお}いですね！…でも、どこの{駅|えき}ですか？",
+                  "reading": "Haha, tooi desu ne! …Demo, doko no eki desu ka?",
+                  "translation": "Haha, that's far! …But which station?",
+                  "vocabRefs": [
+                    "v_doko",
+                    "v_eki"
+                  ]
+                },
+                {
+                  "speaker": "you",
+                  "text": "あ…{成田|なりた}{空港|くうこう}の{駅|えき}です。",
+                  "reading": "A… Narita kuukou no eki desu.",
+                  "translation": "Oh… Narita Airport station.",
+                  "vocabRefs": [
+                    "v_eki"
+                  ]
+                }
+              ],
+              "next": "s4"
+            },
+            {
+              "id": "e1_c3c",
+              "text": "はい、{来|き}ました。",
+              "reading": "Hai, kimashita.",
+              "translation": "Yes, I came.",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_kimashita"
+              ],
+              "feedback": "どこ asks 'where?' — a yes/no answer doesn't fit. Reply with a place + から.",
+              "why": "どこ is a question word (where?), so the answer must contain a place. はい／いいえ only answer yes/no questions, which have no question word: 成田から来ましたか？ → はい、来ました.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "confused",
+                  "text": "ええと…どこの{駅|えき}からですか？",
+                  "reading": "Eeto… doko no eki kara desu ka?",
+                  "translation": "Um… from which station?",
+                  "vocabRefs": [
+                    "v_doko",
+                    "v_eki"
+                  ]
+                },
+                {
+                  "speaker": "you",
+                  "text": "あ！{成田|なりた}{空港|くうこう}です！",
+                  "reading": "A! Narita kuukou desu!",
+                  "translation": "Oh! Narita Airport!"
+                }
+              ],
+              "next": "s4"
+            }
+          ]
+        },
+        "s4": {
+          "skill": "politeness",
+          "lines": [
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "わかりました。では、{新|あたら}しいきっぷを{買|か}ってください。",
+              "reading": "Wakarimashita. Dewa, atarashii kippu o katte kudasai.",
+              "translation": "Understood. In that case, please buy a new ticket.",
+              "vocabRefs": [
+                "v_wakarimashita",
+                "v_kippu",
+                "v_kudasai"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "Better find out the price."
+            }
+          ],
+          "choices": [
+            {
+              "id": "e1_c4a",
+              "text": "いくらですか？",
+              "reading": "Ikura desu ka?",
+              "translation": "How much is it?",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_ikura"
+              ],
+              "feedback": "いくら + ですか is the standard polite way to ask a price.",
+              "why": "いくら = how much, and ですか turns it into a polite question. いくらですか？ works for any price, in shops, stations and restaurants.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "{二百三十円|にひゃくさんじゅうえん}です。",
+                  "reading": "Nihyaku sanjuu en desu.",
+                  "translation": "It's 230 yen."
+                }
+              ],
+              "next": "s5"
+            },
+            {
+              "id": "e1_c4b",
+              "text": "いくら？",
+              "reading": "Ikura?",
+              "translation": "How much?",
+              "quality": "awkward",
+              "effects": {
+                "trust": -1,
+                "fluency": 0
+              },
+              "reactionExpression": "neutral",
+              "vocabRefs": [
+                "v_ikura"
+              ],
+              "feedback": "A bare いくら？ is fine with friends, but with staff add ですか: いくらですか？",
+              "why": "Dropping です／ます gives plain (casual) speech. That's fine with friends, but with staff and strangers it can sound curt. Keep です／ます as your default with anyone you don't know.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "neutral",
+                  "text": "…{二百三十円|にひゃくさんじゅうえん}です。",
+                  "reading": "…Nihyaku sanjuu en desu.",
+                  "translation": "…It's 230 yen."
+                }
+              ],
+              "next": "s5"
+            },
+            {
+              "id": "e1_c4c",
+              "text": "どこですか？",
+              "reading": "Doko desu ka?",
+              "translation": "Where is it?",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_doko"
+              ],
+              "feedback": "どこ means 'where'. For prices, the question word is いくら (how much).",
+              "why": "Question words aren't interchangeable: どこ (where), いくら (how much), いつ (when), なに／なん (what), だれ (who). The word before ですか decides what you're asking.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "confused",
+                  "text": "{券売機|けんばいき}は…そこですよ？",
+                  "reading": "Kenbaiki wa… soko desu yo?",
+                  "translation": "The ticket machine is… right there?"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "You point at the fare chart instead. He catches on."
+                },
+                {
+                  "speaker": "tanaka",
+                  "expression": "neutral",
+                  "text": "あ、{二百三十円|にひゃくさんじゅうえん}です。",
+                  "reading": "A, nihyaku sanjuu en desu.",
+                  "translation": "Ah, it's 230 yen."
+                }
+              ],
+              "next": "s5"
+            }
+          ]
+        },
+        "s5": {
+          "skill": "comprehension",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "You pay and get a fresh ticket."
+            },
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "{電車|でんしゃ}は{五番線|ごばんせん}です。{改札|かいさつ}はこちらです。",
+              "reading": "Densha wa go-bansen desu. Kaisatsu wa kochira desu.",
+              "translation": "Your train is on platform 5. The ticket gate is this way.",
+              "vocabRefs": [
+                "v_densha",
+                "v_bansen",
+                "v_kaisatsu"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "He said that pretty fast. Which platform was it again?"
+            }
+          ],
+          "choices": [
+            {
+              "id": "e1_c5a",
+              "text": "{五番線|ごばんせん}ですね。ありがとうございます！",
+              "reading": "Go-bansen desu ne. Arigatou gozaimasu!",
+              "translation": "Platform 5, right? Thank you very much!",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_bansen",
+                "v_arigatou"
+              ],
+              "feedback": "Repeating key info with 〜ですね confirms it politely — and now the thank-you lands at the right moment.",
+              "why": "Number + 番線 = platform number (五番線 = platform 5). Repeating the information back with 〜ですね ('…, right?') naturally confirms that you heard it correctly. And ありがとうございます fits now, because he has helped.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "はい！{改札|かいさつ}を{通|とお}って、{右|みぎ}です。{気|き}をつけて！",
+                  "reading": "Hai! Kaisatsu o tootte, migi desu. Ki o tsukete!",
+                  "translation": "Yes! Through the gate and to the right. Take care!",
+                  "vocabRefs": [
+                    "v_kaisatsu"
+                  ]
+                }
+              ],
+              "next": "s6"
+            },
+            {
+              "id": "e1_c5b",
+              "text": "{九番線|きゅうばんせん}ですね。ありがとう！",
+              "reading": "Kyuu-bansen desu ne. Arigatou!",
+              "translation": "Platform 9, right? Thanks!",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_bansen",
+                "v_arigatou"
+              ],
+              "feedback": "He said 五 (go, 5) — not 九 (kyuu, 9). Also, ありがとうございます is politer with staff.",
+              "why": "ご (5) / きゅう (9) and いち (1) / しち (7) are easy to mishear. Staff often say numbers quickly, so repeating them back gives them a chance to correct you. Also, ありがとう without ございます is casual.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "はい、{気|き}をつけて！",
+                  "reading": "Hai, ki o tsukete!",
+                  "translation": "Sure, take care!"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "He's already turned to help the next passenger. Nobody caught your mistake…"
+                }
+              ],
+              "next": "e_wrong_train"
+            },
+            {
+              "id": "e1_c5c",
+              "text": "すみません、わかりません。もう{一度|いちど}お{願|ねが}いします。",
+              "reading": "Sumimasen, wakarimasen. Mou ichido onegaishimasu.",
+              "translation": "Sorry, I didn't catch that. Once more, please.",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 1
+              },
+              "vocabRefs": [
+                "v_sumimasen",
+                "v_wakarimasen"
+              ],
+              "feedback": "Asking someone to repeat is a real skill — もう一度お願いします is polite and natural.",
+              "why": "もう一度お願いします ('once more, please') and ゆっくりお願いします ('slowly, please') are survival phrases. Starting with すみません、わかりません softens the request. Asking is always better than guessing.",
+              "reaction": [
+                {
+                  "speaker": "tanaka",
+                  "expression": "happy",
+                  "text": "ご・ばん・せん。{五番線|ごばんせん}です！",
+                  "reading": "Go – ban – sen. Go-bansen desu!",
+                  "translation": "Five. Platform five!",
+                  "vocabRefs": [
+                    "v_bansen"
+                  ]
+                },
+                {
+                  "speaker": "you",
+                  "text": "{五番線|ごばんせん}！ありがとうございます！",
+                  "reading": "Go-bansen! Arigatou gozaimasu!",
+                  "translation": "Platform 5! Thank you so much!",
+                  "vocabRefs": [
+                    "v_bansen",
+                    "v_arigatou"
+                  ]
+                }
+              ],
+              "next": "s6"
+            }
+          ]
+        },
+        "s6": {
+          "routes": [
+            {
+              "if": "chose:e1_c3b && chose:e1_c5c",
+              "next": "e_new_friend"
+            },
+            {
+              "if": "trust >= 4 && fluency >= 8",
+              "next": "e_smooth"
+            },
+            {
+              "else": true,
+              "next": "e_made_it"
+            }
+          ]
+        },
+        "e_smooth": {
+          "cast": [
+            "tanaka"
+          ],
+          "lines": [
+            {
+              "speaker": "tanaka",
+              "expression": "happy",
+              "text": "{日本語|にほんご}、{上手|じょうず}ですね！",
+              "reading": "Nihongo, jouzu desu ne!",
+              "translation": "Your Japanese is really good!"
+            },
+            {
+              "speaker": "tanaka",
+              "expression": "happy",
+              "text": "これ、どうぞ。{駅|えき}の{近|ちか}くのおいしいラーメン{屋|や}です。",
+              "reading": "Kore, douzo. Eki no chikaku no oishii raamen-ya desu.",
+              "translation": "Here, take this. It's a great ramen shop near the station.",
+              "vocabRefs": [
+                "v_eki"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "He sketches a little map on the back of a timetable. Your first night in Tokyo just got delicious."
+            }
+          ],
+          "endingId": "smooth"
+        },
+        "e_made_it": {
+          "background": "/images/bg/street.svg",
+          "cast": [],
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "You find platform 5, squeeze onto the train and watch Tokyo blur past the window."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Forty minutes later you're standing outside your dorm in Kichijoji. Tired — but you made it."
+            },
+            {
+              "speaker": "you",
+              "text": "{電車|でんしゃ}で{着|つ}きました…！",
+              "reading": "Densha de tsukimashita…!",
+              "translation": "Made it here by train…!",
+              "vocabRefs": [
+                "v_densha"
+              ]
+            }
+          ],
+          "endingId": "made_it"
+        },
+        "e_wrong_train": {
+          "background": "/images/bg/seaside.svg",
+          "cast": [],
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "You hop on a train at platform 9. The doors slide shut behind you…"
+            },
+            {
+              "speaker": "narrator",
+              "text": "An hour later, you smell salt in the air. Seagulls. This is definitely not Kichijoji."
+            },
+            {
+              "speaker": "you",
+              "text": "ここは…どこですか？",
+              "reading": "Koko wa… doko desu ka?",
+              "translation": "Where… am I?",
+              "vocabRefs": [
+                "v_doko"
+              ]
+            }
+          ],
+          "endingId": "wrong_train"
+        },
+        "e_new_friend": {
+          "cast": [
+            "yuki"
+          ],
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Before you can move, a student with a tote bag taps your shoulder."
+            },
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "あの、{大丈夫|だいじょうぶ}ですか？「わかりません」って{言|い}えるの、すごいですね！",
+              "reading": "Ano, daijoubu desu ka? \"Wakarimasen\" tte ieru no, sugoi desu ne!",
+              "translation": "Um, are you okay? Being able to say 'I don't understand' — that's awesome!",
+              "vocabRefs": [
+                "v_daijoubu",
+                "v_wakarimasen"
+              ]
+            },
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "{私|わたし}も{吉祥寺|きちじょうじ}に{帰|かえ}ります。{一緒|いっしょ}に{行|い}きましょう！",
+              "reading": "Watashi mo Kichijouji ni kaerimasu. Issho ni ikimashou!",
+              "translation": "I'm heading back to Kichijoji too. Let's go together!",
+              "vocabRefs": [
+                "v_issho"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yuki overheard your 'from my country!' answer and couldn't stop smiling. She walks you all the way to your dorm. Your first friend in Japan."
+            }
+          ],
+          "endingId": "new_friend"
+        }
+      },
+      "endings": [
+        {
+          "id": "smooth",
+          "title": "Smooth Commuter",
+          "titleNative": "スムーズな一日",
+          "type": "best",
+          "image": "/images/bg/station.svg",
+          "character": "tanaka",
+          "expression": "happy",
+          "summary": "Tanaka-san was so impressed he drew you a map to his favourite ramen shop.",
+          "teachingPoint": "すみません → explain → いくらですか → confirm with 〜ですね: four moves that solve almost any station problem."
+        },
+        {
+          "id": "made_it",
+          "title": "Made It!",
+          "titleNative": "到着！",
+          "type": "good",
+          "image": "/images/bg/street.svg",
+          "summary": "A few bumps along the way, but you got a new ticket and reached your dorm.",
+          "teachingPoint": "なくしました (I lost it) and いくらですか (how much?) will save you again and again."
+        },
+        {
+          "id": "wrong_train",
+          "title": "Seaside Detour",
+          "titleNative": "まさかの海",
+          "type": "awkward",
+          "image": "/images/bg/seaside.svg",
+          "summary": "You mixed up 五 (go, 5) and 九 (kyuu, 9) and rode all the way to the sea.",
+          "teachingPoint": "Numbers are easy to mishear. Repeat them back (五番線ですね？) or ask: もう一度お願いします."
+        },
+        {
+          "id": "new_friend",
+          "title": "A Friend at the Gate",
+          "titleNative": "改札の友だち",
+          "type": "hidden",
+          "image": "/images/bg/station.svg",
+          "character": "yuki",
+          "expression": "happy",
+          "summary": "Your charming 'from my country!' mix-up — and your honest わかりません — caught Yuki's attention. She walked you home.",
+          "teachingPoint": "Saying わかりません isn't failure. Honest questions start conversations."
+        }
+      ],
+      "review": {
+        "phrases": [
+          {
+            "text": "すみません、きっぷをなくしました。",
+            "reading": "Sumimasen, kippu o nakushimashita.",
+            "translation": "Excuse me, I lost my ticket.",
+            "note": "Reporting a problem: すみません + what happened"
+          },
+          {
+            "text": "いくらですか？",
+            "reading": "Ikura desu ka?",
+            "translation": "How much is it?",
+            "note": "Works for any price"
+          },
+          {
+            "text": "{五番線|ごばんせん}ですね。",
+            "reading": "Go-bansen desu ne.",
+            "translation": "Platform 5, right?",
+            "note": "〜ですね confirms what you heard"
+          },
+          {
+            "text": "もう{一度|いちど}お{願|ねが}いします。",
+            "reading": "Mou ichido onegaishimasu.",
+            "translation": "Once more, please.",
+            "note": "Ask instead of guessing"
+          }
+        ],
+        "grammar": [
+          {
+            "title": "〜をなくしました: reporting what happened",
+            "explanation": "[object] を + verb in the ました form describes something that happened. を marks the object, and 'I' and 'my' are usually left out.",
+            "example": "さいふをなくしました。",
+            "exampleTranslation": "I lost my wallet."
+          },
+          {
+            "title": "Question words decide the answer",
+            "explanation": "どこ (where) needs a place, いくら (how much) a price and いつ (when) a time. Only questions without a question word take はい／いいえ.",
+            "example": "どこから来ましたか？ — 成田からです。",
+            "exampleTranslation": "Where did you come from? — From Narita."
+          },
+          {
+            "title": "〜ですね: checking you understood",
+            "explanation": "ね at the end of a sentence asks for agreement ('…, right?'). Repeating key information + ですね is a polite way to confirm it.",
+            "example": "三時ですね。",
+            "exampleTranslation": "Three o'clock, right?"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "A station attendant is standing nearby. What's the most natural way to get his attention?",
+            "options": [
+              "すみません！",
+              "おい！",
+              "ありがとうございます！",
+              "さようなら！"
+            ],
+            "answer": 0,
+            "explanation": "すみません is the standard polite way to get someone's attention."
+          },
+          {
+            "question": "At the station, staff ask どこから来ましたか？ What do they want to know?",
+            "options": [
+              "Which station you started from",
+              "Your nationality",
+              "What time you arrived",
+              "Where you're going"
+            ],
+            "answer": 0,
+            "explanation": "In a station, どこから means where your journey started, so the station."
+          },
+          {
+            "question": "How do you ask the price?",
+            "options": [
+              "いくらですか？",
+              "どこですか？",
+              "いつですか？",
+              "なんですか？"
+            ],
+            "answer": 0,
+            "explanation": "いくら = how much. どこ = where, いつ = when, なん = what."
+          }
+        ]
+      },
+      "survival": [
+        {
+          "id": "sv1_platform",
+          "title": "Which platform?",
+          "context": "You want to go to Shibuya and ask a station attendant.",
+          "background": "/images/bg/station.svg",
+          "skill": "comprehension",
+          "steps": [
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "{渋谷|しぶや}ですか？{山手線|やまのてせん}で、{三番線|さんばんせん}です。",
+              "reading": "Shibuya desu ka? Yamanote-sen de, san-bansen desu.",
+              "translation": "Shibuya? Take the Yamanote Line from platform 3.",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "{三番線|さんばんせん}ですね。ありがとうございます。",
+                  "reading": "San-bansen desu ne. Arigatou gozaimasu.",
+                  "translation": "Platform 3, right? Thank you.",
+                  "quality": "natural",
+                  "feedback": "You confirmed the platform number. Perfect.",
+                  "why": "Number + 番線 is the platform. Repeating it with ですね lets him correct you if you misheard."
+                },
+                {
+                  "id": "b",
+                  "text": "{四番線|よんばんせん}ですね。ありがとうございます。",
+                  "reading": "Yon-bansen desu ne. Arigatou gozaimasu.",
+                  "translation": "Platform 4, right? Thank you.",
+                  "quality": "wrong",
+                  "feedback": "He said 三 (san, 3), not 四 (yon, 4).",
+                  "why": "さん (3) and よん (4) are both short. Listen carefully and confirm numbers out loud."
+                },
+                {
+                  "id": "c",
+                  "text": "{渋谷|しぶや}はどこですか？",
+                  "reading": "Shibuya wa doko desu ka?",
+                  "translation": "Where is Shibuya?",
+                  "quality": "awkward",
+                  "feedback": "He's already answering that. Listen for the platform number.",
+                  "why": "When someone answers your question, show you understood by repeating the key detail instead of asking again."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv1_delay",
+          "title": "Running late",
+          "context": "You're waiting on the platform when the attendant walks over.",
+          "background": "/images/bg/station.svg",
+          "skill": "comprehension",
+          "steps": [
+            {
+              "speaker": "tanaka",
+              "expression": "sad",
+              "text": "すみません、{次|つぎ}の{電車|でんしゃ}は{十分|じゅっぷん}{遅|おく}れています。",
+              "reading": "Sumimasen, tsugi no densha wa juppun okurete imasu.",
+              "translation": "Sorry, the next train is running ten minutes late.",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "わかりました。{十分|じゅっぷん}ですね。",
+                  "reading": "Wakarimashita. Juppun desu ne.",
+                  "translation": "Understood. Ten minutes, right?",
+                  "quality": "natural",
+                  "feedback": "You acknowledged it and confirmed the delay.",
+                  "why": "十分 is read じゅっぷん when it means '10 minutes'. わかりました + repeating the detail is the natural response."
+                },
+                {
+                  "id": "b",
+                  "text": "{十分|じゅうぶん}です！",
+                  "reading": "Juubun desu!",
+                  "translation": "That's enough!",
+                  "quality": "awkward",
+                  "feedback": "じゅうぶん means 'enough'. For ten minutes, say じゅっぷん.",
+                  "why": "十分 has two readings: じゅっぷん (10 minutes) and じゅうぶん (enough). Here じゅうぶんです sounds like you're telling him to stop talking!"
+                },
+                {
+                  "id": "c",
+                  "text": "はい、{遅|おそ}いです。",
+                  "reading": "Hai, osoi desu.",
+                  "translation": "Yes, it's slow.",
+                  "quality": "understandable",
+                  "feedback": "He'll get it, but わかりました is how you acknowledge information.",
+                  "why": "遅い is an adjective (slow or late). To acknowledge news, use わかりました or そうですか."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv1_charge",
+          "title": "Not enough balance",
+          "context": "The gate beeps and won't let you through. You go to the attendant's window.",
+          "background": "/images/bg/station.svg",
+          "skill": "vocabulary",
+          "steps": [
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "{残高|ざんだか}が{足|た}りませんね。チャージしますか？",
+              "reading": "Zandaka ga tarimasen ne. Chaaji shimasu ka?",
+              "translation": "Your balance isn't enough. Would you like to top up?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "はい、チャージします。",
+                  "reading": "Hai, chaaji shimasu.",
+                  "translation": "Yes, I'll top up.",
+                  "quality": "natural",
+                  "feedback": "Exactly. You can't exit without topping up.",
+                  "why": "チャージする = to top up an IC card. Answering with the same verb (チャージします) is natural."
+                },
+                {
+                  "id": "b",
+                  "text": "いいえ、{大丈夫|だいじょうぶ}です。",
+                  "reading": "Iie, daijoubu desu.",
+                  "translation": "No, I'm fine.",
+                  "quality": "awkward",
+                  "feedback": "Polite, but you can't get through the gate without topping up!",
+                  "why": "大丈夫です declines an offer. Here the offer is the only way out, so declining doesn't solve your problem."
+                },
+                {
+                  "id": "c",
+                  "text": "{残高|ざんだか}をください。",
+                  "reading": "Zandaka o kudasai.",
+                  "translation": "Give me balance, please.",
+                  "quality": "wrong",
+                  "feedback": "You can't ask for 'balance'. Say チャージします (I'll top up).",
+                  "why": "残高 means 'balance (remaining amount)'. To add money, you charge (チャージ) your card."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv1_toilet",
+          "title": "Urgent!",
+          "context": "You really need the restroom. You find the attendant.",
+          "background": "/images/bg/station.svg",
+          "skill": "vocabulary",
+          "steps": [
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "はい、どうしましたか？",
+              "reading": "Hai, dou shimashita ka?",
+              "translation": "Yes, what's the matter?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "すみません、トイレはどこですか？",
+                  "reading": "Sumimasen, toire wa doko desu ka?",
+                  "translation": "Excuse me, where is the restroom?",
+                  "quality": "natural",
+                  "feedback": "Clear and polite.",
+                  "why": "[place] はどこですか？ is the go-to pattern for asking where something is."
+                },
+                {
+                  "id": "b",
+                  "text": "トイレをなくしました。",
+                  "reading": "Toire o nakushimashita.",
+                  "translation": "I lost the toilet.",
+                  "quality": "wrong",
+                  "feedback": "なくしました = I lost it. You didn't lose a toilet!",
+                  "why": "Don't reuse a phrase just because it worked before. Ask for a place with はどこですか."
+                },
+                {
+                  "id": "c",
+                  "text": "トイレ！",
+                  "reading": "Toire!",
+                  "translation": "Toilet!",
+                  "quality": "awkward",
+                  "feedback": "One word works in an emergency, but the full question is easy and polite.",
+                  "why": "Single words get understood, but すみません + full sentence sounds much more natural to staff."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv1_lost",
+          "title": "Lost and found",
+          "context": "You left something on the train and go to the station office.",
+          "background": "/images/bg/station.svg",
+          "skill": "comprehension",
+          "steps": [
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "{何|なに}をなくしましたか？",
+              "reading": "Nani o nakushimashita ka?",
+              "translation": "What did you lose?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "さいふをなくしました。",
+                  "reading": "Saifu o nakushimashita.",
+                  "translation": "I lost my wallet.",
+                  "quality": "natural",
+                  "feedback": "You named what you lost. That's exactly what he needs.",
+                  "why": "何 asks 'what?', so answer with the thing (さいふ = wallet) + をなくしました."
+                },
+                {
+                  "id": "b",
+                  "text": "はい、なくしました。",
+                  "reading": "Hai, nakushimashita.",
+                  "translation": "Yes, I lost it.",
+                  "quality": "wrong",
+                  "feedback": "何 asks 'what?'. Name the item.",
+                  "why": "Questions with a question word (何, どこ, いつ) can't be answered with はい／いいえ."
+                },
+                {
+                  "id": "c",
+                  "text": "さいふをください。",
+                  "reading": "Saifu o kudasai.",
+                  "translation": "Give me a wallet, please.",
+                  "quality": "awkward",
+                  "feedback": "ください asks for something. He needs to know what you lost.",
+                  "why": "〜をください requests an item, but here you have to report something that happened (past tense)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv1_exit",
+          "title": "West exit",
+          "context": "You need the WEST exit. You ask the attendant.",
+          "background": "/images/bg/station.svg",
+          "skill": "comprehension",
+          "steps": [
+            {
+              "speaker": "tanaka",
+              "expression": "neutral",
+              "text": "{東口|ひがしぐち}は{右|みぎ}、{西口|にしぐち}は{左|ひだり}です。",
+              "reading": "Higashiguchi wa migi, nishiguchi wa hidari desu.",
+              "translation": "The east exit is on the right, the west exit on the left.",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "{西口|にしぐち}は{左|ひだり}ですね。ありがとうございます。",
+                  "reading": "Nishiguchi wa hidari desu ne. Arigatou gozaimasu.",
+                  "translation": "The west exit is on the left, right? Thank you.",
+                  "quality": "natural",
+                  "feedback": "You picked out the detail you needed and confirmed it.",
+                  "why": "西 = west, 東 = east, 右 = right, 左 = left. Confirm with ですね."
+                },
+                {
+                  "id": "b",
+                  "text": "{西口|にしぐち}は{右|みぎ}ですね。ありがとうございます。",
+                  "reading": "Nishiguchi wa migi desu ne. Arigatou gozaimasu.",
+                  "translation": "The west exit is on the right, right? Thank you.",
+                  "quality": "wrong",
+                  "feedback": "右 = right, 左 = left. The west exit is on the left.",
+                  "why": "みぎ (right) and ひだり (left) are easy to swap. Think 'hidari, hand on the left'."
+                },
+                {
+                  "id": "c",
+                  "text": "{東口|ひがしぐち}ですね。",
+                  "reading": "Higashiguchi desu ne.",
+                  "translation": "The east exit, right?",
+                  "quality": "awkward",
+                  "feedback": "You wanted the west exit (西口), not the east (東口).",
+                  "why": "When someone gives you two options, listen for the one you asked about."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ep2",
+      "title": "Konbini Night",
+      "titleNative": "コンビニの夜",
+      "level": 2,
+      "goal": "Buy dinner at the convenience store without panicking.",
+      "synopsis": "Day 3, 9 p.m. You're starving, and the konbini clerk speaks in rapid-fire set phrases.",
+      "startScene": "s1",
+      "scenes": {
+        "s1": {
+          "background": "/images/bg/konbini.svg",
+          "cast": [
+            "kenta"
+          ],
+          "skill": "culture",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Day 3. It's 9 p.m., you're starving, and the glowing convenience store on the corner is calling your name."
+            },
+            {
+              "speaker": "narrator",
+              "text": "The door chimes as you step inside."
+            },
+            {
+              "speaker": "kenta",
+              "expression": "happy",
+              "text": "いらっしゃいませ〜！",
+              "reading": "Irasshaimase~!",
+              "translation": "Welcome~!",
+              "vocabRefs": [
+                "v_irasshaimase"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e2_c1a",
+              "text": "（{軽|かる}く{会釈|えしゃく}する）",
+              "reading": "(karuku eshaku suru)",
+              "translation": "(Give a small nod)",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "reactionExpression": "happy",
+              "feedback": "いらっしゃいませ doesn't need a reply — a small nod (or nothing at all) is what locals do.",
+              "why": "In Japanese shops, いらっしゃいませ is a greeting from staff, not a question, so no answer is expected. Most people say nothing or give a small nod (会釈, a slight bow).",
+              "reaction": [
+                {
+                  "speaker": "narrator",
+                  "text": "The clerk — his name tag says KENTA — nods back and returns to stacking rice balls."
+                }
+              ],
+              "next": "s2"
+            },
+            {
+              "id": "e2_c1b",
+              "text": "いらっしゃいませ！",
+              "reading": "Irasshaimase!",
+              "translation": "Welcome!",
+              "quality": "awkward",
+              "effects": {
+                "trust": 1,
+                "fluency": 0
+              },
+              "reactionExpression": "surprised",
+              "vocabRefs": [
+                "v_irasshaimase"
+              ],
+              "feedback": "いらっしゃいませ is what STAFF say to customers — saying it back makes it sound like you work here!",
+              "why": "いらっしゃいませ is a fixed honorific phrase meaning 'welcome (to our place)', and only the host or staff say it. As a customer you can nod, or say こんにちは to staff you know.",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "surprised",
+                  "text": "えっ？…あ、{新|あたら}しいバイトの{方|かた}ですか？",
+                  "reading": "E? …A, atarashii baito no kata desu ka?",
+                  "translation": "Huh? …Oh, are you the new part-timer?"
+                },
+                {
+                  "speaker": "you",
+                  "text": "い、いいえ！{客|きゃく}です！",
+                  "reading": "I, iie! Kyaku desu!",
+                  "translation": "N-no! I'm a customer!"
+                }
+              ],
+              "next": "s2"
+            },
+            {
+              "id": "e2_c1c",
+              "text": "はじめまして。どうぞよろしくお{願|ねが}いします。",
+              "reading": "Hajimemashite. Douzo yoroshiku onegaishimasu.",
+              "translation": "How do you do. I look forward to our relationship.",
+              "quality": "awkward",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_onegaishimasu"
+              ],
+              "feedback": "That's a formal self-introduction — lovely at a job interview, but far too much for walking into a shop.",
+              "why": "はじめまして / どうぞよろしくお願いします introduce you to someone you'll have an ongoing relationship with, such as classmates, coworkers or interviewers. A clerk greeting customers doesn't need one.",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "confused",
+                  "text": "え、あ、はい…よろしくお{願|ねが}いします…？",
+                  "reading": "E, a, hai… yoroshiku onegaishimasu…?",
+                  "translation": "Uh, oh, yes… likewise…?",
+                  "vocabRefs": [
+                    "v_onegaishimasu"
+                  ]
+                }
+              ],
+              "next": "s2"
+            }
+          ]
+        },
+        "s2": {
+          "skill": "grammar",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "You wander the aisles. Sandwiches, ice cream, a whole wall of drinks… but no rice balls anywhere."
+            }
+          ],
+          "choices": [
+            {
+              "id": "e2_c2a",
+              "text": "すみません、おにぎりはどこにありますか？",
+              "reading": "Sumimasen, onigiri wa doko ni arimasu ka?",
+              "translation": "Excuse me, where are the rice balls?",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_sumimasen",
+                "v_onigiri",
+                "v_doko",
+                "v_arimasu"
+              ],
+              "feedback": "Objects use あります (to exist) — おにぎりはどこにありますか is exactly right.",
+              "why": "Japanese has two verbs for 'to exist': あります for things (objects, plants, events) and います for people and animals. [thing] はどこにありますか asks where something is.",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "happy",
+                  "text": "おにぎりは、こちらにあります！",
+                  "reading": "Onigiri wa, kochira ni arimasu!",
+                  "translation": "The rice balls are right over here!",
+                  "vocabRefs": [
+                    "v_onigiri",
+                    "v_arimasu"
+                  ]
+                }
+              ],
+              "next": "s3"
+            },
+            {
+              "id": "e2_c2b",
+              "text": "すみません、おにぎりはどこにいますか？",
+              "reading": "Sumimasen, onigiri wa doko ni imasu ka?",
+              "translation": "Excuse me, where are the rice balls (hanging out)?",
+              "quality": "awkward",
+              "effects": {
+                "trust": 1,
+                "fluency": 0
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_sumimasen",
+                "v_onigiri",
+                "v_imasu"
+              ],
+              "feedback": "います is for living things (people, animals). For objects use あります — otherwise your onigiri sound like they're wandering around!",
+              "why": "います is only for living things that move by themselves: 猫がいます, 先生がいます. Using it for rice balls turns them into little creatures. Memory trick: あ for 'artifacts', い for 'individuals'.",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "happy",
+                  "text": "あはは！おにぎりは{生|い}きていませんよ。こちらにあります。",
+                  "reading": "Ahaha! Onigiri wa ikite imasen yo. Kochira ni arimasu.",
+                  "translation": "Ahaha! The rice balls aren't alive. They're over here.",
+                  "vocabRefs": [
+                    "v_onigiri",
+                    "v_arimasu"
+                  ]
+                }
+              ],
+              "next": "s3"
+            },
+            {
+              "id": "e2_c2c",
+              "text": "すみません、おにぎりをどこですか？",
+              "reading": "Sumimasen, onigiri o doko desu ka?",
+              "translation": "Excuse me, rice balls (object) where is?",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_sumimasen",
+                "v_onigiri",
+                "v_doko"
+              ],
+              "feedback": "を marks the object of a verb, but there's no action verb here. Use は: おにぎりはどこですか？",
+              "why": "を marks the object of an action verb (おにぎりを買います). です isn't an action, so it has no object. Mark the topic you're asking about with は: おにぎりはどこですか？",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "confused",
+                  "text": "おにぎり…を？…あ、おにぎりですね！こちらにあります。",
+                  "reading": "Onigiri… o? …A, onigiri desu ne! Kochira ni arimasu.",
+                  "translation": "Rice balls… what? …Oh, rice balls! They're over here.",
+                  "vocabRefs": [
+                    "v_onigiri",
+                    "v_arimasu"
+                  ]
+                }
+              ],
+              "next": "s3"
+            }
+          ]
+        },
+        "s3": {
+          "skill": "comprehension",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Onigiri secured. You also grab a karaage bento and head to the register."
+            },
+            {
+              "speaker": "kenta",
+              "expression": "neutral",
+              "text": "お{弁当|べんとう}、{温|あたた}めますか？",
+              "reading": "Obentou, atatamemasu ka?",
+              "translation": "Shall I heat up your bento?",
+              "vocabRefs": [
+                "v_bentou",
+                "v_atatamemasu"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e2_c3a",
+              "text": "はい、お{願|ねが}いします。",
+              "reading": "Hai, onegaishimasu.",
+              "translation": "Yes, please.",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_onegaishimasu"
+              ],
+              "feedback": "温めますか？ is an offer — はい、お願いします accepts it politely.",
+              "why": "温めますか？ is the polite ます form of 温める (to warm up): 'Shall I heat it?'. Konbini staff ask this for bento. Answer はい、お願いします (yes, please) or 大丈夫です (no, thanks).",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "happy",
+                  "text": "はい、{少々|しょうしょう}お{待|ま}ちください！",
+                  "reading": "Hai, shoushou omachi kudasai!",
+                  "translation": "Sure, just a moment!",
+                  "vocabRefs": [
+                    "v_kudasai"
+                  ]
+                }
+              ],
+              "next": "s4"
+            },
+            {
+              "id": "e2_c3b",
+              "text": "はい、{温|あたた}かいです。",
+              "reading": "Hai, atatakai desu.",
+              "translation": "Yes, it is warm.",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "confused",
+              "feedback": "温かい means 'is warm' — he was OFFERING to heat it (温めますか). Accept with はい、お願いします.",
+              "why": "温める is a verb (to heat something) and 温かい is an adjective (warm). The clerk asked about an action, whether to heat it, not about how warm it is now.",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "confused",
+                  "text": "え？…{冷|つめ}たいですよ？",
+                  "reading": "E? …Tsumetai desu yo?",
+                  "translation": "Huh? …It's cold, though?"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "He looks at the bento, then at you, then quietly bags it. Unheated."
+                }
+              ],
+              "next": "s4"
+            },
+            {
+              "id": "e2_c3c",
+              "text": "{温|あたた}めません。",
+              "reading": "Atatamemasen.",
+              "translation": "I will not heat it.",
+              "quality": "awkward",
+              "effects": {
+                "trust": 0,
+                "fluency": 0
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_atatamemasu"
+              ],
+              "feedback": "温めません sounds like YOU refuse to heat it. To decline politely, say 大丈夫です (I'm fine).",
+              "why": "温めません is a plain negative: 'I/we won't heat it'. It sounds like a refusal or an announcement. To decline politely, Japanese prefers soft phrases: 大丈夫です, いいです, or 結構です (more formal).",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "confused",
+                  "text": "あ…はい。そのままですね。",
+                  "reading": "A… hai. Sono mama desu ne.",
+                  "translation": "Oh… okay. As it is, then."
+                }
+              ],
+              "next": "s4"
+            }
+          ]
+        },
+        "s4": {
+          "skill": "vocabulary",
+          "lines": [
+            {
+              "speaker": "kenta",
+              "expression": "neutral",
+              "text": "{袋|ふくろ}はご{利用|りよう}ですか？",
+              "reading": "Fukuro wa goriyou desu ka?",
+              "translation": "Will you be using a bag?",
+              "vocabRefs": [
+                "v_fukuro"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e2_c4a",
+              "text": "{大丈夫|だいじょうぶ}です。",
+              "reading": "Daijoubu desu.",
+              "translation": "I'm fine. (No bag, thanks.)",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_daijoubu"
+              ],
+              "feedback": "大丈夫です is the softest way to say 'no thanks' in a shop — very natural.",
+              "why": "大丈夫です literally means 'I'm all right'. In shops it's the softest way to decline, meaning 'I'm fine without it'. The context makes the meaning clear, so you never have to say いいえ.",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "happy",
+                  "text": "ありがとうございます！",
+                  "reading": "Arigatou gozaimasu!",
+                  "translation": "Thank you!",
+                  "vocabRefs": [
+                    "v_arigatou"
+                  ]
+                }
+              ],
+              "next": "s5"
+            },
+            {
+              "id": "e2_c4b",
+              "text": "はい、ふくろうをください。",
+              "reading": "Hai, fukurou o kudasai.",
+              "translation": "Yes, an owl, please.",
+              "quality": "wrong",
+              "effects": {
+                "trust": 1,
+                "fluency": -1
+              },
+              "reactionExpression": "surprised",
+              "vocabRefs": [
+                "v_fukurou",
+                "v_kudasai"
+              ],
+              "feedback": "ふくろう (fukurou) is an owl! A bag is ふくろ (fukuro) — vowel length changes the word.",
+              "why": "Long vowels change meaning: ふくろ (bag) has three short syllables, but ふくろう (owl) ends in a long 'o'. Similar pairs are おばさん / おばあさん (aunt / grandma) and ここ / こうこう (here / high school).",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "surprised",
+                  "text": "ふ、ふくろう…ですか？",
+                  "reading": "Fu, fukurou… desu ka?",
+                  "translation": "A-an owl…?",
+                  "vocabRefs": [
+                    "v_fukurou"
+                  ]
+                },
+                {
+                  "speaker": "kenta",
+                  "expression": "happy",
+                  "text": "あはは！{袋|ふくろ}ですね。はい、どうぞ！",
+                  "reading": "Ahaha! Fukuro desu ne. Hai, douzo!",
+                  "translation": "Ahaha! You mean a bag. Here you go!",
+                  "vocabRefs": [
+                    "v_fukuro"
+                  ]
+                }
+              ],
+              "next": "s5"
+            },
+            {
+              "id": "e2_c4c",
+              "text": "はい、{袋|ふくろ}をご{利用|りよう}します。",
+              "reading": "Hai, fukuro o goriyou shimasu.",
+              "translation": "Yes, I shall honourably use a bag.",
+              "quality": "awkward",
+              "effects": {
+                "trust": 0,
+                "fluency": 0
+              },
+              "reactionExpression": "neutral",
+              "vocabRefs": [
+                "v_fukuro"
+              ],
+              "feedback": "ご利用 is the honorific staff use for YOUR actions — don't use it about yourself. Just say はい、お願いします.",
+              "why": "ご利用 is honorific: it raises the listener's action, so staff use it for customers (ご利用ですか？). Using honorific forms about yourself sounds self-important. About yourself, say はい、お願いします or 袋をください.",
+              "reaction": [
+                {
+                  "speaker": "kenta",
+                  "expression": "neutral",
+                  "text": "…はい、かしこまりました。",
+                  "reading": "…Hai, kashikomarimashita.",
+                  "translation": "…Certainly."
+                }
+              ],
+              "next": "s5"
+            }
+          ]
+        },
+        "s5": {
+          "cast": [
+            "kenta",
+            "yuki"
+          ],
+          "skill": "politeness",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "As you pay, the door chimes again. It's the student from the room next to yours."
+            },
+            {
+              "speaker": "you",
+              "text": "あ、ゆきさんがいます！",
+              "reading": "A, Yuki-san ga imasu!",
+              "translation": "Oh, it's Yuki!",
+              "vocabRefs": [
+                "v_imasu"
+              ]
+            },
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "あ！{同|おな}じ{寮|りょう}の{人|ひと}だよね？{元気|げんき}？",
+              "reading": "A! Onaji ryou no hito da yo ne? Genki?",
+              "translation": "Oh! You live in my dorm, right? How's it going?",
+              "vocabRefs": [
+                "v_genki"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e2_c5a",
+              "text": "うん、{元気|げんき}だよ！ゆきちゃんは？",
+              "reading": "Un, genki da yo! Yuki-chan wa?",
+              "translation": "Yeah, I'm good! How about you, Yuki?",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_genki"
+              ],
+              "feedback": "She spoke casually (元気？), so matching her with casual だよ sounds friendly and natural.",
+              "why": "元気？ is the casual version of 元気ですか？. When a peer speaks to you casually, a casual answer (うん、元気だよ) signals closeness. ～ちゃん is an affectionate suffix often used with friends.",
+              "reaction": [
+                {
+                  "speaker": "yuki",
+                  "expression": "happy",
+                  "text": "{元気|げんき}{元気|げんき}！{晩|ばん}ごはん？{一緒|いっしょ}に{食|た}べない？",
+                  "reading": "Genki genki! Bangohan? Issho ni tabenai?",
+                  "translation": "Doing great! Is that dinner? Want to eat together?",
+                  "vocabRefs": [
+                    "v_genki",
+                    "v_issho"
+                  ]
+                }
+              ],
+              "next": "s6"
+            },
+            {
+              "id": "e2_c5b",
+              "text": "はい、{大変|たいへん}{元気|げんき}でございます。",
+              "reading": "Hai, taihen genki de gozaimasu.",
+              "translation": "Yes, I am most exceedingly well.",
+              "quality": "awkward",
+              "effects": {
+                "trust": 1,
+                "fluency": -1
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_genki"
+              ],
+              "feedback": "でございます is ultra-formal (luxury-hotel level). Between students it sounds like a robot butler — match her casual tone.",
+              "why": "でございます is a super-polite form of です, used by hotel and department-store staff. Japanese has distinct speech levels (casual, polite です／ます, and honorific), and you pick the one that fits the relationship.",
+              "reaction": [
+                {
+                  "speaker": "yuki",
+                  "expression": "happy",
+                  "text": "あはは！なにそれ、{執事|しつじ}みたい！",
+                  "reading": "Ahaha! Nani sore, shitsuji mitai!",
+                  "translation": "Ahaha! What was that? You sound like a butler!"
+                }
+              ],
+              "next": "s6"
+            },
+            {
+              "id": "e2_c5c",
+              "text": "{元気|げんき}ですか？",
+              "reading": "Genki desu ka?",
+              "translation": "Are you well?",
+              "quality": "understandable",
+              "effects": {
+                "trust": 0,
+                "fluency": 0
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_genki"
+              ],
+              "feedback": "Echoing her question back skips your answer — reply first (うん、元気！), then ask back.",
+              "why": "When someone asks 元気？, answer first (うん、元気！) and then return the question (〇〇は？). Echoing the question without answering leaves the other person hanging.",
+              "reaction": [
+                {
+                  "speaker": "yuki",
+                  "expression": "confused",
+                  "text": "え？うん、{元気|げんき}だけど…？",
+                  "reading": "E? Un, genki da kedo…?",
+                  "translation": "Huh? Yeah, I'm fine, but…?",
+                  "vocabRefs": [
+                    "v_genki"
+                  ]
+                }
+              ],
+              "next": "s6"
+            }
+          ]
+        },
+        "s6": {
+          "routes": [
+            {
+              "if": "chose:e2_c1b && chose:e2_c4b",
+              "next": "e_legend"
+            },
+            {
+              "if": "chose:e2_c3b || chose:e2_c3c",
+              "next": "e_cold"
+            },
+            {
+              "if": "trust >= 4 && fluency >= 8",
+              "next": "e_feast"
+            },
+            {
+              "else": true,
+              "next": "e_dinner"
+            }
+          ]
+        },
+        "e_feast": {
+          "background": "/images/bg/street.svg",
+          "cast": [
+            "yuki"
+          ],
+          "lines": [
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "{温|あたた}かいお{弁当|べんとう}、いいね！{公園|こうえん}で{一緒|いっしょ}に{食|た}べよう！",
+              "reading": "Atatakai obentou, ii ne! Kouen de issho ni tabeyou!",
+              "translation": "A warm bento, nice! Let's eat together in the park!",
+              "vocabRefs": [
+                "v_bentou",
+                "v_issho"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "You eat steaming karaage on a park bench while Yuki teaches you her best konbini hacks. Kenta even waves as you leave."
+            }
+          ],
+          "endingId": "feast"
+        },
+        "e_dinner": {
+          "background": "/images/bg/room.svg",
+          "cast": [],
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Back in your tiny dorm room, you open a warm bento. Not bad for day three."
+            },
+            {
+              "speaker": "you",
+              "text": "いただきます！",
+              "reading": "Itadakimasu!",
+              "translation": "Let's eat! (said before a meal)"
+            }
+          ],
+          "endingId": "dinner"
+        },
+        "e_cold": {
+          "background": "/images/bg/room.svg",
+          "cast": [],
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Back in your room, you bite into your karaage bento. It's… refrigerator-cold."
+            },
+            {
+              "speaker": "you",
+              "text": "{冷|つめ}たい…。「{温|あたた}めますか」は{質問|しつもん}だったんだ…",
+              "reading": "Tsumetai… \"Atatamemasu ka\" wa shitsumon dattanda…",
+              "translation": "Cold… So 'atatamemasu ka' was a question…",
+              "vocabRefs": [
+                "v_atatamemasu",
+                "v_shitsumon"
+              ]
+            }
+          ],
+          "endingId": "cold"
+        },
+        "e_legend": {
+          "cast": [
+            "kenta"
+          ],
+          "lines": [
+            {
+              "speaker": "kenta",
+              "expression": "happy",
+              "text": "また{来|き}てくださいね、ふくろうさん！",
+              "reading": "Mata kite kudasai ne, Fukurou-san!",
+              "translation": "Come again soon, Mx. Owl!",
+              "vocabRefs": [
+                "v_fukurou",
+                "v_kudasai"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "The customer who welcomed staff to their own store AND asked for an owl? Kenta tells everyone. By Friday the whole night shift calls you 'Fukurou-san'."
+            }
+          ],
+          "endingId": "legend"
+        }
+      },
+      "endings": [
+        {
+          "id": "feast",
+          "title": "Konbini Feast",
+          "titleNative": "コンビニ・パーティー",
+          "type": "best",
+          "image": "/images/bg/street.svg",
+          "character": "yuki",
+          "expression": "happy",
+          "summary": "Every exchange went smoothly — and Yuki invited you to share dinner in the park.",
+          "teachingPoint": "Match the register: polite です/ます with staff, casual だよ with friends who speak casually to you."
+        },
+        {
+          "id": "dinner",
+          "title": "Dinner Secured",
+          "titleNative": "晩ごはん確保",
+          "type": "good",
+          "image": "/images/bg/room.svg",
+          "summary": "You navigated the konbini and brought home a warm dinner.",
+          "teachingPoint": "温めますか？ (heat it?) and 袋はご利用ですか？ (bag?) are two questions you'll hear at every konbini."
+        },
+        {
+          "id": "cold",
+          "title": "Ice-Cold Karaage",
+          "titleNative": "冷たい唐揚げ",
+          "type": "awkward",
+          "image": "/images/bg/room.svg",
+          "summary": "You missed the clerk's offer to heat your bento and ate it fridge-cold.",
+          "teachingPoint": "〜ますか？ from staff is often an offer. Accept with はい、お願いします; decline with 大丈夫です."
+        },
+        {
+          "id": "legend",
+          "title": "The Owl Legend",
+          "titleNative": "ふくろうの伝説",
+          "type": "hidden",
+          "image": "/images/bg/konbini.svg",
+          "character": "kenta",
+          "expression": "happy",
+          "summary": "Your two best mistakes made you a konbini celebrity: the night shift now calls you 'Fukurou-san'.",
+          "teachingPoint": "Long vowels matter: ふくろ (bag) vs ふくろう (owl), おばさん (aunt) vs おばあさん (grandma)."
+        }
+      ],
+      "review": {
+        "phrases": [
+          {
+            "text": "はい、お{願|ねが}いします。",
+            "reading": "Hai, onegaishimasu.",
+            "translation": "Yes, please.",
+            "note": "Accepting an offer (heating, a bag, a receipt…)"
+          },
+          {
+            "text": "{大丈夫|だいじょうぶ}です。",
+            "reading": "Daijoubu desu.",
+            "translation": "I'm fine. (No, thanks.)",
+            "note": "The soft way to decline in shops"
+          },
+          {
+            "text": "おにぎりはどこにありますか？",
+            "reading": "Onigiri wa doko ni arimasu ka?",
+            "translation": "Where are the rice balls?",
+            "note": "あります for things"
+          },
+          {
+            "text": "うん、{元気|げんき}だよ！",
+            "reading": "Un, genki da yo!",
+            "translation": "Yeah, I'm good!",
+            "note": "Casual reply to a friend"
+          }
+        ],
+        "grammar": [
+          {
+            "title": "あります vs います",
+            "explanation": "あります is for things (objects, plants, events). います is for people and animals.",
+            "example": "コンビニがあります。猫がいます。",
+            "exampleTranslation": "There's a konbini. There's a cat."
+          },
+          {
+            "title": "Offers phrased as 〜ますか？",
+            "explanation": "Staff often offer services as ます-form questions: 温めますか？ (Shall I heat it?), 袋はご利用ですか？ (Will you use a bag?). Accept with はい、お願いします or decline with 大丈夫です.",
+            "example": "お箸はおつけしますか？",
+            "exampleTranslation": "Shall I include chopsticks?"
+          },
+          {
+            "title": "Matching speech levels",
+            "explanation": "There's casual (だよ), polite (です／ます) and super-polite (でございます). Match the level the other person uses with you: polite with staff, and casual with friends who speak casually to you.",
+            "example": "元気？ — うん、元気だよ！",
+            "exampleTranslation": "How's it going? — Yeah, good!"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "The clerk says いらっしゃいませ as you walk in. What do most people do?",
+            "options": [
+              "Nod or say nothing",
+              "Say いらっしゃいませ back",
+              "Introduce themselves",
+              "Say さようなら"
+            ],
+            "answer": 0,
+            "explanation": "いらっしゃいませ is a staff greeting, and no reply is expected."
+          },
+          {
+            "question": "Which sentence correctly asks where the rice balls are?",
+            "options": [
+              "おにぎりはどこにありますか？",
+              "おにぎりはどこにいますか？",
+              "おにぎりをどこですか？"
+            ],
+            "answer": 0,
+            "explanation": "Things take あります, います is for living things, and を needs an action verb."
+          },
+          {
+            "question": "The clerk asks 袋はご利用ですか？ and you don't need a bag. What do you say?",
+            "options": [
+              "大丈夫です。",
+              "ふくろうをください。",
+              "はい、ご利用します。",
+              "温めません。"
+            ],
+            "answer": 0,
+            "explanation": "大丈夫です declines politely. (ふくろう is an owl!)"
+          }
+        ]
+      },
+      "survival": [
+        {
+          "id": "sv2_receipt",
+          "title": "Receipt?",
+          "context": "You've just paid at the konbini.",
+          "background": "/images/bg/konbini.svg",
+          "skill": "vocabulary",
+          "steps": [
+            {
+              "speaker": "kenta",
+              "expression": "neutral",
+              "text": "レシートはご{利用|りよう}ですか？",
+              "reading": "Reshiito wa goriyou desu ka?",
+              "translation": "Do you need the receipt?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "{大丈夫|だいじょうぶ}です。",
+                  "reading": "Daijoubu desu.",
+                  "translation": "I'm fine. (No, thanks.)",
+                  "quality": "natural",
+                  "feedback": "The softest way to decline.",
+                  "why": "大丈夫です politely declines offers in shops."
+                },
+                {
+                  "id": "b",
+                  "text": "はい、ご{利用|りよう}します。",
+                  "reading": "Hai, goriyou shimasu.",
+                  "translation": "Yes, I shall honourably use it.",
+                  "quality": "awkward",
+                  "feedback": "ご利用 is honorific, for the CUSTOMER's actions. Say はい、お願いします.",
+                  "why": "Honorific forms (ご〜) raise the other person. Using them about yourself sounds self-important."
+                },
+                {
+                  "id": "c",
+                  "text": "レシートがいます。",
+                  "reading": "Reshiito ga imasu.",
+                  "translation": "There is a receipt (alive).",
+                  "quality": "wrong",
+                  "feedback": "います is for living things, and you'd answer with はい、お願いします anyway.",
+                  "why": "Things use あります, people and animals use います. And an offer needs a yes or no answer."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv2_chopsticks",
+          "title": "Chopsticks?",
+          "context": "You're buying a bento at a different konbini.",
+          "background": "/images/bg/konbini.svg",
+          "skill": "comprehension",
+          "steps": [
+            {
+              "speaker": "kenta",
+              "expression": "neutral",
+              "text": "お{箸|はし}はおつけしますか？",
+              "reading": "Ohashi wa otsuke shimasu ka?",
+              "translation": "Shall I include chopsticks?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "はい、お{願|ねが}いします。",
+                  "reading": "Hai, onegaishimasu.",
+                  "translation": "Yes, please.",
+                  "quality": "natural",
+                  "feedback": "Simple and polite.",
+                  "why": "おつけしますか？ is a humble offer ('shall I include?'). Accept with はい、お願いします."
+                },
+                {
+                  "id": "b",
+                  "text": "はい、{箸|はし}をつけます。",
+                  "reading": "Hai, hashi o tsukemasu.",
+                  "translation": "Yes, I'll attach chopsticks.",
+                  "quality": "awkward",
+                  "feedback": "That sounds like YOU will add them. Just accept: はい、お願いします.",
+                  "why": "Echoing the clerk's verb changes who does the action. Accept the offer instead."
+                },
+                {
+                  "id": "c",
+                  "text": "いいえ、{箸|はし}です。",
+                  "reading": "Iie, hashi desu.",
+                  "translation": "No, it's chopsticks.",
+                  "quality": "wrong",
+                  "feedback": "That doesn't answer the question. Use はい、お願いします or 大丈夫です.",
+                  "why": "Answer offers with acceptance (お願いします) or a soft decline (大丈夫です)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv2_pointcard",
+          "title": "Point card",
+          "context": "At the register, the clerk asks you something.",
+          "background": "/images/bg/konbini.svg",
+          "skill": "politeness",
+          "steps": [
+            {
+              "speaker": "kenta",
+              "expression": "neutral",
+              "text": "ポイントカードはお{持|も}ちですか？",
+              "reading": "Pointo kaado wa omochi desu ka?",
+              "translation": "Do you have a point card?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "いいえ、{持|も}っていません。",
+                  "reading": "Iie, motte imasen.",
+                  "translation": "No, I don't have one.",
+                  "quality": "natural",
+                  "feedback": "Clear and polite.",
+                  "why": "持っています = to have (something on you). Its negative is 持っていません."
+                },
+                {
+                  "id": "b",
+                  "text": "いいえ、お{持|も}ちではありません。",
+                  "reading": "Iie, omochi dewa arimasen.",
+                  "translation": "No, I honourably do not possess one.",
+                  "quality": "awkward",
+                  "feedback": "お持ち is honorific, for OTHER people's belongings. For yourself: 持っていません.",
+                  "why": "Honorific お〜 forms talk about others. Use plain polite forms about yourself."
+                },
+                {
+                  "id": "c",
+                  "text": "はい、ポイントです！",
+                  "reading": "Hai, pointo desu!",
+                  "translation": "Yes, it's points!",
+                  "quality": "wrong",
+                  "feedback": "That doesn't answer whether you have the card.",
+                  "why": "お持ちですか？ asks 'do you have?'. Answer with 持っています or 持っていません."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv2_payment",
+          "title": "Cash or card?",
+          "context": "The clerk is ready for you to pay.",
+          "background": "/images/bg/konbini.svg",
+          "skill": "comprehension",
+          "steps": [
+            {
+              "speaker": "kenta",
+              "expression": "neutral",
+              "text": "お{支払|しはら}いは{現金|げんきん}ですか、カードですか？",
+              "reading": "Oshiharai wa genkin desu ka, kaado desu ka?",
+              "translation": "Will you pay in cash or by card?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "カードでお{願|ねが}いします。",
+                  "reading": "Kaado de onegaishimasu.",
+                  "translation": "By card, please.",
+                  "quality": "natural",
+                  "feedback": "You picked one option with で (by means of).",
+                  "why": "〜で marks the method: カードで, 現金で. Add お願いします to make it polite."
+                },
+                {
+                  "id": "b",
+                  "text": "はい、そうです。",
+                  "reading": "Hai, sou desu.",
+                  "translation": "Yes, that's right.",
+                  "quality": "awkward",
+                  "feedback": "It's an either/or question, so pick one: カードで or 現金で.",
+                  "why": "A ですか、〜ですか question asks you to choose, so はい doesn't answer it."
+                },
+                {
+                  "id": "c",
+                  "text": "カードをなくしました。",
+                  "reading": "Kaado o nakushimashita.",
+                  "translation": "I lost my card.",
+                  "quality": "wrong",
+                  "feedback": "You just told him you lost your card!",
+                  "why": "Make sure the phrase matches the situation. なくしました reports a lost item."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv2_tea",
+          "title": "Hot or cold?",
+          "context": "You ask for tea at the counter of a konbini café corner.",
+          "background": "/images/bg/konbini.svg",
+          "skill": "comprehension",
+          "steps": [
+            {
+              "speaker": "kenta",
+              "expression": "neutral",
+              "text": "{温|あたた}かいお{茶|ちゃ}と{冷|つめ}たいお{茶|ちゃ}、どちらにしますか？",
+              "reading": "Atatakai ocha to tsumetai ocha, dochira ni shimasu ka?",
+              "translation": "Hot tea or cold tea, which would you like?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "{温|あたた}かいのをお{願|ねが}いします。",
+                  "reading": "Atatakai no o onegaishimasu.",
+                  "translation": "The hot one, please.",
+                  "quality": "natural",
+                  "feedback": "Adjective + の = 'the hot one'. Natural.",
+                  "why": "どちら asks 'which one?'. Adjective + の turns it into 'the ~ one'."
+                },
+                {
+                  "id": "b",
+                  "text": "はい、お{願|ねが}いします。",
+                  "reading": "Hai, onegaishimasu.",
+                  "translation": "Yes, please.",
+                  "quality": "awkward",
+                  "feedback": "どちら asks 'which one?', so はい doesn't choose.",
+                  "why": "Listen for どちら／どっち. It means you have to pick an option."
+                },
+                {
+                  "id": "c",
+                  "text": "{温|あたた}めません。",
+                  "reading": "Atatamemasen.",
+                  "translation": "I won't heat it.",
+                  "quality": "wrong",
+                  "feedback": "Nobody asked you to heat anything!",
+                  "why": "温かい (hot, adjective) ≠ 温める (to heat, verb)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv2_karaoke",
+          "title": "Karaoke invite",
+          "context": "Yuki catches you outside the konbini.",
+          "background": "/images/bg/street.svg",
+          "skill": "politeness",
+          "steps": [
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "{明日|あした}、{一緒|いっしょ}にカラオケ{行|い}かない？",
+              "reading": "Ashita, issho ni karaoke ikanai?",
+              "translation": "Want to go to karaoke together tomorrow?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "いいね！{行|い}こう！",
+                  "reading": "Ii ne! Ikou!",
+                  "translation": "Sounds good! Let's go!",
+                  "quality": "natural",
+                  "feedback": "Casual invitation → casual, enthusiastic answer.",
+                  "why": "〜ない？ is a casual invitation. 行こう (let's go) is the casual volitional form."
+                },
+                {
+                  "id": "b",
+                  "text": "はい、{参|まい}ります。",
+                  "reading": "Hai, mairimasu.",
+                  "translation": "Yes, I shall humbly attend.",
+                  "quality": "awkward",
+                  "feedback": "参ります is humble keigo, far too formal for a friend.",
+                  "why": "Humble verbs (参る, いたす, おる) are for superiors and customers, not for friends."
+                },
+                {
+                  "id": "c",
+                  "text": "いいえ、{行|い}きません！",
+                  "reading": "Iie, ikimasen!",
+                  "translation": "No, I won't go!",
+                  "quality": "understandable",
+                  "feedback": "Clear, but very blunt. A softer no: ごめん、明日はちょっと…",
+                  "why": "Japanese usually softens refusals. ちょっと… ('it's a bit…') does the job."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ep3",
+      "title": "The Café Interview",
+      "titleNative": "カフェの面接",
+      "level": 3,
+      "goal": "Land your first part-time job at Café Komorebi.",
+      "synopsis": "Day 6. Your savings are melting. Yuki got you an interview — now switch from casual chat with her to keigo with the manager.",
+      "startScene": "s1",
+      "scenes": {
+        "s1": {
+          "background": "/images/bg/cafe.svg",
+          "cast": [
+            "yuki"
+          ],
+          "skill": "politeness",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Day 6. Your savings are melting faster than konbini ice cream. Time for a part-time job."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yuki works at Café Komorebi and set up an interview for you. You arrive ten minutes early."
+            },
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "{来|き}たね！{店長|てんちょう}、もうすぐ{来|く}るよ。{緊張|きんちょう}してる？",
+              "reading": "Kita ne! Tenchou, mou sugu kuru yo. Kinchou shiteru?",
+              "translation": "You made it! The manager'll be here soon. Nervous?",
+              "vocabRefs": [
+                "v_tenchou",
+                "v_kinchou"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e3_c1a",
+              "text": "ちょっとね。でも{頑張|がんば}る！",
+              "reading": "Chotto ne. Demo ganbaru!",
+              "translation": "A little. But I'll do my best!",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_ganbaru"
+              ],
+              "feedback": "Casual ちょっとね + 頑張る matches Yuki's friendly tone perfectly.",
+              "why": "Casual speech drops です／ます, so 頑張る instead of 頑張ります. ちょっとね ('a little, yeah') is a soft casual reply. Matching your friend's register keeps the conversation warm.",
+              "reaction": [
+                {
+                  "speaker": "yuki",
+                  "expression": "happy",
+                  "text": "その{調子|ちょうし}！{店長|てんちょう}は{優|やさ}しいから{大丈夫|だいじょうぶ}だよ。",
+                  "reading": "Sono choushi! Tenchou wa yasashii kara daijoubu da yo.",
+                  "translation": "That's the spirit! The manager's kind, so you'll be fine.",
+                  "vocabRefs": [
+                    "v_tenchou",
+                    "v_daijoubu"
+                  ]
+                }
+              ],
+              "next": "s2"
+            },
+            {
+              "id": "e3_c1b",
+              "text": "はい、{少々|しょうしょう}{緊張|きんちょう}しております。",
+              "reading": "Hai, shoushou kinchou shite orimasu.",
+              "translation": "Yes, I am feeling somewhat nervous. (humble)",
+              "quality": "awkward",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_kinchou"
+              ],
+              "feedback": "おります is humble keigo — save it for the manager. With a friend it sounds stiff and distant.",
+              "why": "〜ております is humble keigo (謙譲語): you lower yourself to show respect to a superior or a customer. Using it with a friend creates distance, as if you were strangers.",
+              "reaction": [
+                {
+                  "speaker": "yuki",
+                  "expression": "happy",
+                  "text": "あはは、{面接|めんせつ}はまだだよ！{私|わたし}にはふつうでいいよ。",
+                  "reading": "Ahaha, mensetsu wa mada da yo! Watashi ni wa futsuu de ii yo.",
+                  "translation": "Haha, the interview hasn't started yet! Just talk normally with me."
+                }
+              ],
+              "next": "s2"
+            },
+            {
+              "id": "e3_c1c",
+              "text": "{緊張|きんちょう}？してないよ。{余裕|よゆう}{余裕|よゆう}。",
+              "reading": "Kinchou? Shitenai yo. Yoyuu yoyuu.",
+              "translation": "Nervous? Nope. Easy-peasy.",
+              "quality": "understandable",
+              "effects": {
+                "trust": 0,
+                "fluency": 1
+              },
+              "reactionExpression": "neutral",
+              "vocabRefs": [
+                "v_kinchou"
+              ],
+              "feedback": "Natural casual Japanese, just a bit cocky — and you're still in casual mode right before a formal talk.",
+              "why": "余裕 means 'room to spare', and 余裕余裕 is slang for 'easy-peasy'. It's grammatically fine, but it sounds overconfident, and you'll have to switch gears for the manager in a minute.",
+              "reaction": [
+                {
+                  "speaker": "yuki",
+                  "expression": "neutral",
+                  "text": "ほんと？{店長|てんちょう}の{前|まえ}では{敬語|けいご}だよ？",
+                  "reading": "Honto? Tenchou no mae de wa keigo da yo?",
+                  "translation": "Really? You know it's keigo in front of the manager, right?",
+                  "vocabRefs": [
+                    "v_tenchou"
+                  ]
+                }
+              ],
+              "next": "s2"
+            }
+          ]
+        },
+        "s2": {
+          "cast": [
+            "sato"
+          ],
+          "skill": "politeness",
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "A woman in a linen apron walks over. Yuki straightens up and slips back behind the counter."
+            },
+            {
+              "speaker": "sato",
+              "expression": "neutral",
+              "text": "はじめまして。{店長|てんちょう}の{佐藤|さとう}です。どうぞ、おかけください。",
+              "reading": "Hajimemashite. Tenchou no Satou desu. Douzo, okake kudasai.",
+              "translation": "Nice to meet you. I'm Sato, the manager. Please, have a seat.",
+              "vocabRefs": [
+                "v_tenchou"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e3_c2a",
+              "text": "はじめまして。{本日|ほんじつ}はよろしくお{願|ねが}いいたします。",
+              "reading": "Hajimemashite. Honjitsu wa yoroshiku onegai itashimasu.",
+              "translation": "Nice to meet you. Thank you for your time today.",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_honjitsu",
+                "v_yoroshiku"
+              ],
+              "feedback": "本日 + よろしくお願いいたします is textbook interview keigo — polite without overdoing it.",
+              "why": "Interviews use set phrases: はじめまして → (name)と申します → 本日はよろしくお願いいたします. 本日 is the formal word for 'today', and いたします is the humble form of します.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "happy",
+                  "text": "はい、よろしくお{願|ねが}いします。",
+                  "reading": "Hai, yoroshiku onegaishimasu.",
+                  "translation": "Likewise, thank you.",
+                  "vocabRefs": [
+                    "v_yoroshiku"
+                  ]
+                }
+              ],
+              "next": "s3"
+            },
+            {
+              "id": "e3_c2b",
+              "text": "はじめまして！よろしく！",
+              "reading": "Hajimemashite! Yoroshiku!",
+              "translation": "Nice to meet ya! Hey there!",
+              "quality": "awkward",
+              "effects": {
+                "trust": -1,
+                "fluency": 0
+              },
+              "reactionExpression": "surprised",
+              "vocabRefs": [
+                "v_yoroshiku"
+              ],
+              "feedback": "A bare よろしく is casual — you carried Yuki's tone into the interview. Use よろしくお願いいたします.",
+              "why": "よろしく on its own is casual. The ladder goes よろしく → よろしくお願いします → よろしくお願いいたします. In formal settings like interviews, use the longest form.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "surprised",
+                  "text": "…よ、よろしく。",
+                  "reading": "…Yo, yoroshiku.",
+                  "translation": "…N-nice to meet you."
+                }
+              ],
+              "next": "s3"
+            },
+            {
+              "id": "e3_c2c",
+              "text": "はじめまして、{佐藤|さとう}{店長|てんちょう}さん。よろしくお{願|ねが}いします。",
+              "reading": "Hajimemashite, Satou tenchou-san. Yoroshiku onegaishimasu.",
+              "translation": "Nice to meet you, Mrs. Manager Sato. Pleased to meet you.",
+              "quality": "understandable",
+              "effects": {
+                "trust": 0,
+                "fluency": 1
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_tenchou",
+                "v_yoroshiku"
+              ],
+              "feedback": "店長 is already a title, so 佐藤店長さん doubles the honorific. 佐藤店長 on its own is right.",
+              "why": "Job titles like 店長, 部長 and 先生 already work as honorifics, so attach them straight to the name: 佐藤店長. Adding さん on top (佐藤店長さん) doubles the honorific. The same goes for 田中先生.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "happy",
+                  "text": "ふふ、「{佐藤|さとう}」でいいですよ。",
+                  "reading": "Fufu, \"Satou\" de ii desu yo.",
+                  "translation": "Heh, just 'Sato' is fine."
+                }
+              ],
+              "next": "s3"
+            }
+          ]
+        },
+        "s3": {
+          "skill": "culture",
+          "lines": [
+            {
+              "speaker": "sato",
+              "expression": "neutral",
+              "text": "では、どうしてうちで{働|はたら}きたいんですか？",
+              "reading": "Dewa, doushite uchi de hatarakitai n desu ka?",
+              "translation": "So, why do you want to work here?",
+              "vocabRefs": [
+                "v_hataraku"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e3_c3a",
+              "text": "{日本語|にほんご}を{使|つか}って、お{客|きゃく}さんと{話|はな}したいからです。",
+              "reading": "Nihongo o tsukatte, okyakusan to hanashitai kara desu.",
+              "translation": "Because I want to use my Japanese and talk with customers.",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_okyakusan"
+              ],
+              "feedback": "A reason about growth and customers — exactly what interviewers hope to hear, in clean です form.",
+              "why": "Interviewers want motivation connected to the job: 〜たいからです ('because I want to ~'). Mentioning learning, customers or the shop itself sounds sincere.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "happy",
+                  "text": "いいですね。うちはお{客|きゃく}さんとよく{話|はな}しますよ。",
+                  "reading": "Ii desu ne. Uchi wa okyakusan to yoku hanashimasu yo.",
+                  "translation": "Great. We chat with customers a lot here.",
+                  "vocabRefs": [
+                    "v_okyakusan"
+                  ]
+                }
+              ],
+              "next": "s4"
+            },
+            {
+              "id": "e3_c3b",
+              "text": "{時給|じきゅう}がいいからです。",
+              "reading": "Jikyuu ga ii kara desu.",
+              "translation": "Because the hourly pay is good.",
+              "quality": "awkward",
+              "effects": {
+                "trust": -1,
+                "fluency": 1
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_jikyuu"
+              ],
+              "feedback": "Grammatically perfect and honest — but leading with money sounds blunt in a Japanese interview.",
+              "why": "Pay matters, but in Japanese interviews it usually comes up after you've shown interest in the work itself. Answering if you're asked is fine. Just don't lead with it.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "neutral",
+                  "text": "…{正直|しょうじき}ですね。{時給|じきゅう}は{千二百円|せんにひゃくえん}です。",
+                  "reading": "…Shoujiki desu ne. Jikyuu wa sen nihyaku en desu.",
+                  "translation": "…You're honest. The hourly wage is 1,200 yen.",
+                  "vocabRefs": [
+                    "v_jikyuu"
+                  ]
+                }
+              ],
+              "next": "s4"
+            },
+            {
+              "id": "e3_c3c",
+              "text": "コーヒーが{大好|だいす}きだからっす！",
+              "reading": "Koohii ga daisuki dakara ssu!",
+              "translation": "'Cause I'm totally into coffee!",
+              "quality": "understandable",
+              "effects": {
+                "trust": 1,
+                "fluency": 0
+              },
+              "reactionExpression": "happy",
+              "feedback": "〜っす is sporty slang for です — friendly between coworkers, but too casual for a first interview.",
+              "why": "〜っす is a contraction of です used by young people and in sports clubs. It's friendly with coworkers and seniors you're close to, but too casual for a first meeting with a manager.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "happy",
+                  "text": "「っす」…ふふ。コーヒー、{好|す}きなんですね。",
+                  "reading": "\"Ssu\"… fufu. Koohii, suki nan desu ne.",
+                  "translation": "'Ssu'… heh. So you love coffee, huh."
+                }
+              ],
+              "next": "s4"
+            }
+          ]
+        },
+        "s4": {
+          "skill": "comprehension",
+          "lines": [
+            {
+              "speaker": "sato",
+              "expression": "neutral",
+              "text": "いつから{働|はたら}けますか？",
+              "reading": "Itsu kara hatarakemasu ka?",
+              "translation": "When can you start working?",
+              "vocabRefs": [
+                "v_hataraku"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e3_c4a",
+              "text": "{来週|らいしゅう}の{月曜日|げつようび}から{働|はたら}けます。",
+              "reading": "Raishuu no getsuyoubi kara hatarakemasu.",
+              "translation": "I can start from next Monday.",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_raishuu",
+                "v_hataraku"
+              ],
+              "feedback": "いつから asks 'from when' — a start date + 働けます (can work) answers it precisely.",
+              "why": "いつから = 'from when?'. 働けます ('can work') is the polite potential form (働く → 働ける → 働けます). Answering with a specific date (来週の月曜日から) is clear and helpful.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "happy",
+                  "text": "{来週|らいしゅう}ですね。{助|たす}かります。",
+                  "reading": "Raishuu desu ne. Tasukarimasu.",
+                  "translation": "Next week — that really helps.",
+                  "vocabRefs": [
+                    "v_raishuu"
+                  ]
+                }
+              ],
+              "next": "s5"
+            },
+            {
+              "id": "e3_c4b",
+              "text": "{毎日|まいにち}{働|はたら}けます！",
+              "reading": "Mainichi hatarakemasu!",
+              "translation": "I can work every day!",
+              "quality": "understandable",
+              "effects": {
+                "trust": 1,
+                "fluency": 0
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_hataraku"
+              ],
+              "feedback": "Enthusiastic! But she asked いつから (from WHEN), not how often. Listen for the question word.",
+              "why": "The question word decides the answer. いつから (from when?) needs a start date, while 週に何日 (how many days a week?) needs a frequency. 毎日 answers the second question, not the first.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "confused",
+                  "text": "{毎日|まいにち}…？ええと、{始|はじ}められるのはいつですか？",
+                  "reading": "Mainichi…? Eeto, hajimerareru no wa itsu desu ka?",
+                  "translation": "Every day…? Um, when can you START?"
+                },
+                {
+                  "speaker": "you",
+                  "text": "あ、{来週|らいしゅう}からです！",
+                  "reading": "A, raishuu kara desu!",
+                  "translation": "Oh — from next week!",
+                  "vocabRefs": [
+                    "v_raishuu"
+                  ]
+                }
+              ],
+              "next": "s5"
+            },
+            {
+              "id": "e3_c4c",
+              "text": "{来週|らいしゅう}から{働|はたら}きました。",
+              "reading": "Raishuu kara hatarakimashita.",
+              "translation": "I worked starting next week.",
+              "quality": "wrong",
+              "effects": {
+                "trust": 0,
+                "fluency": -1
+              },
+              "reactionExpression": "confused",
+              "vocabRefs": [
+                "v_raishuu",
+                "v_hataraku"
+              ],
+              "feedback": "働きました is past tense — 'I worked from next week' is time travel! Use 働けます (can work).",
+              "why": "働きました is past tense, but 来週 is in the future, so the two clash. For the future use the ます form (働きます) or the potential form (働けます).",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "confused",
+                  "text": "…{未来|みらい}から{来|き}たんですか？",
+                  "reading": "…Mirai kara kita n desu ka?",
+                  "translation": "…Did you come from the future?"
+                },
+                {
+                  "speaker": "you",
+                  "text": "い、いえ！{来週|らいしゅう}から{働|はたら}けます！",
+                  "reading": "I, ie! Raishuu kara hatarakemasu!",
+                  "translation": "N-no! I can start next week!",
+                  "vocabRefs": [
+                    "v_raishuu",
+                    "v_hataraku"
+                  ]
+                }
+              ],
+              "next": "s5"
+            }
+          ]
+        },
+        "s5": {
+          "skill": "culture",
+          "lines": [
+            {
+              "speaker": "sato",
+              "expression": "neutral",
+              "text": "{最後|さいご}に、{何|なに}か{質問|しつもん}はありますか？",
+              "reading": "Saigo ni, nanika shitsumon wa arimasu ka?",
+              "translation": "Finally, do you have any questions?",
+              "vocabRefs": [
+                "v_shitsumon",
+                "v_arimasu"
+              ]
+            }
+          ],
+          "choices": [
+            {
+              "id": "e3_c5a",
+              "text": "はい。{新|あたら}しいスタッフの{研修|けんしゅう}はありますか？",
+              "reading": "Hai. Atarashii sutaffu no kenshuu wa arimasu ka?",
+              "translation": "Yes. Is there training for new staff?",
+              "quality": "natural",
+              "effects": {
+                "trust": 1,
+                "fluency": 2
+              },
+              "vocabRefs": [
+                "v_kenshuu",
+                "v_arimasu"
+              ],
+              "feedback": "Asking about training shows you're serious about doing the job well — a great closing question.",
+              "why": "Ending an interview with a question shows interest, and the best ones are about the work: 研修はありますか, どんな仕事から始めますか. 〜はありますか ('is there ~?') is an easy pattern.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "happy",
+                  "text": "はい、{最初|さいしょ}の{一週間|いっしゅうかん}は{研修|けんしゅう}です。",
+                  "reading": "Hai, saisho no isshuukan wa kenshuu desu.",
+                  "translation": "Yes, the first week is training.",
+                  "vocabRefs": [
+                    "v_kenshuu"
+                  ]
+                }
+              ],
+              "next": "s6"
+            },
+            {
+              "id": "e3_c5b",
+              "text": "{特|とく}にありません。",
+              "reading": "Toku ni arimasen.",
+              "translation": "Nothing in particular.",
+              "quality": "understandable",
+              "effects": {
+                "trust": 0,
+                "fluency": 0
+              },
+              "reactionExpression": "neutral",
+              "vocabRefs": [
+                "v_arimasu"
+              ],
+              "feedback": "Polite and acceptable, but it misses a chance to show interest. Prepare one question in advance.",
+              "why": "特にありません is polite and acceptable. But 何か質問はありますか is a chance to show motivation, so it's common advice to prepare one question in advance.",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "neutral",
+                  "text": "そうですか。わかりました。",
+                  "reading": "Sou desu ka. Wakarimashita.",
+                  "translation": "I see. Understood.",
+                  "vocabRefs": [
+                    "v_wakarimashita"
+                  ]
+                }
+              ],
+              "next": "s6"
+            },
+            {
+              "id": "e3_c5c",
+              "text": "まかないはありますか？",
+              "reading": "Makanai wa arimasu ka?",
+              "translation": "Do staff get free meals?",
+              "quality": "understandable",
+              "effects": {
+                "trust": 1,
+                "fluency": 0
+              },
+              "reactionExpression": "happy",
+              "vocabRefs": [
+                "v_makanai",
+                "v_arimasu"
+              ],
+              "feedback": "まかない (staff meals) is a real perk people ask about — natural wording, but a bold opening question!",
+              "why": "まかない (staff meals) is a real perk at Japanese restaurants and cafés, and people do ask about it, usually once they're hired. As your only question in an interview, it can sound like you mainly want the food!",
+              "reaction": [
+                {
+                  "speaker": "sato",
+                  "expression": "happy",
+                  "text": "ありますよ。{今日|きょう}のおすすめはチーズケーキです。",
+                  "reading": "Arimasu yo. Kyou no osusume wa chiizukeeki desu.",
+                  "translation": "There are. Today's special is cheesecake."
+                }
+              ],
+              "next": "s6"
+            }
+          ]
+        },
+        "s6": {
+          "routes": [
+            {
+              "if": "chose:e3_c3c && chose:e3_c5c",
+              "next": "e_coffee"
+            },
+            {
+              "if": "fluency <= 4",
+              "next": "e_keigo"
+            },
+            {
+              "if": "trust >= 4 && fluency >= 8",
+              "next": "e_hired"
+            },
+            {
+              "else": true,
+              "next": "e_call"
+            }
+          ]
+        },
+        "e_hired": {
+          "cast": [
+            "sato",
+            "yuki"
+          ],
+          "lines": [
+            {
+              "speaker": "sato",
+              "expression": "happy",
+              "text": "{本日|ほんじつ}はありがとうございました。{敬語|けいご}もとても{上手|じょうず}ですね。",
+              "reading": "Honjitsu wa arigatou gozaimashita. Keigo mo totemo jouzu desu ne.",
+              "translation": "Thank you for today. Your keigo is excellent, too.",
+              "vocabRefs": [
+                "v_honjitsu"
+              ]
+            },
+            {
+              "speaker": "sato",
+              "expression": "happy",
+              "text": "ぜひ、{来週|らいしゅう}からよろしくお{願|ねが}いします！",
+              "reading": "Zehi, raishuu kara yoroshiku onegaishimasu!",
+              "translation": "We'd love to have you — see you next week!",
+              "vocabRefs": [
+                "v_raishuu",
+                "v_yoroshiku"
+              ]
+            },
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "やったね！{一緒|いっしょ}に{働|はたら}けるね！",
+              "reading": "Yatta ne! Issho ni hatarakeru ne!",
+              "translation": "You did it! We get to work together!",
+              "vocabRefs": [
+                "v_issho",
+                "v_hataraku"
+              ]
+            }
+          ],
+          "endingId": "hired"
+        },
+        "e_call": {
+          "background": "/images/bg/room.svg",
+          "cast": [],
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Two days later, your phone buzzes. It's Café Komorebi."
+            },
+            {
+              "speaker": "sato",
+              "expression": "happy",
+              "text": "もしもし、{佐藤|さとう}です。ぜひ{来週|らいしゅう}から{働|はたら}いてください！",
+              "reading": "Moshimoshi, Satou desu. Zehi raishuu kara hataraite kudasai!",
+              "translation": "Hello, it's Sato. We'd love you to start next week!",
+              "vocabRefs": [
+                "v_raishuu",
+                "v_hataraku"
+              ]
+            }
+          ],
+          "endingId": "call"
+        },
+        "e_keigo": {
+          "cast": [
+            "yuki"
+          ],
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Manager Sato thanks you politely… a little too politely. You know what that means."
+            },
+            {
+              "speaker": "yuki",
+              "expression": "happy",
+              "text": "{大丈夫|だいじょうぶ}！{今日|きょう}から{私|わたし}が{敬語|けいご}の{先生|せんせい}ね。{頑張|がんば}ろう！",
+              "reading": "Daijoubu! Kyou kara watashi ga keigo no sensei ne. Ganbarou!",
+              "translation": "It's okay! From today I'm your keigo teacher. Let's do our best!",
+              "vocabRefs": [
+                "v_daijoubu",
+                "v_ganbaru"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "Over strawberry parfaits, Yuki drills you on です, ます and いたします. Next interview, you'll be ready."
+            }
+          ],
+          "endingId": "keigo"
+        },
+        "e_coffee": {
+          "cast": [
+            "sato"
+          ],
+          "lines": [
+            {
+              "speaker": "sato",
+              "expression": "happy",
+              "text": "{実|じつ}は{私|わたし}もコーヒーが{大好|だいす}きで…まかないで{新|あたら}しい{豆|まめ}を{試|ため}しませんか？",
+              "reading": "Jitsu wa watashi mo koohii ga daisuki de… makanai de atarashii mame o tameshimasen ka?",
+              "translation": "Actually, I love coffee too… Want to try our new beans over a staff meal?",
+              "vocabRefs": [
+                "v_makanai"
+              ]
+            },
+            {
+              "speaker": "narrator",
+              "text": "Your slightly-too-casual passion struck a chord. Sato hires you as a barista trainee, and you spend the afternoon taste-testing beans."
+            }
+          ],
+          "endingId": "coffee"
+        }
+      },
+      "endings": [
+        {
+          "id": "hired",
+          "title": "Hired on the Spot",
+          "titleNative": "その場で採用",
+          "type": "best",
+          "image": "/images/bg/cafe.svg",
+          "character": "sato",
+          "expression": "happy",
+          "summary": "Manager Sato hired you on the spot — and you'll be working shifts with Yuki.",
+          "teachingPoint": "Switching registers is the real skill: casual with Yuki, keigo (いたします, 本日) with the manager."
+        },
+        {
+          "id": "call",
+          "title": "The Callback",
+          "titleNative": "後日の電話",
+          "type": "good",
+          "image": "/images/bg/room.svg",
+          "character": "sato",
+          "expression": "happy",
+          "summary": "A couple of wobbles, but your effort showed — the café called two days later to offer you the job.",
+          "teachingPoint": "In interviews, listen for the question word (いつ, どうして, 何) and answer exactly that."
+        },
+        {
+          "id": "keigo",
+          "title": "Keigo Bootcamp",
+          "titleNative": "敬語特訓",
+          "type": "awkward",
+          "image": "/images/bg/cafe.svg",
+          "character": "yuki",
+          "expression": "happy",
+          "summary": "The interview didn't land — but Yuki turned it into a parfait-fuelled keigo bootcamp.",
+          "teachingPoint": "Casual (だよ), polite (です/ます) and humble (いたします/おります) are three different gears. Interviews need the top two."
+        },
+        {
+          "id": "coffee",
+          "title": "Coffee Comrades",
+          "titleNative": "コーヒー仲間",
+          "type": "hidden",
+          "image": "/images/bg/cafe.svg",
+          "character": "sato",
+          "expression": "happy",
+          "summary": "Your casual love of coffee (and your bold staff-meal question) turned a stiff interview into a tasting session.",
+          "teachingPoint": "っす and まかない aren't textbook interview Japanese — but genuine enthusiasm opens doors. Learn the rules, then learn when to bend them."
+        }
+      ],
+      "review": {
+        "phrases": [
+          {
+            "text": "{本日|ほんじつ}はよろしくお{願|ねが}いいたします。",
+            "reading": "Honjitsu wa yoroshiku onegai itashimasu.",
+            "translation": "Thank you for your time today.",
+            "note": "A formal opening line"
+          },
+          {
+            "text": "{来週|らいしゅう}の{月曜日|げつようび}から{働|はたら}けます。",
+            "reading": "Raishuu no getsuyoubi kara hatarakemasu.",
+            "translation": "I can start next Monday.",
+            "note": "いつから → a start date"
+          },
+          {
+            "text": "{研修|けんしゅう}はありますか？",
+            "reading": "Kenshuu wa arimasu ka?",
+            "translation": "Is there training?",
+            "note": "A good closing question"
+          },
+          {
+            "text": "ちょっとね。でも{頑張|がんば}る！",
+            "reading": "Chotto ne. Demo ganbaru!",
+            "translation": "A little. But I'll do my best!",
+            "note": "Casual, with friends"
+          }
+        ],
+        "grammar": [
+          {
+            "title": "Three registers",
+            "explanation": "Casual (頑張る), polite (頑張ります) and humble keigo (いたします／おります／申します). Use casual with friends, and humble keigo about yourself in interviews.",
+            "example": "よろしく → よろしくお願いします → よろしくお願いいたします",
+            "exampleTranslation": "Casual → polite → humble"
+          },
+          {
+            "title": "Potential form: 'can do'",
+            "explanation": "働く → 働ける (can work) → 働けます (polite). Use it to say what you're able to do.",
+            "example": "日本語が話せます。",
+            "exampleTranslation": "I can speak Japanese."
+          },
+          {
+            "title": "Titles work as honorifics",
+            "explanation": "店長, 部長 and 先生 already show respect. Attach them straight to the name (佐藤店長, 田中先生) without an extra さん.",
+            "example": "佐藤店長、よろしくお願いいたします。",
+            "exampleTranslation": "Manager Sato, pleased to work with you."
+          }
+        ],
+        "quiz": [
+          {
+            "question": "Your friend asks you casually: 緊張してる？ Which reply matches her register?",
+            "options": [
+              "ちょっとね。でも頑張る！",
+              "はい、少々緊張しております。",
+              "緊張いたしております。"
+            ],
+            "answer": 0,
+            "explanation": "A casual question gets a casual answer. おります is humble keigo, for superiors."
+          },
+          {
+            "question": "The manager asks いつから働けますか？ What is she asking?",
+            "options": [
+              "When you can start",
+              "How often you can work",
+              "Where you worked before",
+              "Why you want the job"
+            ],
+            "answer": 0,
+            "explanation": "いつから = from when, so she wants your start date."
+          },
+          {
+            "question": "Which is the correct way to address the manager?",
+            "options": [
+              "佐藤店長",
+              "佐藤店長さん",
+              "店長佐藤さん"
+            ],
+            "answer": 0,
+            "explanation": "店長 is a title that already works as an honorific, so no extra さん."
+          }
+        ]
+      },
+      "survival": [
+        {
+          "id": "sv3_firstday",
+          "title": "First day",
+          "context": "It's your first shift at Café Komorebi.",
+          "background": "/images/bg/cafe.svg",
+          "skill": "politeness",
+          "steps": [
+            {
+              "speaker": "sato",
+              "expression": "smile",
+              "text": "{今日|きょう}からよろしくお{願|ねが}いします。",
+              "reading": "Kyou kara yoroshiku onegaishimasu.",
+              "translation": "Glad to have you, starting today.",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "よろしくお{願|ねが}いいたします！",
+                  "reading": "Yoroshiku onegai itashimasu!",
+                  "translation": "I look forward to working with you!",
+                  "quality": "natural",
+                  "feedback": "The humble form fits perfectly with your manager.",
+                  "why": "お願いいたします is the humble version, a step more formal than お願いします."
+                },
+                {
+                  "id": "b",
+                  "text": "よろしく！",
+                  "reading": "Yoroshiku!",
+                  "translation": "Hey, nice!",
+                  "quality": "awkward",
+                  "feedback": "Too casual for your manager.",
+                  "why": "Bare よろしく is for friends. With a boss, use the full phrase."
+                },
+                {
+                  "id": "c",
+                  "text": "お{疲|つか}れさまでした。",
+                  "reading": "Otsukaresama deshita.",
+                  "translation": "Thanks for your hard work (today).",
+                  "quality": "wrong",
+                  "feedback": "お疲れさまでした is said at the END of work, not when you arrive.",
+                  "why": "Workplace greetings depend on timing: おはようございます (arriving) and お疲れさまでした (leaving)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv3_leaving",
+          "title": "End of shift",
+          "context": "Your shift is over and you're heading home.",
+          "background": "/images/bg/cafe.svg",
+          "skill": "culture",
+          "steps": [
+            {
+              "speaker": "sato",
+              "expression": "smile",
+              "text": "お{疲|つか}れさまでした。",
+              "reading": "Otsukaresama deshita.",
+              "translation": "Thanks for your hard work today.",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "お{疲|つか}れさまでした。お{先|さき}に{失礼|しつれい}します。",
+                  "reading": "Otsukaresama deshita. Osaki ni shitsurei shimasu.",
+                  "translation": "Thanks for your hard work. Excuse me for leaving first.",
+                  "quality": "natural",
+                  "feedback": "Textbook workplace etiquette.",
+                  "why": "お先に失礼します ('excuse me for leaving before you') is what you say when you leave before others."
+                },
+                {
+                  "id": "b",
+                  "text": "さようなら！",
+                  "reading": "Sayounara!",
+                  "translation": "Goodbye!",
+                  "quality": "awkward",
+                  "feedback": "さようなら sounds like a long goodbye. At work, people say お先に失礼します.",
+                  "why": "さようなら is for goodbyes that might be long, or for school. Workplaces use fixed phrases."
+                },
+                {
+                  "id": "c",
+                  "text": "はい、{疲|つか}れました。",
+                  "reading": "Hai, tsukaremashita.",
+                  "translation": "Yes, I'm tired.",
+                  "quality": "understandable",
+                  "feedback": "Honest! But お疲れさまでした is a greeting, not a question about how you feel.",
+                  "why": "お疲れさま acknowledges effort. Answer by returning it, not by describing how tired you are."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv3_order",
+          "title": "Your first customer",
+          "context": "Kenta from the konbini walks in as a customer.",
+          "background": "/images/bg/cafe.svg",
+          "skill": "politeness",
+          "steps": [
+            {
+              "speaker": "kenta",
+              "expression": "happy",
+              "text": "すみません、ラテをひとつください。",
+              "reading": "Sumimasen, rate o hitotsu kudasai.",
+              "translation": "Excuse me, one latte, please.",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "かしこまりました。{少々|しょうしょう}お{待|ま}ちください。",
+                  "reading": "Kashikomarimashita. Shoushou omachi kudasai.",
+                  "translation": "Certainly. Please wait a moment.",
+                  "quality": "natural",
+                  "feedback": "Perfect customer-service Japanese.",
+                  "why": "かしこまりました is a humble 'understood' used with customers. 少々お待ちください = 'one moment, please'."
+                },
+                {
+                  "id": "b",
+                  "text": "わかった！ちょっと{待|ま}って。",
+                  "reading": "Wakatta! Chotto matte.",
+                  "translation": "Got it! Hang on.",
+                  "quality": "awkward",
+                  "feedback": "Friendly, but too casual for a customer, even if you know him.",
+                  "why": "At work you use customer-service keigo with everyone being served."
+                },
+                {
+                  "id": "c",
+                  "text": "ラテをください。",
+                  "reading": "Rate o kudasai.",
+                  "translation": "A latte, please.",
+                  "quality": "wrong",
+                  "feedback": "You just repeated his order back as your own request!",
+                  "why": "Acknowledge the order with かしこまりました instead of echoing it."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv3_saturday",
+          "title": "Weekend shift",
+          "context": "Manager Sato is planning next week's schedule.",
+          "background": "/images/bg/cafe.svg",
+          "skill": "culture",
+          "steps": [
+            {
+              "speaker": "sato",
+              "expression": "neutral",
+              "text": "{土曜日|どようび}は{働|はたら}けますか？",
+              "reading": "Doyoubi wa hatarakemasu ka?",
+              "translation": "Can you work on Saturday?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "すみません、{土曜日|どようび}はちょっと…",
+                  "reading": "Sumimasen, doyoubi wa chotto…",
+                  "translation": "Sorry, Saturday is a bit…",
+                  "quality": "natural",
+                  "feedback": "Softly declining with ちょっと… is very natural Japanese.",
+                  "why": "Japanese often declines indirectly: すみません + [day] はちょっと… The listener understands it's a no."
+                },
+                {
+                  "id": "b",
+                  "text": "{働|はたら}けません！",
+                  "reading": "Hatarakemasen!",
+                  "translation": "I can't work!",
+                  "quality": "understandable",
+                  "feedback": "Clear, but abrupt. Add すみません and soften it with ちょっと….",
+                  "why": "A direct 'can't' sounds harsh. Apologize first and leave the sentence soft."
+                },
+                {
+                  "id": "c",
+                  "text": "{土曜日|どようび}に{働|はたら}きました。",
+                  "reading": "Doyoubi ni hatarakimashita.",
+                  "translation": "I worked on Saturday.",
+                  "quality": "wrong",
+                  "feedback": "That's past tense: 'I worked on Saturday.'",
+                  "why": "Answer 働けますか？ with 働けます／働けません (can / can't), not with the past tense."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv3_question",
+          "title": "Ask a coworker",
+          "context": "Yuki checks on you during your shift.",
+          "background": "/images/bg/cafe.svg",
+          "skill": "politeness",
+          "steps": [
+            {
+              "speaker": "yuki",
+              "expression": "smile",
+              "text": "{何|なに}かわからないことある？",
+              "reading": "Nanika wakaranai koto aru?",
+              "translation": "Anything you're not sure about?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "うん、カップはどこに{置|お}けばいい？",
+                  "reading": "Un, kappu wa doko ni okeba ii?",
+                  "translation": "Yeah, where should I put the cups?",
+                  "quality": "natural",
+                  "feedback": "Casual and specific. Perfect with a friendly coworker.",
+                  "why": "〜ばいい？ asks 'what should I do?'. Matching Yuki's casual tone keeps it natural."
+                },
+                {
+                  "id": "b",
+                  "text": "はい、ございます。",
+                  "reading": "Hai, gozaimasu.",
+                  "translation": "Yes, there is (super-polite).",
+                  "quality": "awkward",
+                  "feedback": "Far too formal for Yuki, and you didn't say what you need.",
+                  "why": "ございます is very formal. With a friendly coworker, answer casually and be specific."
+                },
+                {
+                  "id": "c",
+                  "text": "{全部|ぜんぶ}わからない！",
+                  "reading": "Zenbu wakaranai!",
+                  "translation": "I don't understand anything!",
+                  "quality": "understandable",
+                  "feedback": "Honest! But a specific question gets you better help.",
+                  "why": "Asking about one concrete thing (どこ, どうやって) makes it easier for people to help."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sv3_wrongdrink",
+          "title": "Wrong drink",
+          "context": "You brought a customer the wrong drink.",
+          "background": "/images/bg/cafe.svg",
+          "skill": "politeness",
+          "steps": [
+            {
+              "speaker": "kenta",
+              "expression": "confused",
+              "text": "あの、これ、ラテじゃないですよ。",
+              "reading": "Ano, kore, rate ja nai desu yo.",
+              "translation": "Um, this isn't a latte.",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "{申|もう}し{訳|わけ}ございません。すぐにお{持|も}ちします。",
+                  "reading": "Moushiwake gozaimasen. Sugu ni omochi shimasu.",
+                  "translation": "I'm terribly sorry. I'll bring it right away.",
+                  "quality": "natural",
+                  "feedback": "A formal apology plus a fix. Excellent.",
+                  "why": "申し訳ございません is the most formal apology, used with customers. お持ちします is the humble 'I'll bring it'."
+                },
+                {
+                  "id": "b",
+                  "text": "ごめん！",
+                  "reading": "Gomen!",
+                  "translation": "Sorry!",
+                  "quality": "awkward",
+                  "feedback": "ごめん is casual. With customers, use 申し訳ございません.",
+                  "why": "Apologies have levels too: ごめん (casual) → すみません (polite) → 申し訳ございません (formal)."
+                },
+                {
+                  "id": "c",
+                  "text": "ラテですよ。",
+                  "reading": "Rate desu yo.",
+                  "translation": "It IS a latte.",
+                  "quality": "wrong",
+                  "feedback": "Arguing with the customer! Apologize and fix it.",
+                  "why": "In customer service, apologize first and then solve the problem."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
