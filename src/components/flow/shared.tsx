@@ -8,12 +8,19 @@ import { stopSpeaking } from "@/lib/audio";
 import { cx } from "../ui";
 export function Brand() {
   return (
-    <Link href="/" className="inline-flex items-center gap-2.5">
-      <img src="/icon.svg" alt="" className="h-10 w-10 animate-pop" />
-      <span className="font-display text-[23px] font-extrabold leading-tight tracking-tight">
-        Language Stories
-      </span>
-    </Link>
+    
+<Link href="/" className="inline-flex items-center gap-2.5">
+  <img
+    src="/icon.png"
+    alt=""
+    className="h-10 w-10 rounded-xl animate-pop"
+  />
+
+  <span className="font-display text-[23px] font-extrabold leading-tight tracking-tight">
+    yap <span className="text-[#D4AF37]">&amp;</span> learn
+  </span>
+</Link>
+
   );
 }
 export function PreviewHydration() {

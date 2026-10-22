@@ -13,7 +13,7 @@ import { Preferences } from "@/components/Preferences";
 export const metadata: Metadata = {
   title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
   description: `${APP_TAGLINE} Interactive, branching stories where the language you choose changes what happens next.`,
-  icons: { icon: "/icon.svg" },
+  icons: { icon: "/icon.png" },
 };
 
 export const viewport: Viewport = {

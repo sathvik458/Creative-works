@@ -10,7 +10,7 @@ export function Splash() {
     const timer = setTimeout(() => {
       splashCompleted = true;
       router.replace("/onboarding");
-    }, 3000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, [router]);
   return (
