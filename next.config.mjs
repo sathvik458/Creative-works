@@ -5,5 +5,7 @@ const nextConfig = {
   turbopack: { root: process.cwd() },
   // Story JSON is read from /content at build time; make sure it ships with server output too.
   outputFileTracingIncludes: { "/**": ["./content/**/*"] },
+  allowedDevOrigins: ['gloater-dill-clumsily.ngrok-free.dev'],
+
 };
 export default nextConfig;

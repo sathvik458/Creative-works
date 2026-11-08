@@ -135,7 +135,7 @@ export function Profile() {
           >
             <img
               src={avatarUrl(selectedAvatar.seed)}
-              alt={`${selectedAvatar.name} avatar`}
+              alt={`${selectedAvatar} avatar`}
               className="h-full w-full object-cover"
             />
 
@@ -206,7 +206,7 @@ export function Profile() {
                     key={option.id}
                     type="button"
                     onClick={() => selectAvatar(option.id)}
-                    aria-label={`Choose ${option.name} avatar`}
+                    aria-label={`Choose ${option} avatar`}
                     aria-pressed={isSelected}
                     className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-2 transition-all hover:-translate-y-0.5 ${
                       isSelected
@@ -230,7 +230,7 @@ export function Profile() {
                     </span>
 
                     <span className="text-xs font-semibold text-ink">
-                      {option.name}
+                      
                     </span>
                   </button>
                 );
