@@ -1,0 +1,696 @@
+<title>Tomo Character Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a sticky stage with the character on the left, control panels stacked on the right; one column on phones. */
+:root {
+  --paper: #fff7ec;
+  --card: #ffffff;
+  --ink: #2b2340;
+  --ink-soft: #5d5470;
+  --line: rgba(43, 35, 64, 0.12);
+  --matcha: #35765d;
+  --matcha-soft: #e3eee7;
+  --butter-soft: #fff0c4;
+  --good: #23864f;
+  --good-soft: #e2f4e8;
+  --bad: #c7334d;
+  --bad-soft: #fde7eb;
+  --stage: #d9eae0;
+  --stage-glow: #f2f8f3;
+  --stage-ink: #2b2340;
+  --stage-mark: #ffe3a3;
+  --on-accent: #ffffff;
+  --display: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", ui-rounded, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #191522; --card: #241e30; --ink: #f4eef8; --ink-soft: #b9afc9; --line: rgba(255, 255, 255, 0.12);
+    --matcha: #79c3a0; --matcha-soft: #1f3a30; --butter-soft: #3a3220; --good: #5fd08e; --good-soft: #18372a;
+    --bad: #ff8a9c; --bad-soft: #3d1d26; --stage: #cfe3d7; --stage-glow: #eaf3ed; --on-accent: #10241b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #191522; --card: #241e30; --ink: #f4eef8; --ink-soft: #b9afc9; --line: rgba(255, 255, 255, 0.12);
+  --matcha: #79c3a0; --matcha-soft: #1f3a30; --butter-soft: #3a3220; --good: #5fd08e; --good-soft: #18372a;
+  --bad: #ff8a9c; --bad-soft: #3d1d26; --stage: #cfe3d7; --stage-glow: #eaf3ed; --on-accent: #10241b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--display); font-weight: 500;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px; line-height: 1.5;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 20px; }
+.top { display: grid; gap: 4px; }
+.eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--matcha); }
+h1 { margin: 0; font-size: clamp(30px, 5vw, 44px); font-weight: 800; line-height: 1.1; text-wrap: balance; }
+.lede { margin: 0; color: var(--ink-soft); max-width: 62ch; }
+.layout { display: grid; gap: 20px; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.stage-col { position: sticky; top: calc(12px + env(safe-area-inset-top, 0px)); display: grid; gap: 12px; }
+@media (max-width: 860px) { .stage-col { position: static; } }
+.stage {
+  position: relative; border-radius: 28px; padding: 18px 18px 16px; display: grid; justify-items: center; gap: 8px;
+  background: radial-gradient(120% 80% at 50% 30%, var(--stage-glow) 0%, var(--stage) 70%); border: 1px solid var(--line);
+}
+.state-pill {
+  justify-self: start; font-size: 13px; font-weight: 800; padding: 4px 12px; border-radius: 999px;
+  background: var(--card); color: var(--ink); border: 1px solid var(--line); transition: background 0.2s, color 0.2s;
+}
+.state-pill[data-mood="correct"] { background: var(--good-soft); color: var(--good); }
+.state-pill[data-mood="wrong"] { background: var(--bad-soft); color: var(--bad); }
+.state-pill[data-mood="listening"] { background: var(--matcha-soft); color: var(--matcha); }
+.char { width: min(100%, 400px); aspect-ratio: 400 / 420; }
+.char svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.caption {
+  margin: 0; min-height: 3.2em; max-width: 34ch; text-align: center; font-size: 18px; font-weight: 700; color: var(--stage-ink);
+}
+.caption .w { border-radius: 6px; padding: 0 1px; transition: background 0.08s; }
+.caption .w.on { background: var(--stage-mark); }
+.caption .hint { color: var(--stage-ink); opacity: 0.7; font-weight: 500; font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+button, .chip {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--card); color: var(--ink); padding: 8px 14px; font-size: 14px; transition: transform 0.1s, background 0.15s;
+}
+button:active { transform: scale(0.97); }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--matcha); outline-offset: 2px; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn-main { background: var(--matcha); color: var(--on-accent); border-color: transparent; }
+.panels { display: grid; gap: 14px; min-width: 0; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 10px; min-width: 0; }
+.panel h2 { margin: 0; font-size: 19px; font-weight: 800; }
+.panel p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.prompt { font-size: 17px; font-weight: 700; color: var(--ink) !important; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.row input { flex: 1 1 220px; min-width: 0; }
+input[type="text"] {
+  font: inherit; font-size: 16px; padding: 10px 14px; border-radius: 14px; border: 1.5px solid var(--line);
+  background: var(--paper); color: var(--ink);
+}
+.feedback { border-radius: 14px; padding: 10px 12px; font-size: 14px; font-weight: 700; }
+.feedback[data-kind="good"] { background: var(--good-soft); color: var(--good); }
+.feedback[data-kind="bad"] { background: var(--bad-soft); color: var(--bad); }
+.examples { display: flex; gap: 6px; flex-wrap: wrap; }
+.examples button { font-size: 13px; padding: 6px 11px; font-weight: 500; }
+.mouths { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.mouth {
+  display: grid; justify-items: center; gap: 2px; padding: 8px 4px 6px; border-radius: 14px; background: var(--paper);
+  border: 1.5px solid transparent; font-size: 12px; color: var(--ink-soft);
+}
+.mouth svg { width: 52px; height: 40px; }
+.mouth b { font-family: var(--mono); color: var(--ink); font-size: 13px; }
+.mouth.on { border-color: var(--matcha); background: var(--matcha-soft); }
+.mouth .face { fill: #fdf1df; }
+.contract { width: 100%; border-collapse: collapse; font-size: 13px; }
+.contract-wrap { overflow-x: auto; }
+.contract th { text-align: left; font-weight: 700; color: var(--ink-soft); font-size: 12px; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.contract td { padding: 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.contract td:first-child, .contract td.val { font-family: var(--mono); }
+.contract td.val { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.contract tr.fired td { background: var(--butter-soft); }
+.contract .t { color: var(--ink-soft); font-size: 12px; }
+.note { font-size: 12.5px !important; }
+.mono { font-family: var(--mono); font-size: 0.92em; }
+@media (prefers-reduced-motion: reduce) { button, .caption .w { transition: none; } }
+</style>
+<style>
+/* additions for the character studio */
+.char { width: min(100%, 380px); aspect-ratio: 400 / 480; }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.swatch {
+  width: 34px; height: 34px; border-radius: 50%; padding: 0; border: 2px solid var(--card);
+  box-shadow: 0 0 0 1px var(--line); cursor: pointer;
+}
+.swatch[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--ink); }
+.field-label { font-size: 13px; font-weight: 800; color: var(--ink); }
+.field { display: grid; gap: 6px; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.toggle input { width: 18px; height: 18px; accent-color: var(--matcha); }
+.label-row input { text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+</style>
+
+<main class="wrap">
+  <header class="top">
+    <span class="eyebrow">Language Stories · character prototype</span>
+    <h1>Meet Tomo</h1>
+    <p class="lede">A friendly guide who can play any role. Change his outfit and what his shirt says, then talk to him. Every movement here is what the Rive file will do. (Tomo means “friend” in Japanese.)</p>
+  </header>
+
+  <div class="layout">
+    <section class="stage-col" aria-label="Tomo">
+      <div class="stage">
+        <span class="state-pill" id="ui-state" aria-live="polite">Idle</span>
+        <div class="char"><svg id="tomo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" role="img" aria-label="Tomo, a friendly young man in an orange hoodie"><title>Tomo</title><g id="Tomo"><g id="Body" transform="translate(200 460)"><g id="Torso"><path d="M -78 -148 C -58 -162 -30 -166 0 -166 C 30 -166 58 -162 78 -148 C 96 -136 104 -114 104 -84 L 100 32 L -100 32 L -104 -84 C -104 -114 -96 -136 -78 -148 Z" fill="#ff9f43" data-role="shirt"/><path d="M -104 -84 C -104 -114 -96 -136 -78 -148 C -86 -124 -88 -88 -86 32 L -100 32 Z" fill="#000000" opacity="0.12"/><path d="M 104 -84 C 104 -114 96 -136 78 -148 C 86 -124 88 -88 86 32 L 100 32 Z" fill="#000000" opacity="0.08"/></g><g id="Neck"><rect x="-20" y="-214" width="40" height="66" rx="14" fill="#e9b38b" data-role="skin"/><path d="M -20 -198 C -8 -184 8 -184 20 -198 L 20 -174 C 8 -164 -8 -164 -20 -174 Z" fill="#000000" opacity="0.14"/></g><g id="Collar"><path d="M -32 -160 C -20 -144 20 -144 32 -160 C 22 -154 -22 -154 -32 -160 Z" fill="#000000" opacity="0.18"/></g><g id="Outfits"><g id="Outfit_Casual"><path d="M -52 -158 C -42 -172 -22 -176 0 -172 C 22 -176 42 -172 52 -158 C 40 -144 -40 -144 -52 -158 Z" fill="#ff9f43" data-role="shirt"/><path d="M -52 -158 C -42 -172 -22 -176 0 -172 C 22 -176 42 -172 52 -158 C 40 -144 -40 -144 -52 -158 Z" fill="#000000" opacity="0.12"/><path d="M -34 -160 C -20 -166 20 -166 34 -160 C 22 -154 -22 -154 -34 -160 Z" fill="#000000" opacity="0.22"/><path d="M -14 -144 L -18 -104" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 14 -144 L 18 -104" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="-18" cy="-100" rx="3.5" ry="4.5" fill="#ffffff"/><ellipse cx="18" cy="-100" rx="3.5" ry="4.5" fill="#ffffff"/><path d="M -62 -30 L 62 -30 L 70 32 L -70 32 Z" fill="#000000" opacity="0.1"/><path d="M -58 -30 L 58 -30" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.12"/></g><g id="Outfit_Police" opacity="0"><path d="M 0 -154 L -30 -166 L -40 -142 Z" fill="#33467a"/><path d="M 0 -154 L 30 -166 L 40 -142 Z" fill="#33467a"/><path d="M 0 -152 L 0 32" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/><ellipse cx="7" cy="-126" rx="3.2" ry="3.2" fill="#d9dee8"/><ellipse cx="7" cy="-22" rx="3.2" ry="3.2" fill="#d9dee8"/><rect x="-88" y="-156" width="36" height="12" rx="5" fill="#11182c"/><rect x="52" y="-156" width="36" height="12" rx="5" fill="#11182c"/><path d="M 46 -124 L 58 -118 L 56 -104 L 46 -96 L 36 -104 L 34 -118 Z" fill="#e8b931"/><path d="M 46 -118 L 52 -115 L 51 -107 L 46 -103 L 41 -107 L 40 -115 Z" fill="#b98a12" opacity="0.6"/></g><g id="Outfit_Station" opacity="0"><path d="M -28 -162 L 0 -100 L 28 -162 Z" fill="#ffffff"/><path d="M 0 -152 L -8 -140 L 0 -100 L 8 -140 Z" fill="#c0392b"/><path d="M -32 -162 L 0 -94 L -14 -88 L -44 -148 Z" fill="#163a5c"/><path d="M 32 -162 L 0 -94 L 14 -88 L 44 -148 Z" fill="#163a5c"/><path d="M 0 -94 L 0 32" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/><ellipse cx="14" cy="-28" rx="4.2" ry="4.2" fill="#e8b931"/><ellipse cx="14" cy="2" rx="4.2" ry="4.2" fill="#e8b931"/></g><g id="Outfit_Cafe" opacity="0"><path d="M -34 -160 C -20 -146 20 -146 34 -160" fill="none" stroke="#000000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.12"/><path d="M -48 -120 L -24 -160" fill="none" stroke="#5e3a27" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 48 -120 L 24 -160" fill="none" stroke="#5e3a27" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M -50 -124 L 50 -124 L 58 32 L -58 32 Z" fill="#7a4e35"/><path d="M -50 -124 L 50 -124 L 52 -114 L -52 -114 Z" fill="#000000" opacity="0.12"/><rect x="-24" y="-30" width="48" height="26" rx="6" fill="#000000" opacity="0.12"/></g><g id="Outfit_Shop" opacity="0"><path d="M -24 -162 L 0 -142 L 24 -162 L 16 -164 L 0 -152 L -16 -164 Z" fill="#dfe3dc"/><path d="M -78 -148 C -60 -160 -38 -164 -18 -162 L -12 32 L -100 32 L -104 -84 C -104 -114 -96 -136 -78 -148 Z" fill="#35765d"/><path d="M 78 -148 C 60 -160 38 -164 18 -162 L 12 32 L 100 32 L 104 -84 C 104 -114 96 -136 78 -148 Z" fill="#35765d"/><path d="M -18 -160 L -12 32" fill="none" stroke="#f7cf55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 18 -160 L 12 32" fill="none" stroke="#f7cf55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g></g><g id="Label" transform="translate(0 -66)"><rect x="-66" y="-17" width="132" height="34" rx="10" fill="#000000" opacity="0" data-role="accent"/><text id="Label_Text" x="0" y="7.5" text-anchor="middle" font-family="M PLUS Rounded 1c, ui-rounded, system-ui, sans-serif" font-weight="800" font-size="20" letter-spacing="1.2" fill="#ffffff" data-role="label-ink">HELLO</text></g><g id="Head" transform="translate(0 -184)"><g id="Hair_Back"><path d="M -104 -84 C -116 -158 -72 -212 0 -214 C 76 -216 120 -162 106 -82 C 100 -106 92 -124 80 -136 L -80 -136 C -92 -124 -100 -106 -104 -84 Z" fill="#3b2620" data-role="hair"/></g><g id="Ear_L" transform="translate(-98 -82)"><ellipse cx="0" cy="0" rx="15" ry="21" fill="#e9b38b" data-role="skin"/><ellipse cx="1" cy="1" rx="7" ry="11" fill="#000000" opacity="0.12"/></g><g id="Ear_R" transform="translate(98 -82)"><ellipse cx="0" cy="0" rx="15" ry="21" fill="#e9b38b" data-role="skin"/><ellipse cx="-1" cy="1" rx="7" ry="11" fill="#000000" opacity="0.12"/></g><g id="Head_Skin"><path d="M 0 -186 C 62 -186 100 -148 100 -92 C 100 -36 62 4 0 4 C -62 4 -100 -36 -100 -92 C -100 -148 -62 -186 0 -186 Z" fill="#e9b38b" data-role="skin"/><path d="M -96 -66 C -84 -24 -46 2 0 4 C -48 -6 -80 -30 -90 -72 Z" fill="#000000" opacity="0.08"/></g><g id="Face" transform="translate(0 -80)"><g id="Cheeks"><ellipse cx="-66" cy="26" rx="15" ry="8.5" fill="#f28b82" opacity="0.38"/><ellipse cx="66" cy="26" rx="15" ry="8.5" fill="#f28b82" opacity="0.38"/></g><g id="Freckles"><ellipse cx="-60" cy="14" rx="1.9" ry="1.9" fill="#a0522d" opacity="0.45"/><ellipse cx="-52" cy="19" rx="1.9" ry="1.9" fill="#a0522d" opacity="0.45"/><ellipse cx="-67" cy="20" rx="1.9" ry="1.9" fill="#a0522d" opacity="0.45"/><ellipse cx="60" cy="14" rx="1.9" ry="1.9" fill="#a0522d" opacity="0.45"/><ellipse cx="52" cy="19" rx="1.9" ry="1.9" fill="#a0522d" opacity="0.45"/><ellipse cx="67" cy="20" rx="1.9" ry="1.9" fill="#a0522d" opacity="0.45"/></g><g id="Eye_L" transform="translate(-40 -8)"><g id="Eye_L_Open"><ellipse cx="0" cy="0" rx="18.5" ry="21" fill="#ffffff"/><g id="Iris_L" transform="translate(1.5 2)"><ellipse cx="0" cy="0" rx="12.5" ry="13.5" fill="#4a2f25"/><ellipse cx="0" cy="0" rx="6.8" ry="7.2" fill="#1c1414"/><ellipse cx="4.6" cy="-5" rx="4.2" ry="4.2" fill="#ffffff"/><ellipse cx="-3.6" cy="5" rx="1.9" ry="1.9" fill="#ffffff" opacity="0.8"/></g><path d="M -18.6 -3 C -16 -18 16 -18 18.6 -3 C 14 -12 -14 -12 -18.6 -3 Z" fill="#000000" opacity="0.08"/></g><g id="Eye_L_Happy" opacity="0"><path d="M -15 5 Q 0 -12 15 5" fill="none" stroke="#2a1d1a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></g></g><g id="Eye_R" transform="translate(40 -8)"><g id="Eye_R_Open"><ellipse cx="0" cy="0" rx="18.5" ry="21" fill="#ffffff"/><g id="Iris_R" transform="translate(1.5 2)"><ellipse cx="0" cy="0" rx="12.5" ry="13.5" fill="#4a2f25"/><ellipse cx="0" cy="0" rx="6.8" ry="7.2" fill="#1c1414"/><ellipse cx="4.6" cy="-5" rx="4.2" ry="4.2" fill="#ffffff"/><ellipse cx="-3.6" cy="5" rx="1.9" ry="1.9" fill="#ffffff" opacity="0.8"/></g><path d="M -18.6 -3 C -16 -18 16 -18 18.6 -3 C 14 -12 -14 -12 -18.6 -3 Z" fill="#000000" opacity="0.08"/></g><g id="Eye_R_Happy" opacity="0"><path d="M -15 5 Q 0 -12 15 5" fill="none" stroke="#2a1d1a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></g></g><g id="Brow_L" transform="translate(-40 -50)"><path d="M -15 2 Q 0 -5 15 2" fill="none" stroke="#3b2620" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" data-role="hair-stroke"/></g><g id="Brow_R" transform="translate(40 -50)"><path d="M -15 2 Q 0 -5 15 2" fill="none" stroke="#3b2620" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" data-role="hair-stroke"/></g><g id="Nose" transform="translate(0 4)"><path d="M -3 1 C -6 9 -2 12 3 12" fill="none" stroke="#000000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"/></g><g id="Mouth" transform="translate(0 42)"><g id="Mouth_X" opacity="0"><path d="M -15 -2 Q 0 9 15 -2" fill="none" stroke="#6a2533" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Mouth_A" opacity="0"><path d="M -13 2 Q 0 5 13 2" fill="none" stroke="#6a2533" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Mouth_B" opacity="0"><path d="M -16 -3 Q 0 -6 16 -3 Q 13 9 0 10 Q -13 9 -16 -3 Z" fill="#6a2533"/><path d="M -12.5 -3.2 Q 0 -5.6 12.5 -3.2 L 11.5 1 Q 0 -1 -11.5 1 Z" fill="#ffffff"/></g><g id="Mouth_C" opacity="0"><path d="M -17 -4 Q 0 -8 17 -4 Q 15 14 0 16 Q -15 14 -17 -4 Z" fill="#6a2533"/><ellipse cx="0" cy="10.5" rx="8.5" ry="4.2" fill="#f07f86"/></g><g id="Mouth_D" opacity="0"><path d="M -20 -6 Q 0 -11 20 -6 Q 18 21 0 24 Q -18 21 -20 -6 Z" fill="#6a2533"/><path d="M -15 -6.4 Q 0 -9.6 15 -6.4 L 14 -2 Q 0 -4.6 -14 -2 Z" fill="#ffffff"/><ellipse cx="0" cy="16" rx="10.5" ry="6" fill="#f07f86"/></g><g id="Mouth_E" opacity="0"><ellipse cx="0" cy="4" rx="11.5" ry="12.5" fill="#6a2533"/><ellipse cx="0" cy="11" rx="6.5" ry="3.5" fill="#f07f86"/></g><g id="Mouth_F" opacity="0"><ellipse cx="0" cy="3" rx="7.5" ry="8.5" fill="#6a2533"/></g><g id="Mouth_G" opacity="0"><path d="M -16 -3 Q 0 -6 16 -3 Q 12 10 0 11 Q -12 10 -16 -3 Z" fill="#6a2533"/><path d="M -12.5 -3.2 Q 0 -5.6 12.5 -3.2 L 11.5 4.5 Q 0 2.2 -11.5 4.5 Z" fill="#ffffff"/></g><g id="Mouth_H" opacity="0"><path d="M -17 -4 Q 0 -8 17 -4 Q 15 14 0 16 Q -15 14 -17 -4 Z" fill="#6a2533"/><ellipse cx="0" cy="1.5" rx="7" ry="4.5" fill="#f07f86"/></g><g id="Mouth_Smile"><path d="M -21 -4 Q 0 -8 21 -4 Q 17 15 0 17 Q -17 15 -21 -4 Z" fill="#6a2533"/><path d="M -16.5 -4.6 Q 0 -7.6 16.5 -4.6 L 15.5 -0.5 Q 0 -3 -15.5 -0.5 Z" fill="#ffffff"/><path d="M -9 11 Q 0 6 9 11 Q 4.6 16.3 0 16.6 Q -4.6 16.3 -9 11 Z" fill="#f07f86"/></g><g id="Mouth_Happy" opacity="0"><path d="M -26 -7 Q 0 -13 26 -7 Q 21 25 0 28 Q -21 25 -26 -7 Z" fill="#6a2533"/><path d="M -20 -7.8 Q 0 -12 20 -7.8 L 19 -2.5 Q 0 -6.4 -19 -2.5 Z" fill="#ffffff"/><path d="M -14 18 Q 0 8 14 18 Q 8 26.6 0 27.4 Q -8 26.6 -14 18 Z" fill="#f07f86"/></g><g id="Mouth_Oops" opacity="0"><path d="M -18 -6 Q 0 -9 18 -6 Q 20 2 17 8 Q 0 11 -17 8 Q -20 2 -18 -6 Z" fill="#6a2533"/><path d="M -14 -4 Q 0 -6.5 14 -4 L 14.5 5.5 Q 0 8 -14.5 5.5 Z" fill="#ffffff"/><path d="M -14 0.8 Q 0 2.2 14 0.8" fill="none" stroke="#6a2533" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M -5 -5 L -5 6.5" fill="none" stroke="#6a2533" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 5 -5 L 5 6.5" fill="none" stroke="#6a2533" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Mouth_Hmm" opacity="0"><path d="M 0 3 Q 8 2 16 -3" fill="none" stroke="#6a2533" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></g></g></g><g id="Glasses" opacity="0"><circle cx="-40" cy="-88" r="26" fill="#ffffff" fill-opacity="0.12" stroke="#2b2340" stroke-width="5"/><circle cx="40" cy="-88" r="26" fill="#ffffff" fill-opacity="0.12" stroke="#2b2340" stroke-width="5"/><path d="M -14 -92 Q 0 -100 14 -92" fill="none" stroke="#2b2340" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M -66 -92 L -96 -100" fill="none" stroke="#2b2340" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 66 -92 L 96 -100" fill="none" stroke="#2b2340" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Hair_Front"><path d="M -98 -100 C -104 -152 -64 -196 -6 -202 C 22 -222 72 -220 92 -190 C 108 -166 110 -136 100 -110 C 90 -132 72 -144 50 -148 C 36 -138 14 -134 -4 -140 C -18 -126 -40 -124 -58 -132 C -74 -126 -88 -114 -98 -100 Z" fill="#3b2620" data-role="hair"/><path d="M -97 -110 C -98 -96 -97 -86 -94 -76 C -92 -88 -90 -98 -86 -108 Z" fill="#3b2620" data-role="hair"/><path d="M 97 -110 C 98 -96 97 -86 94 -76 C 92 -88 90 -98 86 -108 Z" fill="#3b2620" data-role="hair"/><path d="M -50 -170 C -24 -192 20 -204 62 -194" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/><path d="M 14 -144 C 32 -150 52 -156 76 -152" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/><path d="M -50 -136 C -34 -142 -18 -150 -4 -166" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/></g><g id="Hair_Tuft" transform="translate(38 -210)"><path d="M -12 8 C -4 -12 18 -24 38 -18 C 22 -14 12 -2 8 10 Z" fill="#3b2620" data-role="hair"/></g><g id="Cap_Police" opacity="0"><path d="M -88 -158 C -94 -202 -50 -224 0 -224 C 50 -224 94 -202 88 -158 C 50 -170 -50 -170 -88 -158 Z" fill="#24345a"/><path d="M -80 -158 C -50 -170 50 -170 80 -158 C 82 -172 76 -188 62 -198 C 40 -190 -40 -190 -62 -198 C -76 -188 -82 -172 -80 -158 Z" fill="#000000" opacity="0.12"/><path d="M -84 -170 C -50 -180 50 -180 84 -170 L 84 -154 C 50 -164 -50 -164 -84 -154 Z" fill="#11182c"/><path d="M -80 -167.77 L -67 -167.77 L -67 -160.77 L -80 -160.77 Z" fill="#ffffff" opacity="0.9"/><path d="M -52 -171.31 L -39 -171.31 L -39 -164.31 L -52 -164.31 Z" fill="#ffffff" opacity="0.9"/><path d="M -24 -173.18 L -11 -173.18 L -11 -166.18 L -24 -166.18 Z" fill="#ffffff" opacity="0.9"/><path d="M 4 -173.38 L 17 -173.38 L 17 -166.38 L 4 -166.38 Z" fill="#ffffff" opacity="0.9"/><path d="M 32 -171.93 L 45 -171.93 L 45 -164.93 L 32 -164.93 Z" fill="#ffffff" opacity="0.9"/><path d="M 60 -168.81 L 73 -168.81 L 73 -161.81 L 60 -161.81 Z" fill="#ffffff" opacity="0.9"/><path d="M -84 -156 C -50 -164 50 -164 84 -156 C 78 -138 50 -130 0 -130 C -50 -130 -78 -138 -84 -156 Z" fill="#0f1424"/><path d="M 0 -212 L 10 -206 L 8 -194 L 0 -188 L -8 -194 L -10 -206 Z" fill="#d9dee8"/><ellipse cx="0" cy="-200" rx="4" ry="4" fill="#24345a"/></g><g id="Cap_Station" opacity="0"><path d="M -86 -158 C -90 -198 -50 -216 0 -216 C 50 -216 90 -198 86 -158 C 50 -170 -50 -170 -86 -158 Z" fill="#1f4f7a"/><path d="M -80 -158 C -50 -170 50 -170 80 -158 C 82 -172 76 -188 62 -198 C 40 -190 -40 -190 -62 -198 C -76 -188 -82 -172 -80 -158 Z" fill="#000000" opacity="0.12"/><path d="M -84 -170 C -50 -180 50 -180 84 -170 L 84 -156 C 50 -166 -50 -166 -84 -156 Z" fill="#e8b931"/><path d="M -82 -156 C -50 -164 50 -164 82 -156 C 76 -140 50 -132 0 -132 C -50 -132 -76 -140 -82 -156 Z" fill="#14324f"/><ellipse cx="0" cy="-192" rx="7" ry="7" fill="#e8b931"/><path d="M -14 -194 C -22 -198 -28 -196 -34 -192" fill="none" stroke="#e8b931" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 14 -194 C 22 -198 28 -196 34 -192" fill="none" stroke="#e8b931" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Sweat" transform="translate(-88 -112)" opacity="0"><path d="M 0 -14 C 6 -4 10 2 10 7 C 10 13 5 17 0 17 C -5 17 -10 13 -10 7 C -10 2 -6 -4 0 -14 Z" fill="#9ad4f5" stroke="#5aa9e6" stroke-width="2" stroke-linejoin="round"/></g></g><g id="Arm_L" transform="translate(-76 -136) rotate(12)"><g id="Upper_L"><path d="M -15 -4 C -15 -12 15 -12 15 -4 L 13 66 C 13 74 -13 74 -13 66 Z" fill="#e9b38b" data-role="skin"/></g><g id="Sleeve_L"><path d="M -20 -8 C -20 -22 20 -22 20 -8 L 18.5 38 C 18.5 43 -18.5 43 -18.5 38 Z" fill="#ff9f43" data-role="shirt"/><path d="M -18.8 32 L 18.8 32 L 18.5 38 C 18.5 43 -18.5 43 -18.5 38 Z" fill="#000000" opacity="0.14"/></g><g id="Forearm_L" transform="translate(0 66) rotate(-22)"><path d="M -13 -4 C -13 -12 13 -12 13 -4 L 11 50 C 11 57 -11 57 -11 50 Z" fill="#e9b38b" data-role="skin"/><g id="Fore_Sleeve_L" opacity="0"><path d="M -15 -6 C -15 -14 15 -14 15 -6 L 13.5 38 L -13.5 38 Z" fill="#1f4f7a" data-role="shirt"/><rect x="-14" y="31" width="28" height="7" rx="3" fill="#e8b931"/></g><g id="Hand_L" transform="translate(0 62)"><ellipse cx="9" cy="-8" rx="7.5" ry="8" fill="#e9b38b" data-role="skin"/><ellipse cx="9" cy="-8" rx="7.5" ry="8" fill="#000000" opacity="0.1"/><ellipse cx="0" cy="0" rx="15.5" ry="16.5" fill="#e9b38b" data-role="skin"/><path d="M -14.5 4 C -10 13 -4 16.5 1 16.5 C 8 16.5 13.5 12 15.5 4 C 10 10 5 11.5 0 11.5 C -6 11.5 -10.5 9 -14.5 4 Z" fill="#000000" opacity="0.12"/></g></g></g><g id="Arm_R" transform="translate(76 -136) rotate(-12)"><g id="Upper_R"><path d="M -15 -4 C -15 -12 15 -12 15 -4 L 13 66 C 13 74 -13 74 -13 66 Z" fill="#e9b38b" data-role="skin"/></g><g id="Sleeve_R"><path d="M -20 -8 C -20 -22 20 -22 20 -8 L 18.5 38 C 18.5 43 -18.5 43 -18.5 38 Z" fill="#ff9f43" data-role="shirt"/><path d="M -18.8 32 L 18.8 32 L 18.5 38 C 18.5 43 -18.5 43 -18.5 38 Z" fill="#000000" opacity="0.14"/></g><g id="Forearm_R" transform="translate(0 66) rotate(22)"><path d="M -13 -4 C -13 -12 13 -12 13 -4 L 11 50 C 11 57 -11 57 -11 50 Z" fill="#e9b38b" data-role="skin"/><g id="Fore_Sleeve_R" opacity="0"><path d="M -15 -6 C -15 -14 15 -14 15 -6 L 13.5 38 L -13.5 38 Z" fill="#1f4f7a" data-role="shirt"/><rect x="-14" y="31" width="28" height="7" rx="3" fill="#e8b931"/></g><g id="Hand_R" transform="translate(0 62)"><ellipse cx="-9" cy="-8" rx="7.5" ry="8" fill="#e9b38b" data-role="skin"/><ellipse cx="-9" cy="-8" rx="7.5" ry="8" fill="#000000" opacity="0.1"/><ellipse cx="0" cy="0" rx="15.5" ry="16.5" fill="#e9b38b" data-role="skin"/><path d="M -14.5 4 C -10 13 -4 16.5 1 16.5 C 8 16.5 13.5 12 15.5 4 C 10 10 5 11.5 0 11.5 C -6 11.5 -10.5 9 -14.5 4 Z" fill="#000000" opacity="0.12"/></g></g></g></g><g id="Listen_Waves" transform="translate(72 196)" opacity="0"><path d="M -9.9 9.9 A 14 14 0 0 1 -9.9 -9.9" fill="none" stroke="#35765d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M -19.8 19.8 A 28 28 0 0 1 -19.8 -19.8" fill="none" stroke="#35765d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/></g><g id="Think_Dots"><g id="Think_Dot_1" transform="translate(300 66)" opacity="0"><ellipse cx="0" cy="0" rx="5.5" ry="5.5" fill="#6b5a6e"/></g><g id="Think_Dot_2" transform="translate(318 44)" opacity="0"><ellipse cx="0" cy="0" rx="7.5" ry="7.5" fill="#6b5a6e"/></g><g id="Think_Dot_3" transform="translate(344 20)" opacity="0"><ellipse cx="0" cy="0" rx="10" ry="10" fill="#6b5a6e"/></g></g><g id="Stars"><g id="Star_1" transform="translate(64 120)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#f7cf55" transform="scale(1.0)"/></g><g id="Star_2" transform="translate(336 96)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#35765d" transform="scale(0.9)"/></g><g id="Star_3" transform="translate(48 260)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#35765d" transform="scale(0.75)"/></g><g id="Star_4" transform="translate(356 250)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#f7cf55" transform="scale(0.8)"/></g><g id="Star_5" transform="translate(200 26)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#f07f86" transform="scale(0.85)"/></g><g id="Star_6" transform="translate(300 22)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#f7cf55" transform="scale(0.6)"/></g></g></g></svg></div>
+        <p class="caption" id="ui-caption"><span class="hint">Pick an outfit, or answer his question.</span></p>
+      </div>
+      <div class="chips" role="group" aria-label="Play a state">
+        <button type="button" class="chip" data-state="idle" aria-pressed="true">Idle</button>
+        <button type="button" class="chip" data-state="talk" aria-pressed="false">Talk</button>
+        <button type="button" class="chip" data-state="listen" aria-pressed="false">Listen</button>
+        <button type="button" class="chip" data-state="think" aria-pressed="false">Think</button>
+        <button type="button" class="chip" data-state="correct" aria-pressed="false">Correct</button>
+        <button type="button" class="chip" data-state="wrong" aria-pressed="false">Wrong</button>
+      </div>
+    </section>
+
+    <section class="panels">
+      <article class="panel" aria-labelledby="ui-look-title">
+        <span class="eyebrow">Dress him up</span>
+        <h2 id="ui-look-title">Outfit and shirt</h2>
+        <div class="chips" role="group" aria-label="Outfit" id="ui-outfits"></div>
+        <form class="field label-row" id="ui-label-form">
+          <label class="field-label" for="ui-label">Shirt says</label>
+          <div class="row">
+            <input type="text" id="ui-label" maxlength="16" autocomplete="off" value="HELLO">
+            <button type="submit">Apply</button>
+          </div>
+        </form>
+        <div class="field">
+          <span class="field-label" id="ui-shirt-lbl">Shirt colour</span>
+          <div class="swatches" role="group" aria-labelledby="ui-shirt-lbl" id="ui-shirt"></div>
+        </div>
+        <div class="field">
+          <span class="field-label" id="ui-skin-lbl">Skin tone</span>
+          <div class="swatches" role="group" aria-labelledby="ui-skin-lbl" id="ui-skin"></div>
+        </div>
+        <div class="field">
+          <span class="field-label" id="ui-hair-lbl">Hair</span>
+          <div class="swatches" role="group" aria-labelledby="ui-hair-lbl" id="ui-hair"></div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="ui-glasses"> Glasses</label>
+      </article>
+
+      <article class="panel" aria-labelledby="ui-practice-title">
+        <span class="eyebrow">Try it</span>
+        <h2 id="ui-practice-title">Answer Tomo</h2>
+        <p class="prompt" id="ui-prompt"></p>
+        <form class="row" id="ui-form">
+          <input type="text" id="ui-answer" autocomplete="off" placeholder="Type your answer" aria-label="Your answer">
+          <button type="submit" class="btn-main">Check</button>
+        </form>
+        <div class="feedback" id="ui-feedback" hidden></div>
+        <p class="note">The question changes with his role. He listens while you type, thinks when you press Check, then celebrates or helps you fix it.</p>
+      </article>
+
+      <article class="panel" aria-labelledby="ui-talk-title">
+        <h2 id="ui-talk-title">Make Tomo talk</h2>
+        <form class="row" id="ui-talk-form">
+          <input type="text" id="ui-line" autocomplete="off" aria-label="Line for Tomo to say" value="Hi! I'm Tomo. Let's practise some English together.">
+          <button type="submit" class="btn-main">Speak</button>
+          <button type="button" id="ui-stop">Stop</button>
+        </form>
+        <p class="note" id="ui-voice-note">Uses your browser's voice. Here the mouth follows an estimate of the sounds; in the app it follows exact timings taken from the audio.</p>
+      </article>
+
+      <article class="panel" aria-labelledby="ui-contract-title">
+        <h2 id="ui-contract-title">What the app sends to Rive</h2>
+        <p>View model <span class="mono">Tomo</span>, state machine <span class="mono">Main</span>. The first six match Yap, so one component drives both.</p>
+        <div class="contract-wrap">
+          <table class="contract">
+            <thead><tr><th>Property</th><th>Type</th><th>Now</th><th>Meaning</th></tr></thead>
+            <tbody id="ui-contract"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const svg = document.getElementById("tomo-svg");
+  const L = (id) => svg.querySelector("#" + id);
+  const reduceMQ = matchMedia("(prefers-reduced-motion: reduce)");
+  const amp = () => (reduceMQ.matches ? 0.2 : 1);
+  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const track = (keys, p) => {
+    if (p <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      if (p <= keys[i][0]) { const [p0, v0] = keys[i - 1], [p1, v1] = keys[i]; return v0 + (v1 - v0) * ease((p - p0) / (p1 - p0)); }
+    }
+    return keys[keys.length - 1][1];
+  };
+  const deg = (r) => (r * 180) / Math.PI;
+
+  // ---------------------------------------------------------------- looks (outfit, label, colours)
+  const OUTFITS = [
+    { name: "Casual", shirt: "#ff9f43", patch: null, ink: "#ffffff", label: "HELLO", cap: null,
+      greet: "Hey! I'm Tomo. Let's practise some English together.",
+      ask: "Say hello and tell me your name.", model: "Hi, I'm Aiko. Nice to meet you!",
+      ok: (s) => has(s, "hello", "hi", "hey", "good morning", "good afternoon", "good evening") && has(s, "my name is", "i'm", "i am", "call me") },
+    { name: "Police", shirt: "#24345a", patch: "#11182c", ink: "#ffffff", label: "POLICE", cap: "Cap_Police",
+      greet: "Hello! I'm a police officer today. How can I help you?",
+      ask: "You lost your bag. Tell the police officer.", model: "Excuse me, I've lost my bag.",
+      ok: (s) => has(s, "lost", "missing", "can't find", "cannot find", "stolen") && has(s, "bag", "wallet", "phone", "passport", "purse") },
+    { name: "Station", shirt: "#1f4f7a", patch: "#e8b931", ink: "#2b2340", label: "STATION HEAD", cap: "Cap_Station",
+      greet: "Good morning! I'm the station head. Where are you travelling today?",
+      ask: "Ask which platform the train to London leaves from.", model: "Which platform does the London train leave from?",
+      ok: (s) => has(s, "platform") && has(s, "which", "what", "where") },
+    { name: "Café", shirt: "#fbf3e6", patch: null, ink: "#fbf3e6", label: "CAFÉ", cap: null,
+      greet: "Welcome to the café! What can I get you?",
+      ask: "Order a coffee, politely.", model: "Could I have a coffee, please?",
+      ok: (s) => has(s, "coffee", "latte", "tea", "cappuccino") && has(s, "please", "could i", "can i", "may i", "i'd like", "i would like") },
+    { name: "Shop", shirt: "#f4f6f2", patch: "#ffffff", ink: "#35765d", label: "STAFF", cap: null,
+      greet: "Hi there! Let me know if you need any help.",
+      ask: "Ask the shop assistant how much this costs.", model: "Excuse me, how much is this?",
+      ok: (s) => has(s, "how much") },
+  ];
+  const SHIRTS = ["#ff9f43", "#35765d", "#3b8fd9", "#594566", "#d64545", "#24345a", "#1f4f7a", "#fbf3e6", "#f4f6f2"];
+  const SKINS = ["#f6d4b6", "#e9b38b", "#c98d62", "#9a6440", "#5f3a26"];
+  const HAIRS = ["#3b2620", "#17141a", "#8a5a35", "#d9a85a", "#2f8f8a"];
+  const look = { outfit: 0, label: "HELLO", shirt: OUTFITS[0].shirt, skin: SKINS[1], hair: HAIRS[0], glasses: false };
+
+  const luminance = (hex) => {
+    const n = parseInt(hex.slice(1), 16), c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  };
+  const labelText = L("Label_Text");
+  const labelPatch = svg.querySelector('[data-role="accent"]');
+  function applyLook() {
+    const o = OUTFITS[look.outfit];
+    const layerId = "Outfit_" + ["Casual", "Police", "Station", "Cafe", "Shop"][look.outfit];
+    svg.querySelectorAll('[id^="Outfit_"]').forEach((g) => g.setAttribute("opacity", g.id === layerId ? 1 : 0));
+    svg.querySelectorAll('[data-role="shirt"]').forEach((e) => e.setAttribute("fill", look.shirt));
+    svg.querySelectorAll('[data-role="skin"]').forEach((e) => e.setAttribute("fill", look.skin));
+    svg.querySelectorAll('[data-role="hair"]').forEach((e) => e.setAttribute("fill", look.hair));
+    svg.querySelectorAll('[data-role="hair-stroke"]').forEach((e) => e.setAttribute("stroke", look.hair));
+    labelPatch.setAttribute("fill", o.patch || "#000000");
+    labelPatch.setAttribute("opacity", o.patch ? 1 : 0);
+    // printed labels (no patch) pick white or ink against the shirt colour
+    const ink = o.patch ? o.ink : (look.outfit === 3 ? o.ink : (luminance(look.shirt) > 0.55 ? "#2b2340" : "#ffffff"));
+    labelText.setAttribute("fill", ink);
+    labelText.textContent = look.label || " ";
+    labelText.setAttribute("font-size", "20");
+    const w = labelText.getComputedTextLength();
+    if (w > 116) labelText.setAttribute("font-size", (20 * 116 / w).toFixed(2));
+    ["Cap_Police", "Cap_Station"].forEach((c) => L(c).setAttribute("opacity", c === o.cap ? 1 : 0));
+    L("Hair_Tuft").setAttribute("opacity", o.cap ? 0 : 1);
+    ["L", "R"].forEach((s) => L("Fore_Sleeve_" + s).setAttribute("opacity", look.outfit === 2 ? 1 : 0));
+    L("Glasses").setAttribute("opacity", look.glasses ? 1 : 0);
+    syncLookUI();
+  }
+
+  // ---------------------------------------------------------------- the Rive contract
+  const MOUTHS = ["X", "A", "B", "C", "D", "E", "F", "G", "H"];
+  const OPENNESS = [0, 0.05, 0.35, 0.6, 1, 0.6, 0.3, 0.35, 0.55];
+  const vm = { mouth: 0, talking: false, listening: false, thinking: false };
+  const CONTRACT = [
+    ["mouth", "Number", "Mouth shape 0-8 while talking"],
+    ["talking", "Boolean", "Voice audio is playing"],
+    ["listening", "Boolean", "Learner is speaking or typing"],
+    ["thinking", "Boolean", "Answer is being checked"],
+    ["correct", "Trigger", "Right answer: celebrate"],
+    ["wrong", "Trigger", "Wrong answer: oops, then encourage"],
+    ["outfit", "Number", "0 casual · 1 police · 2 station · 3 café · 4 shop"],
+    ["shirtLabel", "String", "What the shirt says"],
+    ["shirtColor", "Color", "Shirt and sleeves"],
+    ["skinTone", "Color", "Face, neck, arms, hands"],
+    ["hairColor", "Color", "Hair and eyebrows"],
+    ["glasses", "Boolean", "Show glasses"],
+  ];
+
+  // ---------------------------------------------------------------- layers and pivots
+  const el = {
+    body: L("Body"), head: L("Head"), tuft: L("Hair_Tuft"),
+    armL: L("Arm_L"), armR: L("Arm_R"), foreL: L("Forearm_L"), foreR: L("Forearm_R"),
+    eyeLOpen: L("Eye_L_Open"), eyeROpen: L("Eye_R_Open"), eyeLHappy: L("Eye_L_Happy"), eyeRHappy: L("Eye_R_Happy"),
+    irisL: L("Iris_L"), irisR: L("Iris_R"), browL: L("Brow_L"), browR: L("Brow_R"), sweat: L("Sweat"), cheeks: L("Cheeks"),
+    waves: L("Listen_Waves"), dots: [1, 2, 3].map((i) => L("Think_Dot_" + i)), stars: [1, 2, 3, 4, 5, 6].map((i) => L("Star_" + i)),
+    mouth: {},
+  };
+  [...MOUTHS, "Smile", "Happy", "Oops", "Hmm"].forEach((k) => (el.mouth[k] = L("Mouth_" + k)));
+  const baseT = new Map();
+  const readT = (n) => { const m = /translate\(([-\d.]+) ([-\d.]+)\)/.exec(n.getAttribute("transform") || ""); return m ? [+m[1], +m[2]] : [0, 0]; };
+  [el.body, el.head, el.tuft, el.armL, el.armR, el.irisL, el.irisR, el.browL, el.browR, el.sweat, el.waves, ...el.dots, ...el.stars].forEach((n) => baseT.set(n, readT(n)));
+  const setT = (n, dx, dy, rot = 0, sx = 1, sy = sx) => {
+    const [x, y] = baseT.get(n);
+    n.setAttribute("transform", `translate(${(x + dx).toFixed(2)} ${(y + dy).toFixed(2)}) rotate(${rot.toFixed(2)}) scale(${sx.toFixed(4)} ${sy.toFixed(4)})`);
+  };
+  const setO = (n, o) => n.setAttribute("opacity", clamp(o).toFixed(3));
+
+  // ---------------------------------------------------------------- arms: two-bone IK (Rive: bones + IK constraint)
+  const UPPER = 66, FORE = 62;
+  const SHOULDER = { L: baseT.get(el.armL), R: baseT.get(el.armR) };
+  // hand targets in Body space (Body pivot is the bottom-centre of the torso)
+  const POSE = {
+    rest: { L: [-79, -10], R: [79, -10] },
+    talk: { R: [106, -64] },
+    listen: { R: [122, -232] },
+    think: { L: [-6, -166] },
+    yay: { L: [-118, -246], R: [118, -246] },
+    neck: { R: [92, -194] },
+  };
+  function solveArm(side, hx, hy) {
+    const [sx, sy] = SHOULDER[side];
+    const dx = hx - sx, dy = hy - sy;
+    const d = clamp(Math.hypot(dx, dy), Math.abs(UPPER - FORE) + 0.5, UPPER + FORE - 0.5);
+    const th = Math.atan2(dy, dx);
+    const al = Math.acos(clamp((UPPER * UPPER + d * d - FORE * FORE) / (2 * UPPER * d), -1, 1));
+    const c1 = th + al, c2 = th - al;
+    const x1 = Math.cos(c1), x2 = Math.cos(c2);
+    const up = side === "L" ? (x1 < x2 ? c1 : c2) : (x1 > x2 ? c1 : c2); // elbow bends away from the body
+    const ex = sx + UPPER * Math.cos(up), ey = sy + UPPER * Math.sin(up);
+    let rel = Math.atan2(hy - ey, hx - ex) - up;
+    while (rel > Math.PI) rel -= 2 * Math.PI;
+    while (rel < -Math.PI) rel += 2 * Math.PI;
+    const arm = side === "L" ? el.armL : el.armR, fore = side === "L" ? el.foreL : el.foreR;
+    arm.setAttribute("transform", `translate(${sx} ${sy}) rotate(${(deg(up) - 90).toFixed(2)})`);
+    fore.setAttribute("transform", `translate(0 ${UPPER}) rotate(${deg(rel).toFixed(2)})`);
+  }
+
+  // ---------------------------------------------------------------- lip sync from text (the app uses Rhubarb / Azure timings)
+  const DIGRAPHS = { th: 8, sh: 2, ch: 2, ph: 7, wh: 6, oo: 6, ou: 5, ow: 6, ee: 2, ea: 2, ai: 3, ay: 3, oa: 5, oi: 5, oy: 5, qu: 6, ng: 2, ck: 2, ll: 8 };
+  const SINGLE = { a: 4, e: 3, i: 3, o: 5, u: 3, y: 2, w: 6, m: 1, b: 1, p: 1, f: 7, v: 7, l: 8, r: 5 };
+  const OPEN_SHAPES = new Set([3, 4, 5, 6]);
+  function wordShapes(word) {
+    const w = word.toLowerCase().replace(/[^a-z]/g, ""), out = [];
+    for (let i = 0; i < w.length; ) {
+      const two = w.slice(i, i + 2);
+      if (two in DIGRAPHS) { out.push(DIGRAPHS[two]); i += 2; continue; }
+      const c = w[i];
+      if (!(c === "e" && i === w.length - 1 && w.length > 3)) out.push(c in SINGLE ? SINGLE[c] : 2);
+      i++;
+    }
+    return out.filter((m, i) => i === 0 || m !== out[i - 1]);
+  }
+  function buildTimeline(text, rate) {
+    const k = 1 / rate, words = [], cues = [];
+    let t = 120 * k, m;
+    const re = /([A-Za-z'’]+)|([,;:])|([.!?]+)/g;
+    while ((m = re.exec(text))) {
+      if (m[1]) {
+        const start = t, shapes = wordShapes(m[1]);
+        shapes.forEach((s) => { cues.push([t, s]); t += (OPEN_SHAPES.has(s) ? 95 : 62) * k; });
+        if (!shapes.length) t += 90 * k;
+        words.push({ text: m[1], index: m.index, start, end: t });
+        cues.push([t, 0]); t += 45 * k;
+      } else { cues.push([t, 0]); t += (m[2] ? 200 : 360) * k; }
+    }
+    cues.push([t, 0]);
+    return { words, cues, total: t };
+  }
+  const cueAt = (cues, ms) => { let s = 0; for (const [at, v] of cues) { if (at > ms) break; s = v; } return s; };
+
+  // ---------------------------------------------------------------- speech
+  const caption = document.getElementById("ui-caption"), voiceNote = document.getElementById("ui-voice-note");
+  let speech = null;
+  const pickVoice = () => {
+    const en = (window.speechSynthesis ? speechSynthesis.getVoices() : []).filter((v) => /^en/i.test(v.lang));
+    return en.find((v) => /en-GB/i.test(v.lang) && /male|daniel|ryan|george|arthur|google uk english male/i.test(v.name) && !/female/i.test(v.name))
+      || en.find((v) => /en-GB/i.test(v.lang)) || en.find((v) => /en-US/i.test(v.lang)) || en[0] || null;
+  };
+  function renderCaption(text, words) {
+    caption.textContent = "";
+    let last = 0;
+    words.forEach((w, i) => {
+      caption.append(document.createTextNode(text.slice(last, w.index)));
+      const s = document.createElement("span"); s.className = "w"; s.dataset.i = i; s.textContent = text.slice(w.index, w.index + w.text.length);
+      caption.append(s); last = w.index + w.text.length;
+    });
+    caption.append(document.createTextNode(text.slice(last)));
+  }
+  function speak(text, done) {
+    stopSpeech();
+    text = (text || "").trim();
+    if (!text) return;
+    const rate = 0.98, tl = buildTimeline(text, rate);
+    const sess = { tl, t0: null, shift: 0, silent: false, done, word: -1 };
+    speech = sess; renderCaption(text, tl.words); vm.talking = true;
+    const synth = window.speechSynthesis, voice = synth ? pickVoice() : null;
+    if (synth) {
+      const u = new SpeechSynthesisUtterance(text);
+      if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = "en-GB";
+      u.rate = rate; u.pitch = 1.05;
+      u.onstart = () => { if (speech === sess && sess.t0 === null) sess.t0 = performance.now(); };
+      u.onboundary = (e) => {
+        if (speech !== sess || sess.t0 === null || (e.name && e.name !== "word")) return;
+        const w = sess.tl.words.find((x) => x.index >= e.charIndex);
+        if (w) sess.shift = performance.now() - sess.t0 - w.start;
+      };
+      u.onend = () => { if (speech === sess) endSpeech(); };
+      u.onerror = () => {
+        if (speech !== sess) return;
+        if (sess.t0 === null) { sess.silent = true; sess.t0 = performance.now(); voiceNote.textContent = "This browser could not play a voice, so Tomo is lip-syncing silently."; }
+        else if (!sess.silent) endSpeech();
+      };
+      synth.cancel();
+      setTimeout(() => { if (speech === sess) synth.speak(u); }, 40);
+      voiceNote.textContent = `Voice: ${voice ? voice.name : "browser default"}. Here the mouth follows an estimate of the sounds; in the app it follows exact timings taken from the audio.`;
+      setTimeout(() => { if (speech === sess && sess.t0 === null) { sess.silent = true; sess.t0 = performance.now(); voiceNote.textContent = "No voice played on this device, so Tomo is lip-syncing silently."; } }, 1200);
+    } else { sess.silent = true; sess.t0 = performance.now(); voiceNote.textContent = "No browser voice found, so Tomo is lip-syncing silently."; }
+  }
+  function endSpeech() {
+    const s = speech; speech = null; vm.talking = false; vm.mouth = 0;
+    caption.querySelectorAll(".w.on").forEach((n) => n.classList.remove("on"));
+    if (s && s.done) s.done();
+  }
+  function stopSpeech() {
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (speech) { speech.done = null; speech = null; vm.talking = false; vm.mouth = 0; }
+  }
+  if (window.speechSynthesis) speechSynthesis.getVoices();
+
+  // ---------------------------------------------------------------- reactions
+  let reaction = null;
+  const firedAt = {};
+  function fire(type, then) { reaction = { type, start: performance.now(), dur: type === "correct" ? 1500 : 1400, then }; firedAt[type] = performance.now(); }
+
+  // ---------------------------------------------------------------- frame loop
+  const cur = { tilt: 0, nodY: 0, browL: 0, browR: 0, liftL: 0, liftR: 0, waves: 0, lookX: 0, lookY: 0, dots: 0, talkBob: 0,
+    hLx: POSE.rest.L[0], hLy: POSE.rest.L[1], hRx: POSE.rest.R[0], hRy: POSE.rest.R[1] };
+  let last = performance.now(), nextBlink = last + 2200, blinkStart = -1, doubleBlink = false, smileNext = last + 7000, smileStart = -1;
+  let wander = { x: 0, y: 0, until: last + 2500 };
+  const moodName = () => reaction ? reaction.type : vm.talking ? "talking" : vm.thinking ? "thinking" : vm.listening ? "listening" : "idle";
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const t = now / 1000, a = amp();
+    const mode = vm.talking ? "talking" : vm.thinking ? "thinking" : vm.listening ? "listening" : "idle";
+
+    if (speech && speech.t0 !== null) {
+      const ms = now - speech.t0 - speech.shift;
+      vm.mouth = cueAt(speech.tl.cues, ms);
+      const wi = speech.tl.words.findIndex((w) => ms >= w.start && ms < w.end + 45);
+      if (wi !== speech.word) {
+        caption.querySelectorAll(".w.on").forEach((n) => n.classList.remove("on"));
+        if (wi >= 0) caption.querySelector(`.w[data-i="${wi}"]`)?.classList.add("on");
+        speech.word = wi;
+      }
+      if (speech.silent && ms > speech.tl.total + 150) endSpeech();
+    }
+    if (now > wander.until) {
+      const spots = [[0, 0], [0.5, -0.2], [-0.5, 0.15], [0.2, 0.4], [0, 0]];
+      const s = spots[Math.floor(Math.random() * spots.length)];
+      wander = { x: s[0], y: s[1], until: now + 1800 + Math.random() * 2600 };
+    }
+
+    // state targets (these become Rive timelines)
+    const tg = { tilt: 0, nodY: 0, browL: 0, browR: 0, liftL: 0, liftR: 0, waves: 0, lookX: wander.x, lookY: wander.y, dots: 0,
+      hLx: POSE.rest.L[0], hLy: POSE.rest.L[1], hRx: POSE.rest.R[0], hRy: POSE.rest.R[1] };
+    if (mode === "listening") Object.assign(tg, { tilt: -7, liftL: -6, liftR: -6, browL: -6, browR: 6, waves: 1, lookX: 0.5, lookY: 0.45, hRx: POSE.listen.R[0], hRy: POSE.listen.R[1] });
+    if (mode === "thinking") Object.assign(tg, { tilt: 5, liftR: -8, browR: -10, liftL: 1, lookX: -0.6, lookY: -0.85, dots: 1, hLx: POSE.think.L[0], hLy: POSE.think.L[1] });
+    if (mode === "talking") Object.assign(tg, { lookX: 0, lookY: 0, liftL: -2, liftR: -2, hRx: POSE.talk.R[0], hRy: POSE.talk.R[1] });
+    const k = 1 - Math.exp(-dt * 9);
+    for (const key in tg) cur[key] += (tg[key] - cur[key]) * k;
+
+    // body: breathe and sway
+    let bdy = 0, bsx = 1 + 0.006 * Math.sin(t * 2.1 + 1.4) * a, bsy = 1 + 0.01 * Math.sin(t * 2.1) * a, brot = Math.sin(t * 0.9) * 0.8 * a;
+    let hrot = cur.tilt * a + Math.sin(t * 1.3) * 1.2 * a, hdy = 0;
+    let hL = [cur.hLx, cur.hLy], hR = [cur.hRx, cur.hRy];
+    if (mode === "listening") { hrot += Math.sin(t * 3.4) * 1.8 * a; hdy -= Math.max(0, Math.sin(t * 3.4)) * 2 * a; }
+    if (mode === "thinking") hL[1] -= Math.max(0, Math.sin(t * 7)) * 2.5 * a;
+    cur.talkBob += ((vm.talking ? OPENNESS[vm.mouth] : 0) - cur.talkBob) * 0.35;
+    if (vm.talking) { hrot += Math.sin(t * 5.1) * 2 * a; hdy -= cur.talkBob * 2.5 * a; hR = [hR[0] + Math.sin(t * 4.4) * 4 * a, hR[1] + Math.sin(t * 4.4 + 1) * 7 * a]; }
+
+    let eyesHappy = false, mouthKey = null, worry = 0, sweatO = 0, sweatY = 0, starP = -1, look = null, tuftKick = 0;
+    if (reaction) {
+      const p = (now - reaction.start) / reaction.dur;
+      if (p >= 1) { const done = reaction.then; reaction = null; if (done) setTimeout(done, 0); }
+      else if (reaction.type === "correct") {
+        bdy += track([[0, 0], [0.08, 4], [0.28, -24], [0.46, 0], [0.56, 3], [0.7, 0]], p) * (a < 1 ? 0.3 : 1);
+        bsy *= track([[0, 1], [0.08, 0.95], [0.2, 1.04], [0.46, 1.01], [0.53, 0.95], [0.66, 1.01], [0.8, 1]], p);
+        bsx *= track([[0, 1], [0.08, 1.04], [0.2, 0.97], [0.46, 1], [0.53, 1.04], [0.66, 1], [0.8, 1]], p);
+        hdy += track([[0, 0], [0.08, 3], [0.3, -6], [0.5, 2], [0.7, 0]], p);
+        hrot += Math.sin(clamp((p - 0.5) / 0.45) * Math.PI * 4) * 4 * (1 - clamp((p - 0.5) / 0.45)) * a;
+        const env = track([[0, 0], [0.12, 0.5], [0.26, 1], [0.82, 1], [1, 0]], p), pump = Math.sin(p * Math.PI * 6) * 8 * a;
+        hL = [hL[0] + (POSE.yay.L[0] - hL[0]) * env, hL[1] + (POSE.yay.L[1] + pump - hL[1]) * env];
+        hR = [hR[0] + (POSE.yay.R[0] - hR[0]) * env, hR[1] + (POSE.yay.R[1] - pump - hR[1]) * env];
+        eyesHappy = true; mouthKey = "Happy"; starP = clamp((p - 0.1) / 0.75); tuftKick = track([[0, 0], [0.3, -14], [0.5, 10], [0.7, -5], [0.9, 0]], p);
+      } else {
+        const sp = clamp((p - 0.1) / 0.6);
+        hrot += Math.sin(sp * Math.PI * 6) * 6 * (1 - sp) * a;
+        bdy += track([[0, 0], [0.08, 3], [0.2, 0]], p);
+        worry = track([[0, 0], [0.06, 1], [0.8, 1], [0.95, 0]], p);
+        mouthKey = p < 0.78 ? "Oops" : null;
+        sweatO = track([[0, 0], [0.08, 0], [0.16, 1], [0.78, 1], [0.92, 0]], p);
+        sweatY = track([[0, 0], [0.16, 0], [0.85, 14]], p);
+        look = p < 0.7 ? [-0.4, 0.5] : null;
+        const env = track([[0, 0], [0.12, 1], [0.75, 1], [0.95, 0]], p);
+        hR = [hR[0] + (POSE.neck.R[0] - hR[0]) * env, hR[1] + (POSE.neck.R[1] + Math.sin(t * 15) * 3 - hR[1]) * env];
+      }
+    }
+    // signature grin, now and then while idle
+    if (mode === "idle" && !reaction && smileStart < 0 && now > smileNext) { smileStart = now; smileNext = now + 8000 + Math.random() * 4000; }
+    if (smileStart >= 0 && (now - smileStart >= 1200 || mode !== "idle" || reaction)) smileStart = -1;
+    if (smileStart >= 0) { eyesHappy = true; mouthKey = "Happy"; hdy -= Math.sin(((now - smileStart) / 1200) * Math.PI) * 3 * a; }
+
+    setT(el.body, 0, bdy, brot, bsx, bsy);
+    setT(el.head, 0, cur.nodY + hdy, hrot);
+    setT(el.tuft, 0, 0, Math.sin(t * 2.3) * 4 * a + tuftKick * a);
+    solveArm("L", hL[0], hL[1]);
+    solveArm("R", hR[0], hR[1]);
+
+    if (blinkStart < 0 && now > nextBlink) { blinkStart = now; doubleBlink = Math.random() < 0.2; nextBlink = now + 2200 + Math.random() * 2800; }
+    let blink = 1;
+    if (blinkStart >= 0) {
+      const bp = (now - blinkStart) / (doubleBlink ? 340 : 160);
+      if (bp >= 1) blinkStart = -1;
+      else { const q = doubleBlink ? (bp * 2) % 1 : bp; blink = q < 0.5 ? 1 - q * 1.8 : 0.1 + (q - 0.5) * 1.8; }
+    }
+    [el.eyeLOpen, el.eyeROpen].forEach((e) => { e.setAttribute("transform", `scale(1 ${blink.toFixed(3)})`); setO(e, eyesHappy ? 0 : 1); });
+    [el.eyeLHappy, el.eyeRHappy].forEach((e) => setO(e, eyesHappy ? 1 : 0));
+    const lx = (look ? look[0] : cur.lookX) * 5.5, ly = (look ? look[1] : cur.lookY) * 4.5;
+    setT(el.irisL, lx, ly); setT(el.irisR, lx, ly);
+    setT(el.browL, 0, cur.liftL * (1 - worry) - 3 * worry + (eyesHappy ? -3 : 0), cur.browL * (1 - worry) - 14 * worry);
+    setT(el.browR, 0, cur.liftR * (1 - worry) - 3 * worry + (eyesHappy ? -3 : 0), cur.browR * (1 - worry) + 14 * worry);
+    setO(el.cheeks, eyesHappy ? 0.9 : 0.6);
+    setO(el.sweat, sweatO); setT(el.sweat, 0, sweatY);
+    setO(el.waves, cur.waves); setT(el.waves, -4 * Math.sin(t * 6.5) * a, 0, 0, 1 + 0.12 * Math.sin(t * 6.5) * a);
+    el.dots.forEach((d, i) => { const pulse = Math.max(0, Math.sin(t * 3.2 - i * 0.9)); setO(d, cur.dots * (0.25 + 0.75 * pulse)); setT(d, 0, -pulse * 3 * a, 0, 0.85 + 0.2 * pulse); });
+    el.stars.forEach((s, i) => {
+      if (starP < 0) { setO(s, 0); return; }
+      const lp = clamp(starP * 1.15 - i * 0.04), sc = track([[0, 0], [0.25, 1.2], [0.6, 0.9], [1, 0]], lp);
+      const [bx, by] = baseT.get(s);
+      setT(s, (bx - 200) * 0.12 * lp, (by - 190) * 0.12 * lp, lp * 140, sc); setO(s, lp < 0.9 ? 1 : (1 - lp) * 10);
+    });
+
+    let key;
+    if (mouthKey) key = mouthKey;
+    else if (vm.talking) key = MOUTHS[vm.mouth];
+    else if (mode === "thinking") key = "Hmm";
+    else if (mode === "listening") key = "X";
+    else key = "Smile";
+    for (const k2 in el.mouth) setO(el.mouth[k2], k2 === key ? 1 : 0);
+
+    updatePanels(now, key);
+    requestAnimationFrame(frame);
+  }
+
+  // ---------------------------------------------------------------- panels
+  const pill = document.getElementById("ui-state");
+  const PILL = { idle: "Idle", talking: "Talking", listening: "Listening", thinking: "Thinking", correct: "Correct!", wrong: "Not quite" };
+  const cells = {};
+  CONTRACT.forEach(([name, type, meaning]) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${name}</td><td class="t">${type}</td><td class="val"></td><td class="t">${meaning}</td>`;
+    document.getElementById("ui-contract").append(tr);
+    cells[name] = { tr, val: tr.querySelector(".val"), last: null };
+  });
+  let lastMood = "";
+  function updatePanels(now, key) {
+    const mood = moodName();
+    if (mood !== lastMood) {
+      pill.textContent = PILL[mood]; pill.dataset.mood = mood; lastMood = mood;
+      const chip = { idle: "idle", talking: "talk", listening: "listen", thinking: "think", correct: "correct", wrong: "wrong" }[mood];
+      document.querySelectorAll(".chip[data-state]").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.state === chip)));
+    }
+    const v = {
+      mouth: `${vm.talking ? vm.mouth : 0} (${vm.talking ? MOUTHS[vm.mouth] : "X"})`,
+      talking: String(vm.talking), listening: String(vm.listening), thinking: String(vm.thinking),
+      correct: now - (firedAt.correct || -1e9) < 700 ? "fired" : "—", wrong: now - (firedAt.wrong || -1e9) < 700 ? "fired" : "—",
+      outfit: `${look.outfit} (${OUTFITS[look.outfit].name})`, shirtLabel: `"${look.label}"`, shirtColor: look.shirt,
+      skinTone: look.skin, hairColor: look.hair, glasses: String(look.glasses),
+    };
+    for (const n in v) { const c = cells[n]; if (c.last !== v[n]) { c.val.textContent = v[n]; c.last = v[n]; c.tr.classList.toggle("fired", v[n] === "fired"); } }
+  }
+
+  // ---------------------------------------------------------------- look controls
+  const outfitsEl = document.getElementById("ui-outfits"), labelInput = document.getElementById("ui-label");
+  OUTFITS.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.dataset.outfit = i; b.textContent = o.name;
+    b.addEventListener("click", () => {
+      look.outfit = i; look.shirt = o.shirt; look.label = o.label; labelInput.value = o.label;
+      applyLook(); reaction = null; vm.listening = false; vm.thinking = false;
+      showQ(); speak(o.greet);
+    });
+    outfitsEl.append(b);
+  });
+  const swatchGroup = (id, list, key, name) => {
+    const box = document.getElementById(id);
+    list.forEach((c) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "swatch"; b.style.background = c; b.dataset.c = c;
+      b.setAttribute("aria-label", `${name} ${c}`);
+      b.addEventListener("click", () => { look[key] = c; applyLook(); });
+      box.append(b);
+    });
+  };
+  swatchGroup("ui-shirt", SHIRTS, "shirt", "Shirt colour");
+  swatchGroup("ui-skin", SKINS, "skin", "Skin tone");
+  swatchGroup("ui-hair", HAIRS, "hair", "Hair colour");
+  function syncLookUI() {
+    outfitsEl.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.outfit === look.outfit)));
+    [["ui-shirt", look.shirt], ["ui-skin", look.skin], ["ui-hair", look.hair]].forEach(([id, c]) =>
+      document.querySelectorAll(`#${id} .swatch`).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.c === c))));
+    document.getElementById("ui-glasses").checked = look.glasses;
+  }
+  document.getElementById("ui-label-form").addEventListener("submit", (e) => { e.preventDefault(); look.label = labelInput.value.trim().toUpperCase(); applyLook(); });
+  labelInput.addEventListener("input", () => { look.label = labelInput.value.trim().toUpperCase(); applyLook(); });
+  document.getElementById("ui-glasses").addEventListener("change", (e) => { look.glasses = e.target.checked; applyLook(); });
+
+  // ---------------------------------------------------------------- state chips, talk, practice
+  document.querySelectorAll(".chip[data-state]").forEach((chip) => chip.addEventListener("click", () => {
+    const s = chip.dataset.state;
+    stopSpeech(); vm.listening = false; vm.thinking = false;
+    if (s === "correct" || s === "wrong") { fire(s); caption.innerHTML = `<span class="hint">${s === "correct" ? "Correct!" : "Not quite. Let’s fix it."}</span>`; return; }
+    reaction = null;
+    if (s === "talk") speak(document.getElementById("ui-line").value);
+    if (s === "listen") { vm.listening = true; caption.innerHTML = '<span class="hint">Listening…</span>'; }
+    if (s === "think") { vm.thinking = true; caption.innerHTML = '<span class="hint">Hmm…</span>'; }
+    if (s === "idle") caption.innerHTML = '<span class="hint">Pick an outfit, or answer his question.</span>';
+  }));
+  document.getElementById("ui-talk-form").addEventListener("submit", (e) => { e.preventDefault(); vm.listening = false; vm.thinking = false; speak(document.getElementById("ui-line").value); });
+  document.getElementById("ui-stop").addEventListener("click", () => stopSpeech());
+
+  const norm = (s) => " " + s.toLowerCase().replace(/[’']/g, "'").replace(/[^a-z' ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
+  function has(s, ...alts) { return alts.some((x) => s.includes(" " + x + " ")); }
+  const promptEl = document.getElementById("ui-prompt"), answer = document.getElementById("ui-answer"), feedback = document.getElementById("ui-feedback");
+  function showQ() { promptEl.textContent = OUTFITS[look.outfit].ask; answer.value = ""; feedback.hidden = true; }
+  const startListening = () => { if (reaction || vm.thinking) return; if (vm.talking) stopSpeech(); vm.listening = true; };
+  answer.addEventListener("focus", startListening);
+  answer.addEventListener("input", startListening);
+  answer.addEventListener("blur", () => { if (!answer.value.trim()) vm.listening = false; });
+  const PRAISE = ["Great! That sounds natural.", "Perfect. That's exactly what people say.", "Nice one! Well said."];
+  let praiseI = 0;
+  document.getElementById("ui-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = answer.value.trim();
+    if (!text) { answer.focus(); return; }
+    const o = OUTFITS[look.outfit];
+    stopSpeech(); vm.listening = false; vm.thinking = true; feedback.hidden = true;
+    caption.innerHTML = '<span class="hint">Hmm…</span>';
+    setTimeout(() => {
+      vm.thinking = false;
+      if (o.ok(norm(text))) {
+        fire("correct", () => speak(PRAISE[praiseI++ % PRAISE.length]));
+        caption.innerHTML = '<span class="hint">Correct!</span>';
+        feedback.dataset.kind = "good"; feedback.textContent = "Correct. That works well here."; feedback.hidden = false;
+      } else {
+        fire("wrong", () => speak(`Nearly! Try this: ${o.model}`));
+        caption.innerHTML = '<span class="hint">Not quite. Let’s fix it.</span>';
+        feedback.dataset.kind = "bad"; feedback.textContent = `Nearly. Try: “${o.model}”`; feedback.hidden = false;
+      }
+    }, 750);
+  });
+
+  applyLook(); showQ();
+  requestAnimationFrame(frame);
+})();
+</script>

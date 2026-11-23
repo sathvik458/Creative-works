@@ -1,0 +1,712 @@
+<title>Yap Mascot Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a sticky stage with the character on the left, control panels stacked on the right; one column on phones. */
+:root {
+  --paper: #fff7ec;
+  --card: #ffffff;
+  --ink: #2b2340;
+  --ink-soft: #5d5470;
+  --line: rgba(43, 35, 64, 0.12);
+  --matcha: #35765d;
+  --matcha-soft: #e3eee7;
+  --butter-soft: #fff0c4;
+  --good: #23864f;
+  --good-soft: #e2f4e8;
+  --bad: #c7334d;
+  --bad-soft: #fde7eb;
+  --stage: #d9eae0;
+  --stage-glow: #f2f8f3;
+  --stage-ink: #2b2340;
+  --stage-mark: #ffe3a3;
+  --on-accent: #ffffff;
+  --display: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", ui-rounded, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #191522; --card: #241e30; --ink: #f4eef8; --ink-soft: #b9afc9; --line: rgba(255, 255, 255, 0.12);
+    --matcha: #79c3a0; --matcha-soft: #1f3a30; --butter-soft: #3a3220; --good: #5fd08e; --good-soft: #18372a;
+    --bad: #ff8a9c; --bad-soft: #3d1d26; --stage: #cfe3d7; --stage-glow: #eaf3ed; --on-accent: #10241b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #191522; --card: #241e30; --ink: #f4eef8; --ink-soft: #b9afc9; --line: rgba(255, 255, 255, 0.12);
+  --matcha: #79c3a0; --matcha-soft: #1f3a30; --butter-soft: #3a3220; --good: #5fd08e; --good-soft: #18372a;
+  --bad: #ff8a9c; --bad-soft: #3d1d26; --stage: #cfe3d7; --stage-glow: #eaf3ed; --on-accent: #10241b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--display); font-weight: 500;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px; line-height: 1.5;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 20px; }
+.top { display: grid; gap: 4px; }
+.eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--matcha); }
+h1 { margin: 0; font-size: clamp(30px, 5vw, 44px); font-weight: 800; line-height: 1.1; text-wrap: balance; }
+.lede { margin: 0; color: var(--ink-soft); max-width: 62ch; }
+.layout { display: grid; gap: 20px; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.stage-col { position: sticky; top: calc(12px + env(safe-area-inset-top, 0px)); display: grid; gap: 12px; }
+@media (max-width: 860px) { .stage-col { position: static; } }
+.stage {
+  position: relative; border-radius: 28px; padding: 18px 18px 16px; display: grid; justify-items: center; gap: 8px;
+  background: radial-gradient(120% 80% at 50% 30%, var(--stage-glow) 0%, var(--stage) 70%); border: 1px solid var(--line);
+}
+.state-pill {
+  justify-self: start; font-size: 13px; font-weight: 800; padding: 4px 12px; border-radius: 999px;
+  background: var(--card); color: var(--ink); border: 1px solid var(--line); transition: background 0.2s, color 0.2s;
+}
+.state-pill[data-mood="correct"] { background: var(--good-soft); color: var(--good); }
+.state-pill[data-mood="wrong"] { background: var(--bad-soft); color: var(--bad); }
+.state-pill[data-mood="listening"] { background: var(--matcha-soft); color: var(--matcha); }
+.char { width: min(100%, 400px); aspect-ratio: 400 / 420; }
+.char svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.caption {
+  margin: 0; min-height: 3.2em; max-width: 34ch; text-align: center; font-size: 18px; font-weight: 700; color: var(--stage-ink);
+}
+.caption .w { border-radius: 6px; padding: 0 1px; transition: background 0.08s; }
+.caption .w.on { background: var(--stage-mark); }
+.caption .hint { color: var(--stage-ink); opacity: 0.7; font-weight: 500; font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+button, .chip {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--card); color: var(--ink); padding: 8px 14px; font-size: 14px; transition: transform 0.1s, background 0.15s;
+}
+button:active { transform: scale(0.97); }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--matcha); outline-offset: 2px; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn-main { background: var(--matcha); color: var(--on-accent); border-color: transparent; }
+.panels { display: grid; gap: 14px; min-width: 0; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 10px; min-width: 0; }
+.panel h2 { margin: 0; font-size: 19px; font-weight: 800; }
+.panel p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.prompt { font-size: 17px; font-weight: 700; color: var(--ink) !important; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.row input { flex: 1 1 220px; min-width: 0; }
+input[type="text"] {
+  font: inherit; font-size: 16px; padding: 10px 14px; border-radius: 14px; border: 1.5px solid var(--line);
+  background: var(--paper); color: var(--ink);
+}
+.feedback { border-radius: 14px; padding: 10px 12px; font-size: 14px; font-weight: 700; }
+.feedback[data-kind="good"] { background: var(--good-soft); color: var(--good); }
+.feedback[data-kind="bad"] { background: var(--bad-soft); color: var(--bad); }
+.examples { display: flex; gap: 6px; flex-wrap: wrap; }
+.examples button { font-size: 13px; padding: 6px 11px; font-weight: 500; }
+.mouths { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.mouth {
+  display: grid; justify-items: center; gap: 2px; padding: 8px 4px 6px; border-radius: 14px; background: var(--paper);
+  border: 1.5px solid transparent; font-size: 12px; color: var(--ink-soft);
+}
+.mouth svg { width: 52px; height: 40px; }
+.mouth b { font-family: var(--mono); color: var(--ink); font-size: 13px; }
+.mouth.on { border-color: var(--matcha); background: var(--matcha-soft); }
+.mouth .face { fill: #fdf1df; }
+.contract { width: 100%; border-collapse: collapse; font-size: 13px; }
+.contract-wrap { overflow-x: auto; }
+.contract th { text-align: left; font-weight: 700; color: var(--ink-soft); font-size: 12px; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.contract td { padding: 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.contract td:first-child, .contract td.val { font-family: var(--mono); }
+.contract td.val { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.contract tr.fired td { background: var(--butter-soft); }
+.contract .t { color: var(--ink-soft); font-size: 12px; }
+.note { font-size: 12.5px !important; }
+.mono { font-family: var(--mono); font-size: 0.92em; }
+@media (prefers-reduced-motion: reduce) { button, .caption .w { transition: none; } }
+</style>
+
+<main class="wrap">
+  <header class="top">
+    <span class="eyebrow">Yap &amp; Learn · mascot prototype</span>
+    <h1>Meet Yap</h1>
+    <p class="lede">The mascot from the app icon, brought to life. Every movement here is what the Rive file will do: make Yap talk, answer a question, and watch it listen, think and react. The panels show exactly what the app sends to Rive.</p>
+  </header>
+
+  <div class="layout">
+    <section class="stage-col" aria-label="Yap">
+      <div class="stage">
+        <span class="state-pill" id="ui-state" aria-live="polite">Idle</span>
+        <div class="char"><svg id="yap-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 420" role="img" aria-label="Yap, a smiling speech-bubble character sitting on an open book"><title>Yap</title><defs>
+<linearGradient id="yapBody" x1="0.15" y1="0.05" x2="0.85" y2="0.95"><stop offset="0" stop-color="#fffbf3"/><stop offset="0.55" stop-color="#fbf1e0"/><stop offset="1" stop-color="#f3e2c6"/></linearGradient>
+<linearGradient id="yapHand" x1="0.2" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="#fffaf1"/><stop offset="1" stop-color="#f1dfc2"/></linearGradient>
+<linearGradient id="yapPageL" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#fdf6ea"/><stop offset="1" stop-color="#eedabb"/></linearGradient>
+<linearGradient id="yapPageR" x1="1" y1="0" x2="0" y2="0.4"><stop offset="0" stop-color="#fdf6ea"/><stop offset="1" stop-color="#eedabb"/></linearGradient>
+<linearGradient id="yapLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#5aa57f"/><stop offset="1" stop-color="#9fd6b8"/></linearGradient>
+</defs><g id="Yap"><g id="Shadow" transform="translate(200 378)"><ellipse cx="0" cy="0" rx="150" ry="12" fill="#33222f" opacity="0.12"/></g><g id="Leaves" transform="translate(84 326)"><g id="Leaf_1"><g id="Leaf_1_Art" transform="rotate(-24)"><path d="M 0 0 C -10 -22 -6 -50 12 -68 C 28 -48 24 -18 0 0 Z" fill="url(#yapLeaf)"/><path d="M 0 0 C 4 -20 8 -40 12 -62" fill="none" stroke="#4b8f6c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></g></g><g id="Leaf_2"><g id="Leaf_2_Art" transform="rotate(-72)"><path d="M 0 0 C -10 -22 -6 -50 12 -68 C 28 -48 24 -18 0 0 Z" fill="url(#yapLeaf)"/><path d="M 0 0 C 4 -20 8 -40 12 -62" fill="none" stroke="#4b8f6c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></g></g></g><g id="Book" transform="translate(200 338)"><path d="M -134 -4 C -90 -12 -36 -6 0 16 C 36 -6 90 -12 134 -4 L 138 10 C 94 2 40 8 0 30 C -40 8 -94 2 -138 10 Z" fill="#3b2a3d" stroke="#3b2a3d" stroke-width="6" stroke-linejoin="round"/><path d="M -129 -12 C -86 -18 -34 -12 0 10 L 0 20 C -36 -2 -88 -8 -132 -2 Z" fill="#e0c398"/><path d="M 129 -12 C 86 -18 34 -12 0 10 L 0 20 C 36 -2 88 -8 132 -2 Z" fill="#e0c398"/><path d="M -130 -7 C -88 -13 -36 -7 0 15 L 0 20 C -36 -2 -88 -8 -132 -2 Z" fill="#ecd6b2"/><path d="M 130 -7 C 88 -13 36 -7 0 15 L 0 20 C 36 -2 88 -8 132 -2 Z" fill="#ecd6b2"/><path d="M 0 4 C -26 -20 -68 -32 -114 -30 L -129 -12 C -86 -18 -34 -12 0 10 Z" fill="url(#yapPageL)"/><path d="M 0 4 C 26 -20 68 -32 114 -30 L 129 -12 C 86 -18 34 -12 0 10 Z" fill="url(#yapPageR)"/><path d="M -104 -21 C -70 -24 -32 -16 -10 -2" fill="none" stroke="#e8d1ac" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M 104 -21 C 70 -24 32 -16 10 -2" fill="none" stroke="#e8d1ac" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M 0 5 L 0 14" fill="none" stroke="#d9bb8e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><g id="Page_Flip" opacity="0"><path d="M 0 4 C 26 -20 68 -32 114 -30 L 129 -12 C 86 -18 34 -12 0 10 Z" fill="url(#yapPageR)"/></g></g><g id="Stars"><g id="Star_1" transform="translate(60 96)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#f7cf55" transform="scale(1.0)"/></g><g id="Star_2" transform="translate(352 84)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#5aa57f" transform="scale(0.9)"/></g><g id="Star_3" transform="translate(44 236)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#5aa57f" transform="scale(0.75)"/></g><g id="Star_4" transform="translate(362 246)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#f7cf55" transform="scale(0.8)"/></g><g id="Star_5" transform="translate(204 36)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#ec7a70" transform="scale(0.85)"/></g><g id="Star_6" transform="translate(304 30)" opacity="0"><path d="M 0 -14 C 2 -4 4 -2 14 0 C 4 2 2 4 0 14 C -2 4 -4 2 -14 0 C -4 -2 -2 -4 0 -14 Z" fill="#f7cf55" transform="scale(0.6)"/></g></g><g id="Rig" transform="translate(200 290)"><g id="Sparks"><g id="Sparks_Green" transform="translate(-94 -192)"><path d="M 6 -26 L 13 -2" fill="none" stroke="#9fd6b8" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M -24 8 L -2 18" fill="none" stroke="#9fd6b8" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Sparks_Yellow" transform="translate(146 -140)"><path d="M -12 -32 L 8 -46" fill="none" stroke="#f7cf55" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M -6 0 L 18 -2" fill="none" stroke="#f7cf55" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M -9 30 L 9 42" fill="none" stroke="#f7cf55" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g></g><g id="Listen_Waves" opacity="0"><g id="Listen_Wave_L" transform="translate(-146 -94)"><path d="M -9.9 9.9 A 14 14 0 0 1 -9.9 -9.9" fill="none" stroke="#35765d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M -19.8 19.8 A 28 28 0 0 1 -19.8 -19.8" fill="none" stroke="#35765d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/></g><g id="Listen_Wave_R" transform="translate(150 -114)"><path d="M 9.9 -9.9 A 14 14 0 0 1 9.9 9.9" fill="none" stroke="#35765d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M 19.8 -19.8 A 28 28 0 0 1 19.8 19.8" fill="none" stroke="#35765d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/></g></g><g id="Body"><g id="Body_Rim"><path d="M -4 -192 C 70 -198 126 -172 126 -108 C 126 -50 90 -18 36 -12 C 31 -11 27 -10 24 -9 C 22 7 14 24 -3 40 C -1 22 -4 6 -14 -8 C -72 -8 -124 -38 -124 -102 C -124 -160 -78 -188 -4 -192 Z" fill="#e6cdaa"/></g><g id="Body_Fill"><path d="M 0.68 -191.55 C 71.35 -197.28 124.83 -172.45 124.83 -111.33 C 124.83 -55.94 90.45 -25.38 38.88 -19.65 C 34.11 -18.69 30.28 -17.74 27.42 -16.78 C 25.51 -1.5 17.87 14.73 1.63 30.01 C 3.55 12.82 0.68 -2.46 -8.87 -15.83 C -64.26 -15.83 -113.92 -44.48 -113.92 -105.6 C -113.92 -160.99 -69.99 -187.73 0.68 -191.55 Z" fill="url(#yapBody)"/></g><g id="Body_Gloss"><path d="M -90 -132 C -84 -158 -62 -177 -36 -184" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/><ellipse cx="-96" cy="-110" rx="5.5" ry="5.5" fill="#ffffff" opacity="0.75"/></g></g><g id="Face" transform="translate(0 -102)"><g id="Cheeks"><ellipse cx="-70" cy="20" rx="16" ry="9" fill="#f3a493" opacity="0.55"/><ellipse cx="70" cy="20" rx="16" ry="9" fill="#f3a493" opacity="0.55"/></g><g id="Eye_L" transform="translate(-44 -4)"><g id="Eye_L_Open"><ellipse cx="0" cy="0" rx="13" ry="17" fill="#33222f"/><ellipse cx="4.5" cy="-6.5" rx="5.2" ry="6" fill="#ffffff"/><ellipse cx="-4" cy="7" rx="2.4" ry="2.4" fill="#ffffff" opacity="0.8"/></g><g id="Eye_L_Happy" opacity="0"><path d="M -15 5 Q 0 -13 15 5" fill="none" stroke="#33222f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></g><g id="Eye_R" transform="translate(44 -4)"><g id="Eye_R_Open"><ellipse cx="0" cy="0" rx="13" ry="17" fill="#33222f"/><ellipse cx="4.5" cy="-6.5" rx="5.2" ry="6" fill="#ffffff"/><ellipse cx="-4" cy="7" rx="2.4" ry="2.4" fill="#ffffff" opacity="0.8"/></g><g id="Eye_R_Happy" opacity="0"><path d="M -15 5 Q 0 -13 15 5" fill="none" stroke="#33222f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></g><g id="Brow_L" transform="translate(-44 -38)" opacity="0"><path d="M -12 2 Q 0 -4 12 2" fill="none" stroke="#33222f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Brow_R" transform="translate(44 -38)" opacity="0"><path d="M -12 2 Q 0 -4 12 2" fill="none" stroke="#33222f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Mouth" transform="translate(0 30)"><g id="Mouth_X" opacity="0"><path d="M -14 -1 Q 0 9 14 -1" fill="none" stroke="#3a2633" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Mouth_A" opacity="0"><path d="M -13 2 Q 0 6 13 2" fill="none" stroke="#3a2633" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Mouth_B" opacity="0"><path d="M -16 -3 Q 0 -6 16 -3 Q 13 9 0 10 Q -13 9 -16 -3 Z" fill="#3a2633"/><path d="M -12.5 -3.2 Q 0 -5.6 12.5 -3.2 L 11.5 1 Q 0 -1 -11.5 1 Z" fill="#ffffff"/></g><g id="Mouth_C" opacity="0"><path d="M -17 -4 Q 0 -8 17 -4 Q 15 14 0 16 Q -15 14 -17 -4 Z" fill="#3a2633"/><ellipse cx="0" cy="10.5" rx="8.5" ry="4.2" fill="#ec7a70"/></g><g id="Mouth_D" opacity="0"><path d="M -20 -6 Q 0 -11 20 -6 Q 18 21 0 24 Q -18 21 -20 -6 Z" fill="#3a2633"/><path d="M -15 -6.4 Q 0 -9.6 15 -6.4 L 14 -2 Q 0 -4.6 -14 -2 Z" fill="#ffffff"/><ellipse cx="0" cy="16" rx="10.5" ry="6" fill="#ec7a70"/></g><g id="Mouth_E" opacity="0"><ellipse cx="0" cy="4" rx="11.5" ry="12.5" fill="#3a2633"/><ellipse cx="0" cy="11" rx="6.5" ry="3.5" fill="#ec7a70"/></g><g id="Mouth_F" opacity="0"><ellipse cx="0" cy="3" rx="7.5" ry="8.5" fill="#3a2633"/><path d="M -6 -5.5 Q 0 -8 6 -5.5" fill="none" stroke="#ec7a70" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></g><g id="Mouth_G" opacity="0"><path d="M -16 -3 Q 0 -6 16 -3 Q 12 10 0 11 Q -12 10 -16 -3 Z" fill="#3a2633"/><path d="M -12.5 -3.2 Q 0 -5.6 12.5 -3.2 L 11.5 4.5 Q 0 2.2 -11.5 4.5 Z" fill="#ffffff"/></g><g id="Mouth_H" opacity="0"><path d="M -17 -4 Q 0 -8 17 -4 Q 15 14 0 16 Q -15 14 -17 -4 Z" fill="#3a2633"/><ellipse cx="0" cy="1.5" rx="7" ry="4.5" fill="#ec7a70"/></g><g id="Mouth_Smile"><path d="M -17 -3 Q 0 -7 17 -3 Q 14 13 0 14 Q -14 13 -17 -3 Z" fill="#3a2633"/><path d="M -9 8.5 Q 0 3 9 8.5 Q 4.6 13.4 0 13.8 Q -4.6 13.4 -9 8.5 Z" fill="#ec7a70"/></g><g id="Mouth_Happy" opacity="0"><path d="M -26 -7 Q 0 -13 26 -7 Q 21 24 0 27 Q -21 24 -26 -7 Z" fill="#3a2633"/><path d="M -14 17 Q 0 7 14 17 Q 8 25.6 0 26.4 Q -8 25.6 -14 17 Z" fill="#ec7a70"/></g><g id="Mouth_Oops" opacity="0"><path d="M -15 4 Q -7.5 -2.5 0 4 Q 7.5 10.5 15 4" fill="none" stroke="#3a2633" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></g><g id="Mouth_Hmm" opacity="0"><path d="M 0 3 Q 8 2 15 -3" fill="none" stroke="#3a2633" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></g></g><g id="Sweat" transform="translate(-88 -40)" opacity="0"><path d="M 0 -14 C 6 -4 10 2 10 7 C 10 13 5 17 0 17 C -5 17 -10 13 -10 7 C -10 2 -6 -4 0 -14 Z" fill="#9ad4f5" stroke="#5aa9e6" stroke-width="2" stroke-linejoin="round"/></g></g><g id="Hand_L" transform="translate(-82 22)"><ellipse cx="12" cy="-12" rx="8.5" ry="7.5" fill="#e6cdaa"/><ellipse cx="12" cy="-13" rx="7.5" ry="6.5" fill="url(#yapHand)"/><ellipse cx="0" cy="0" rx="20" ry="17" fill="url(#yapHand)"/><path d="M -19 3 C -15 12 -7 17 0 17 C 9 17 18 12 20 2 C 15 9 8 12 0 12 C -8 12 -14 9 -19 3 Z" fill="#e6cdaa"/><ellipse cx="-6" cy="-7" rx="5.5" ry="3.4" fill="#ffffff" opacity="0.8"/></g><g id="Hand_R" transform="translate(82 22)"><ellipse cx="-12" cy="-12" rx="8.5" ry="7.5" fill="#e6cdaa"/><ellipse cx="-12" cy="-13" rx="7.5" ry="6.5" fill="url(#yapHand)"/><ellipse cx="0" cy="0" rx="20" ry="17" fill="url(#yapHand)"/><path d="M -19 3 C -15 12 -7 17 0 17 C 9 17 18 12 20 2 C 15 9 8 12 0 12 C -8 12 -14 9 -19 3 Z" fill="#e6cdaa"/><ellipse cx="6" cy="-7" rx="5.5" ry="3.4" fill="#ffffff" opacity="0.8"/></g><g id="Think_Dots"><g id="Think_Dot_1" transform="translate(102 -216)" opacity="0"><ellipse cx="0" cy="0" rx="5.5" ry="5.5" fill="#6b5a6e"/></g><g id="Think_Dot_2" transform="translate(120 -238)" opacity="0"><ellipse cx="0" cy="0" rx="7.5" ry="7.5" fill="#6b5a6e"/></g><g id="Think_Dot_3" transform="translate(146 -262)" opacity="0"><ellipse cx="0" cy="0" rx="10" ry="10" fill="#6b5a6e"/></g></g></g></g></svg></div>
+        <p class="caption" id="ui-caption"><span class="hint">Tap a state below, or answer a question.</span></p>
+      </div>
+      <div class="chips" role="group" aria-label="Play a state">
+        <button type="button" class="chip" data-state="idle" aria-pressed="true">Idle</button>
+        <button type="button" class="chip" data-state="talk" aria-pressed="false">Talk</button>
+        <button type="button" class="chip" data-state="listen" aria-pressed="false">Listen</button>
+        <button type="button" class="chip" data-state="think" aria-pressed="false">Think</button>
+        <button type="button" class="chip" data-state="correct" aria-pressed="false">Correct</button>
+        <button type="button" class="chip" data-state="wrong" aria-pressed="false">Wrong</button>
+      </div>
+    </section>
+
+    <section class="panels">
+      <article class="panel" aria-labelledby="ui-practice-title">
+        <span class="eyebrow">Try it</span>
+        <h2 id="ui-practice-title">Answer Yap</h2>
+        <p class="prompt" id="ui-prompt"></p>
+        <form class="row" id="ui-form">
+          <input type="text" id="ui-answer" autocomplete="off" placeholder="Type your answer" aria-label="Your answer">
+          <button type="submit" class="btn-main" id="ui-check">Check</button>
+          <button type="button" id="ui-next">Next question</button>
+        </form>
+        <div class="feedback" id="ui-feedback" hidden></div>
+        <p class="note">Yap listens while you type, thinks when you press Check, then celebrates or helps you fix it.</p>
+      </article>
+
+      <article class="panel" aria-labelledby="ui-talk-title">
+        <h2 id="ui-talk-title">Make Yap talk</h2>
+        <form class="row" id="ui-talk-form">
+          <input type="text" id="ui-line" autocomplete="off" aria-label="Line for Yap to say" value="Hi! I'm Yap. Let's practise some English together.">
+          <button type="submit" class="btn-main">Speak</button>
+          <button type="button" id="ui-stop">Stop</button>
+        </form>
+        <div class="examples" id="ui-examples">
+          <button type="button">Where is the station, please?</button>
+          <button type="button">Could I have a coffee, please?</button>
+          <button type="button">Lovely weather today, isn't it?</button>
+          <button type="button">Mmm, maybe. Let me think.</button>
+        </div>
+        <p class="note" id="ui-voice-note">Uses your browser's voice. Here the mouth follows an estimate of the sounds; in the app it follows exact timings taken from the audio.</p>
+      </article>
+
+      <article class="panel" aria-labelledby="ui-mouth-title">
+        <h2 id="ui-mouth-title">Mouth shapes</h2>
+        <p>Nine shapes cover English speech. The app sends a number from 0 to 8 and Rive shows that mouth. Tap one to preview it.</p>
+        <div class="mouths" id="ui-mouths"></div>
+      </article>
+
+      <article class="panel" aria-labelledby="ui-contract-title">
+        <h2 id="ui-contract-title">What the app sends to Rive</h2>
+        <p>View model <span class="mono">Yap</span>, state machine <span class="mono">Main</span>. Same names in the .riv file and in the app code.</p>
+        <div class="contract-wrap">
+          <table class="contract">
+            <thead><tr><th>Property</th><th>Type</th><th>Now</th><th>Meaning</th></tr></thead>
+            <tbody id="ui-contract"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const svg = document.getElementById("yap-svg");
+  const L = (id) => svg.querySelector("#" + id);
+  const reduceMQ = matchMedia("(prefers-reduced-motion: reduce)");
+  const amp = () => (reduceMQ.matches ? 0.2 : 1);
+
+  // ---------------------------------------------------------------- the Rive contract
+  const MOUTHS = ["X", "A", "B", "C", "D", "E", "F", "G", "H"];
+  const MOUTH_SOUNDS = ["rest", "M B P", "K S T EE", "EH AE", "AA", "AO ER", "OO W", "F V", "L TH"];
+  const OPENNESS = [0, 0.05, 0.35, 0.6, 1, 0.6, 0.3, 0.35, 0.55];
+  const vm = { mouth: 0, talking: false, listening: false, thinking: false, lookX: 0, lookY: 0 };
+  const CONTRACT = [
+    ["mouth", "Number", "Mouth shape 0-8 while talking"],
+    ["talking", "Boolean", "Voice audio is playing"],
+    ["listening", "Boolean", "Learner is speaking or typing"],
+    ["thinking", "Boolean", "Answer is being checked"],
+    ["correct", "Trigger", "Answer was right: celebrate"],
+    ["wrong", "Trigger", "Answer was wrong: oops, then encourage"],
+    ["lookX", "Number", "-1 to 1, where the eyes look"],
+    ["lookY", "Number", "-1 to 1, where the eyes look"],
+  ];
+
+  // ---------------------------------------------------------------- layers
+  const el = {
+    rig: L("Rig"), shadow: L("Shadow"), book: L("Book"),
+    eyeLOpen: L("Eye_L_Open"), eyeROpen: L("Eye_R_Open"), eyeLHappy: L("Eye_L_Happy"), eyeRHappy: L("Eye_R_Happy"),
+    browL: L("Brow_L"), browR: L("Brow_R"), sweat: L("Sweat"), cheeks: L("Cheeks"),
+    waves: L("Listen_Waves"), waveL: L("Listen_Wave_L"), waveR: L("Listen_Wave_R"),
+    sparks: L("Sparks"), sparksG: L("Sparks_Green"), sparksY: L("Sparks_Yellow"),
+    dots: [1, 2, 3].map((i) => L("Think_Dot_" + i)),
+    stars: [1, 2, 3, 4, 5, 6].map((i) => L("Star_" + i)),
+    handL: L("Hand_L"), handR: L("Hand_R"), pageFlip: L("Page_Flip"), leaf1: L("Leaf_1"), leaf2: L("Leaf_2"),
+    mouth: {},
+  };
+  [...MOUTHS, "Smile", "Happy", "Oops", "Hmm"].forEach((k) => (el.mouth[k] = L("Mouth_" + k)));
+  const baseT = new Map();
+  const readT = (node) => {
+    const m = /translate\(([-\d.]+) ([-\d.]+)\)/.exec(node.getAttribute("transform") || "");
+    return m ? [parseFloat(m[1]), parseFloat(m[2])] : [0, 0];
+  };
+  [el.rig, el.shadow, el.book, el.browL, el.browR, el.sweat, el.waveL, el.waveR, el.sparksG, el.sparksY, ...el.dots, ...el.stars,
+   el.handL, el.handR, el.pageFlip, el.leaf1, el.leaf2]
+    .forEach((n) => baseT.set(n, readT(n)));
+  const setT = (node, dx, dy, rot = 0, sx = 1, sy = sx) => {
+    const [x, y] = baseT.get(node);
+    node.setAttribute("transform", `translate(${(x + dx).toFixed(2)} ${(y + dy).toFixed(2)}) rotate(${rot.toFixed(2)}) scale(${sx.toFixed(4)} ${sy.toFixed(4)})`);
+  };
+  const setO = (node, o) => node.setAttribute("opacity", Math.max(0, Math.min(1, o)).toFixed(3));
+
+  // ---------------------------------------------------------------- helpers
+  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  // keys: [[p, value], ...] sorted by p; eased between keys.
+  const track = (keys, p) => {
+    if (p <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      if (p <= keys[i][0]) {
+        const [p0, v0] = keys[i - 1], [p1, v1] = keys[i];
+        return v0 + (v1 - v0) * ease((p - p0) / (p1 - p0));
+      }
+    }
+    return keys[keys.length - 1][1];
+  };
+
+  // ---------------------------------------------------------------- lip sync from text
+  // Rough letters -> mouth shapes. The real app gets exact timings from the audio (Rhubarb or Azure visemes).
+  const DIGRAPHS = { th: 8, sh: 2, ch: 2, ph: 7, wh: 6, oo: 6, ou: 5, ow: 6, ee: 2, ea: 2, ai: 3, ay: 3, oa: 5, oi: 5, oy: 5, qu: 6, ng: 2, ck: 2, ll: 8 };
+  const SINGLE = { a: 4, e: 3, i: 3, o: 5, u: 3, y: 2, w: 6, m: 1, b: 1, p: 1, f: 7, v: 7, l: 8, r: 5 };
+  const VOWELISH = new Set([3, 4, 5, 6]);
+  function wordShapes(word) {
+    const w = word.toLowerCase().replace(/[^a-z]/g, "");
+    const out = [];
+    for (let i = 0; i < w.length; ) {
+      const two = w.slice(i, i + 2);
+      if (DIGRAPHS[two] !== undefined) { out.push(DIGRAPHS[two]); i += 2; continue; }
+      const c = w[i];
+      if (c === "e" && i === w.length - 1 && w.length > 3) { i++; continue; } // silent final e
+      out.push(SINGLE[c] !== undefined ? SINGLE[c] : 2);
+      i++;
+    }
+    return out.filter((m, i) => i === 0 || m !== out[i - 1]);
+  }
+  function buildTimeline(text, rate) {
+    const k = 1 / rate, words = [], cues = [];
+    let t = 120 * k;
+    const re = /([A-Za-z'’]+)|([,;:])|([.!?]+)/g;
+    let m;
+    while ((m = re.exec(text))) {
+      if (m[1]) {
+        const shapes = wordShapes(m[1]);
+        const start = t;
+        shapes.forEach((s) => {
+          cues.push([t, s]);
+          t += (VOWELISH.has(s) ? 95 : 62) * k;
+        });
+        if (!shapes.length) t += 90 * k;
+        words.push({ text: m[1], index: m.index, start, end: t });
+        cues.push([t, 0]);
+        t += 45 * k;
+      } else if (m[2]) { cues.push([t, 0]); t += 200 * k; }
+      else { cues.push([t, 0]); t += 360 * k; }
+    }
+    cues.push([t, 0]);
+    return { words, cues, total: t };
+  }
+  const cueAt = (cues, ms) => {
+    let shape = 0;
+    for (const [at, s] of cues) { if (at > ms) break; shape = s; }
+    return shape;
+  };
+
+  // ---------------------------------------------------------------- speech playback
+  const caption = document.getElementById("ui-caption");
+  const voiceNote = document.getElementById("ui-voice-note");
+  let speech = null;
+  let speechSeq = 0;
+  function pickVoice() {
+    const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    const en = voices.filter((v) => /^en/i.test(v.lang));
+    return en.find((v) => /en-GB/i.test(v.lang) && /female|libby|sonia|serena|kate|google uk english female/i.test(v.name))
+      || en.find((v) => /en-GB/i.test(v.lang)) || en.find((v) => /en-US/i.test(v.lang)) || en[0] || null;
+  }
+  function renderCaption(text, words) {
+    caption.textContent = "";
+    let last = 0;
+    words.forEach((w, i) => {
+      caption.append(document.createTextNode(text.slice(last, w.index)));
+      const s = document.createElement("span");
+      s.className = "w"; s.dataset.i = i; s.textContent = text.slice(w.index, w.index + w.text.length);
+      caption.append(s);
+      last = w.index + w.text.length;
+    });
+    caption.append(document.createTextNode(text.slice(last)));
+  }
+  function speak(text, done) {
+    stopSpeech(false);
+    text = (text || "").trim();
+    if (!text) return;
+    const rate = 0.95;
+    const tl = buildTimeline(text, rate);
+    const sess = { id: ++speechSeq, tl, t0: null, shift: 0, silent: false, done, word: -1 };
+    speech = sess;
+    renderCaption(text, tl.words);
+    vm.talking = true;
+    const synth = window.speechSynthesis;
+    const voice = synth ? pickVoice() : null;
+    if (synth) {
+      const u = new SpeechSynthesisUtterance(text);
+      if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = "en-GB";
+      u.rate = rate;
+      u.onstart = () => { if (speech === sess && sess.t0 === null) sess.t0 = performance.now(); };
+      u.onboundary = (e) => {
+        if (speech !== sess || sess.t0 === null || (e.name && e.name !== "word")) return;
+        const w = sess.tl.words.find((x) => x.index >= e.charIndex);
+        if (w) sess.shift = performance.now() - sess.t0 - w.start;
+      };
+      u.onend = () => { if (speech === sess) endSpeech(); };
+      u.onerror = () => {
+        if (speech !== sess) return;
+        if (sess.t0 === null) { sess.silent = true; sess.t0 = performance.now(); voiceNote.textContent = "This browser could not play a voice, so Yap is lip-syncing silently."; }
+        else if (!sess.silent) endSpeech();
+      };
+      synth.cancel();
+      setTimeout(() => { if (speech === sess) synth.speak(u); }, 40);
+      voiceNote.textContent = `Voice: ${voice ? voice.name : "browser default"}. Here the mouth follows an estimate of the sounds; in the app it follows exact timings taken from the audio.`;
+      setTimeout(() => {
+        if (speech === sess && sess.t0 === null) { sess.silent = true; sess.t0 = performance.now(); voiceNote.textContent = "No voice played on this device, so Yap is lip-syncing silently."; }
+      }, 1200);
+    } else {
+      sess.silent = true; sess.t0 = performance.now();
+      voiceNote.textContent = "No browser voice found, so Yap is lip-syncing silently.";
+    }
+  }
+  function endSpeech() {
+    const s = speech;
+    speech = null;
+    vm.talking = false; vm.mouth = 0;
+    caption.querySelectorAll(".w.on").forEach((n) => n.classList.remove("on"));
+    if (s && s.done) s.done();
+  }
+  function stopSpeech(runDone = false) {
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (speech) { const s = speech; speech = null; if (!runDone) s.done = null; vm.talking = false; vm.mouth = 0; if (runDone && s.done) s.done(); }
+  }
+  if (window.speechSynthesis) speechSynthesis.getVoices();
+
+  // ---------------------------------------------------------------- reactions (Rive triggers)
+  let reaction = null;
+  let preview = null;
+  const firedAt = {};
+  function fire(type, then) {
+    reaction = { type, start: performance.now(), dur: type === "correct" ? 1500 : 1400, then };
+    firedAt[type] = performance.now();
+  }
+
+  // ---------------------------------------------------------------- the frame loop
+  const cur = { tilt: 0, dx: 0, brow: 0, browLift: 0, browL: 0, browR: 0, waves: 0, lookX: 0, lookY: 0, sparks: 1, dots: 0, talkBob: 0,
+    hLx: 0, hLy: 0, hLr: 0, hRx: 0, hRy: 0, hRr: 0 };
+  let last = performance.now();
+  let nextBlink = last + 2400, blinkStart = -1, doubleBlink = false;
+  let smileNext = last + 6500, smileStart = -1;
+  let wander = { x: 0, y: 0, until: last + 3000 };
+
+  function moodName() {
+    if (reaction) return reaction.type;
+    if (vm.talking) return "talking";
+    if (vm.thinking) return "thinking";
+    if (vm.listening) return "listening";
+    return "idle";
+  }
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    const t = now / 1000, a = amp();
+    const mode = vm.talking ? "talking" : vm.thinking ? "thinking" : vm.listening ? "listening" : "idle";
+
+    // speech timeline -> mouth number
+    if (speech && speech.t0 !== null) {
+      const ms = now - speech.t0 - speech.shift;
+      vm.mouth = cueAt(speech.tl.cues, ms);
+      const wi = speech.tl.words.findIndex((w) => ms >= w.start && ms < w.end + 45);
+      if (wi !== speech.word) {
+        caption.querySelectorAll(".w.on").forEach((n) => n.classList.remove("on"));
+        if (wi >= 0) caption.querySelector(`.w[data-i="${wi}"]`)?.classList.add("on");
+        speech.word = wi;
+      }
+      if (speech.silent && ms > speech.tl.total + 150) endSpeech();
+    }
+
+    // idle eye wander
+    if (now > wander.until) {
+      const spots = [[0, 0], [0.45, -0.25], [-0.45, 0.1], [0.2, 0.35], [0, 0]];
+      const s = spots[Math.floor(Math.random() * spots.length)];
+      wander = { x: s[0], y: s[1], until: now + 1800 + Math.random() * 2600 };
+    }
+
+    // targets per state (these become Rive timelines)
+    const tg = { tilt: 0, dx: 0, brow: 0, browLift: 0, browL: 0, browR: 0, waves: 0, lookX: wander.x, lookY: wander.y, sparks: 1, dots: 0,
+      hLx: 0, hLy: 0, hLr: 0, hRx: 0, hRy: 0, hRr: 0 };
+    if (mode === "listening") Object.assign(tg, { tilt: -5, dx: -3, brow: 1, browLift: -5, browL: -7, browR: 7, waves: 1, lookX: vm.lookX, lookY: vm.lookY, sparks: 0.3,
+      hRx: 52, hRy: -126, hRr: -24 });
+    if (mode === "thinking") Object.assign(tg, { tilt: 4, brow: 1, browLift: -2, browL: 0, browR: -12, lookX: -0.6, lookY: -0.85, dots: 1, sparks: 0.3,
+      hLx: 58, hLy: -36, hLr: 20 });
+    if (mode === "talking") Object.assign(tg, { lookX: 0, lookY: 0, hRx: 6, hRy: -16, hRr: -14 });
+    const k = 1 - Math.exp(-dt * 9);
+    for (const key in tg) cur[key] += (tg[key] - cur[key]) * k;
+    if (mode !== "listening" && mode !== "thinking") { vm.lookX = +cur.lookX.toFixed(2); vm.lookY = +cur.lookY.toFixed(2); }
+
+    // body: float + breathe
+    let dy = -4 * Math.sin(t * 2.1) * a;
+    let sx = 1 + 0.012 * Math.sin(t * 2.1 + 1.4) * a;
+    let sy = 1 - 0.012 * Math.sin(t * 2.1 + 1.4) * a;
+    let rot = cur.tilt * a, dx = cur.dx * a;
+    if (mode === "listening") { rot += Math.sin(t * 3.4) * 1.6 * a; dy -= Math.max(0, Math.sin(t * 3.4)) * 2.5 * a; }
+    if (mode === "thinking") { rot += Math.sin(t * 1.6) * 1.2 * a; }
+    cur.talkBob += ((vm.talking ? OPENNESS[vm.mouth] : 0) - cur.talkBob) * 0.35;
+    sy += cur.talkBob * 0.035 * a; sx -= cur.talkBob * 0.02 * a; dy -= cur.talkBob * 3 * a;
+    if (vm.talking) rot += Math.sin(t * 5.3) * 1.5 * a;
+
+    // reaction overlays (one-shot Rive timelines)
+    let eyesHappy = false, mouthKey = null, worry = 0, sweatO = 0, sweatY = 0, bookSq = 1, starP = -1, look = null, sparkBoost = 1;
+    let handPose = null, flipQ = -1;
+    if (reaction) {
+      const p = (now - reaction.start) / reaction.dur;
+      if (p >= 1) { const done = reaction.then; reaction = null; if (done) setTimeout(done, 0); }
+      else if (reaction.type === "correct") {
+        dy += track([[0, 0], [0.08, 5], [0.3, -54], [0.46, 0], [0.56, 3], [0.72, 0]], p) * (a < 1 ? 0.3 : 1);
+        sy *= track([[0, 1], [0.08, 0.86], [0.18, 1.1], [0.32, 1.02], [0.46, 1.04], [0.53, 0.88], [0.64, 1.04], [0.78, 1]], p);
+        sx *= track([[0, 1], [0.08, 1.12], [0.18, 0.92], [0.32, 0.99], [0.46, 0.97], [0.53, 1.1], [0.64, 0.98], [0.78, 1]], p);
+        rot += Math.sin(clamp((p - 0.56) / 0.4) * Math.PI * 4) * 4 * (1 - clamp((p - 0.56) / 0.4)) * a;
+        bookSq = track([[0, 1], [0.46, 1], [0.52, 0.94], [0.62, 1]], p);
+        eyesHappy = true; mouthKey = "Happy"; starP = clamp((p - 0.1) / 0.75); sparkBoost = 1 + 0.25 * Math.sin(clamp((p - 0.25) / 0.5) * Math.PI);
+        const wave = Math.sin(p * Math.PI * 6) * 14;
+        handPose = { env: track([[0, 0], [0.12, 0.4], [0.28, 1], [0.8, 1], [1, 0]], p), to: { lx: -50, ly: -150, lr: -25 + wave, rx: 50, ry: -150, rr: 25 - wave } };
+        flipQ = clamp((p - 0.3) / 0.5);
+      } else {
+        const shakeP = clamp((p - 0.1) / 0.6);
+        rot += Math.sin(shakeP * Math.PI * 6) * 7 * (1 - shakeP) * a;
+        sy *= track([[0, 1], [0.08, 0.94], [0.2, 1.01], [0.3, 1]], p);
+        dy += track([[0, 0], [0.08, 3], [0.2, 0]], p);
+        worry = track([[0, 0], [0.06, 1], [0.8, 1], [0.95, 0]], p);
+        mouthKey = p < 0.78 ? "Oops" : null;
+        sweatO = track([[0, 0], [0.08, 0], [0.16, 1], [0.78, 1], [0.92, 0]], p);
+        sweatY = track([[0, 0], [0.16, 0], [0.85, 14]], p);
+        look = p < 0.7 ? [-0.3, 0.4] : null;
+        sparkBoost = 0;
+        handPose = { env: track([[0, 0], [0.12, 1], [0.75, 1], [0.95, 0]], p), to: { rx: 18, ry: -200 + Math.sin(t * 16) * 2, rr: 28 + Math.sin(t * 16) * 12 } };
+      }
+    }
+
+    // signature grin from the logo, now and then while idle
+    if (mode === "idle" && !reaction && smileStart < 0 && now > smileNext) { smileStart = now; smileNext = now + 8000 + Math.random() * 4000; }
+    if (smileStart >= 0 && (now - smileStart >= 1200 || mode !== "idle" || reaction)) smileStart = -1;
+    if (smileStart >= 0) { eyesHappy = true; mouthKey = "Happy"; const sp = (now - smileStart) / 1200; sy *= 1 - 0.035 * Math.sin(sp * Math.PI) * a; sx *= 1 + 0.025 * Math.sin(sp * Math.PI) * a; }
+    setT(el.rig, dx, dy, rot, sx, sy);
+    const lift = Math.max(0, -dy);
+    setT(el.shadow, 0, 0, 0, 1 - lift / 140, 1 - lift / 140);
+    setO(el.shadow, 1 - lift / 120);
+    setT(el.book, 0, 0, 0, 1 + (1 - bookSq) * 0.4, bookSq);
+
+    // hands: rest -> state pose, then one-shot reactions take over
+    const hand = { lx: cur.hLx, ly: cur.hLy, lr: cur.hLr, rx: cur.hRx, ry: cur.hRy, rr: cur.hRr };
+    if (vm.talking) { hand.ry += Math.sin(t * 4.4) * 4 * a; hand.rr += Math.sin(t * 4.4) * 8 * a; }
+    if (mode === "thinking") hand.ly -= Math.max(0, Math.sin(t * 7)) * 2.5 * a;
+    if (handPose) for (const k2 in handPose.to) hand[k2] += (handPose.to[k2] - hand[k2]) * handPose.env;
+    setT(el.handL, hand.lx, hand.ly, hand.lr);
+    setT(el.handR, hand.rx, hand.ry, hand.rr);
+
+    // page flip on a correct answer
+    if (flipQ > 0 && flipQ < 1) { setO(el.pageFlip, 1); setT(el.pageFlip, 0, -Math.sin(flipQ * Math.PI) * 6, 0, 1 - 2 * ease(flipQ), 1); }
+    else setO(el.pageFlip, 0);
+
+    // leaves sway
+    setT(el.leaf1, 0, 0, Math.sin(t * 1.3) * 4 * a + (starP >= 0 ? Math.sin(starP * Math.PI * 4) * 6 * a : 0));
+    setT(el.leaf2, 0, 0, Math.sin(t * 1.5 + 1) * 5 * a);
+
+    // eyes: look + blink
+    if (blinkStart < 0 && now > nextBlink) { blinkStart = now; doubleBlink = Math.random() < 0.2; nextBlink = now + 2200 + Math.random() * 2800; }
+    let blink = 1;
+    if (blinkStart >= 0) {
+      const bp = (now - blinkStart) / (doubleBlink ? 340 : 160);
+      if (bp >= 1) blinkStart = -1;
+      else { const q = doubleBlink ? (bp * 2) % 1 : bp; blink = q < 0.5 ? 1 - q * 1.8 : 0.1 + (q - 0.5) * 1.8; }
+    }
+    const lx = (look ? look[0] : cur.lookX) * 5, ly = (look ? look[1] : cur.lookY) * 4;
+    [el.eyeLOpen, el.eyeROpen].forEach((e) => {
+      e.setAttribute("transform", `translate(${lx.toFixed(2)} ${ly.toFixed(2)}) scale(1 ${blink.toFixed(3)})`);
+      setO(e, eyesHappy ? 0 : 1);
+    });
+    [el.eyeLHappy, el.eyeRHappy].forEach((e) => setO(e, eyesHappy ? 1 : 0));
+
+    // brows
+    const browO = Math.max(cur.brow, worry);
+    setO(el.browL, browO); setO(el.browR, browO);
+    setT(el.browL, 0, cur.browLift * (1 - worry) - 2 * worry, cur.browL * (1 - worry) - 14 * worry);
+    setT(el.browR, 0, cur.browLift * (1 - worry) - 2 * worry, cur.browR * (1 - worry) + 14 * worry);
+    setO(el.cheeks, eyesHappy ? 1 : 0.85);
+
+    // sweat
+    setO(el.sweat, sweatO); setT(el.sweat, 0, sweatY);
+
+    // listen waves
+    setO(el.waves, cur.waves);
+    const wp = 1 + 0.14 * Math.sin(t * 6.5) * a;
+    setT(el.waveL, -3 * (wp - 1) * 10, 0, 0, wp); setT(el.waveR, 3 * (wp - 1) * 10, 0, 0, wp);
+
+    // sparks
+    setO(el.sparks, cur.sparks * (sparkBoost > 0 ? 1 : 0.2));
+    setT(el.sparksG, 0, 0, Math.sin(t * 1.7) * 5 * a, sparkBoost || 1);
+    setT(el.sparksY, 0, 0, Math.sin(t * 1.9 + 1) * 5 * a, sparkBoost || 1);
+
+    // think dots
+    el.dots.forEach((d, i) => {
+      const pulse = Math.max(0, Math.sin(t * 3.2 - i * 0.9));
+      setO(d, cur.dots * (0.25 + 0.75 * pulse));
+      setT(d, 0, -pulse * 3 * a, 0, 0.85 + 0.2 * pulse);
+    });
+
+    // stars burst
+    el.stars.forEach((s, i) => {
+      if (starP < 0) { setO(s, 0); return; }
+      const local = clamp(starP * 1.15 - i * 0.04);
+      const scale = track([[0, 0], [0.25, 1.2], [0.6, 0.9], [1, 0]], local);
+      const [bx, by] = baseT.get(s);
+      const ox = (bx - 200) * 0.12 * local, oy = (by - 190) * 0.12 * local;
+      setT(s, ox, oy, local * 140, scale);
+      setO(s, local < 0.9 ? 1 : (1 - local) * 10);
+    });
+
+    // mouth
+    let key;
+    if (mouthKey) key = mouthKey;
+    else if (vm.talking) key = MOUTHS[vm.mouth];
+    else if (preview && now < preview.until) key = MOUTHS[preview.m];
+    else if (mode === "thinking") key = "Hmm";
+    else if (mode === "listening") key = "X";
+    else key = "Smile";
+    for (const k2 in el.mouth) setO(el.mouth[k2], k2 === key ? 1 : 0);
+    if (preview && now >= preview.until) preview = null;
+
+    updatePanels(now, key);
+    requestAnimationFrame(frame);
+  }
+
+  // ---------------------------------------------------------------- panels
+  const pill = document.getElementById("ui-state");
+  const PILL = { idle: "Idle", talking: "Talking", listening: "Listening", thinking: "Thinking", correct: "Correct!", wrong: "Not quite" };
+  const contractBody = document.getElementById("ui-contract");
+  const cells = {};
+  CONTRACT.forEach(([name, type, meaning]) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${name}</td><td class="t">${type}</td><td class="val"></td><td class="t">${meaning}</td>`;
+    contractBody.append(tr);
+    cells[name] = { tr, val: tr.querySelector(".val"), last: null };
+  });
+  const mouthsEl = document.getElementById("ui-mouths");
+  MOUTHS.forEach((m, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "mouth"; b.dataset.m = i;
+    b.setAttribute("aria-label", `Preview mouth ${i}, ${m}: ${MOUTH_SOUNDS[i]}`);
+    b.innerHTML = `<svg viewBox="-28 -18 56 46" aria-hidden="true"><ellipse class="face" cx="0" cy="5" rx="27" ry="21"/>${el.mouth[m].innerHTML}</svg><b>${i} · ${m}</b><span>${MOUTH_SOUNDS[i]}</span>`;
+    b.addEventListener("click", () => { if (!vm.talking) preview = { m: i, until: performance.now() + 1600 }; });
+    mouthsEl.append(b);
+  });
+  const mouthBtns = [...mouthsEl.children];
+  let lastMood = "", lastMouthTile = -1;
+  function updatePanels(now, key) {
+    const mood = moodName();
+    if (mood !== lastMood) {
+      pill.textContent = PILL[mood]; pill.dataset.mood = mood; lastMood = mood;
+      const chipFor = { idle: "idle", talking: "talk", listening: "listen", thinking: "think", correct: "correct", wrong: "wrong" }[mood];
+      document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.state === chipFor)));
+    }
+    const tile = MOUTHS.indexOf(key);
+    if (tile !== lastMouthTile) {
+      if (lastMouthTile >= 0) mouthBtns[lastMouthTile].classList.remove("on");
+      if (tile >= 0) mouthBtns[tile].classList.add("on");
+      lastMouthTile = tile;
+    }
+    const values = {
+      mouth: `${vm.talking ? vm.mouth : tile >= 0 ? tile : 0} (${vm.talking ? MOUTHS[vm.mouth] : tile >= 0 ? key : "X"})`,
+      talking: String(vm.talking), listening: String(vm.listening), thinking: String(vm.thinking),
+      correct: now - (firedAt.correct || -1e9) < 700 ? "fired" : "—",
+      wrong: now - (firedAt.wrong || -1e9) < 700 ? "fired" : "—",
+      lookX: vm.lookX.toFixed(2), lookY: vm.lookY.toFixed(2),
+    };
+    for (const name in values) {
+      const c = cells[name];
+      if (c.last !== values[name]) { c.val.textContent = values[name]; c.last = values[name]; c.tr.classList.toggle("fired", values[name] === "fired"); }
+    }
+  }
+
+  // ---------------------------------------------------------------- state chips
+  document.querySelectorAll(".chip").forEach((chip) => chip.addEventListener("click", () => {
+    const s = chip.dataset.state;
+    if (s === "correct" || s === "wrong") { stopSpeech(); vm.listening = false; vm.thinking = false; fire(s); caption.innerHTML = s === "correct" ? '<span class="hint">Correct!</span>' : '<span class="hint">Not quite. Let’s fix it.</span>'; return; }
+    stopSpeech(); vm.listening = false; vm.thinking = false; reaction = null;
+    if (s === "talk") speak(document.getElementById("ui-line").value);
+    if (s === "listen") { vm.listening = true; vm.lookX = 0.55; vm.lookY = 0.45; caption.innerHTML = '<span class="hint">Listening…</span>'; }
+    if (s === "think") { vm.thinking = true; caption.innerHTML = '<span class="hint">Hmm…</span>'; }
+    if (s === "idle") caption.innerHTML = '<span class="hint">Tap a state below, or answer a question.</span>';
+  }));
+
+  // ---------------------------------------------------------------- talk panel
+  document.getElementById("ui-talk-form").addEventListener("submit", (e) => {
+    e.preventDefault(); vm.listening = false; vm.thinking = false;
+    speak(document.getElementById("ui-line").value);
+  });
+  document.getElementById("ui-stop").addEventListener("click", () => stopSpeech());
+  document.querySelectorAll("#ui-examples button").forEach((b) => b.addEventListener("click", () => {
+    document.getElementById("ui-line").value = b.textContent;
+    vm.listening = false; vm.thinking = false;
+    speak(b.textContent);
+  }));
+
+  // ---------------------------------------------------------------- practice
+  const norm = (s) => " " + s.toLowerCase().replace(/[’']/g, "'").replace(/[^a-z' ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
+  const has = (s, ...alts) => alts.some((a) => s.includes(" " + a + " "));
+  const QUESTIONS = [
+    { ask: "You're in a café. Ask the barista for a coffee, politely.", model: "Could I have a coffee, please?",
+      ok: (s) => has(s, "coffee") && has(s, "please", "could i", "can i", "may i", "i'd like", "i would like") },
+    { ask: "You're lost in London. Ask someone where the station is.", model: "Excuse me, where is the station?",
+      ok: (s) => has(s, "where") && has(s, "station") },
+    { ask: "Say hello and tell me your name.", model: "Hello, my name is Aiko.",
+      ok: (s) => has(s, "hello", "hi", "hey", "good morning", "good afternoon", "good evening") && has(s, "my name is", "i'm", "i am", "call me") },
+  ];
+  const PRAISE = ["Great! That sounds natural.", "Perfect. A Londoner would say exactly that.", "Nice one! Well said."];
+  let qi = 0;
+  const promptEl = document.getElementById("ui-prompt"), answer = document.getElementById("ui-answer"), feedback = document.getElementById("ui-feedback");
+  const showQ = () => { promptEl.textContent = QUESTIONS[qi].ask; answer.value = ""; feedback.hidden = true; };
+  showQ();
+  const startListening = () => {
+    if (reaction || vm.thinking) return;
+    if (vm.talking) stopSpeech();
+    vm.listening = true; vm.lookX = 0.55; vm.lookY = 0.45;
+  };
+  answer.addEventListener("focus", startListening);
+  answer.addEventListener("input", startListening);
+  answer.addEventListener("blur", () => { if (!answer.value.trim()) vm.listening = false; });
+  document.getElementById("ui-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = answer.value.trim();
+    if (!text) { answer.focus(); return; }
+    const q = QUESTIONS[qi];
+    stopSpeech(); vm.listening = false; vm.thinking = true;
+    caption.innerHTML = '<span class="hint">Hmm…</span>';
+    feedback.hidden = true;
+    setTimeout(() => {
+      vm.thinking = false;
+      if (q.ok(norm(text))) {
+        fire("correct", () => speak(PRAISE[qi % PRAISE.length]));
+        caption.innerHTML = '<span class="hint">Correct!</span>';
+        feedback.dataset.kind = "good"; feedback.textContent = "Correct. That works well here."; feedback.hidden = false;
+      } else {
+        fire("wrong", () => speak(`Nearly! Try this: ${q.model}`));
+        caption.innerHTML = '<span class="hint">Not quite. Let’s fix it.</span>';
+        feedback.dataset.kind = "bad"; feedback.textContent = `Nearly. Try: “${q.model}”`; feedback.hidden = false;
+      }
+    }, 750);
+  });
+  document.getElementById("ui-next").addEventListener("click", () => {
+    stopSpeech(); reaction = null; vm.listening = false; vm.thinking = false;
+    qi = (qi + 1) % QUESTIONS.length; showQ();
+    caption.innerHTML = '<span class="hint">New question. Type your answer when you’re ready.</span>';
+  });
+
+  requestAnimationFrame(frame);
+})();
+</script>

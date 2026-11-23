@@ -10,3 +10,6 @@ next-env.d.ts
 docs/cleanup/
 **/.qa/
 *.zip
+
+# Rive runtime, copied from node_modules on install (scripts/copy-rive-wasm.mjs)
+public/rive/rive.wasm
